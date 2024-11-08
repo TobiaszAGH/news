@@ -1,11 +1,11 @@
 from flask import Blueprint, render_template
-import os
+
 
 main_bp = Blueprint(
     'main_bp',
     __name__,
     static_folder='static',
-    template_folder=os.path.join('..', 'templates')
+    template_folder='templates'
 )
 
 

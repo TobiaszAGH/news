@@ -1,21 +1,20 @@
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
-from config import Config
 from flask_bootstrap import Bootstrap
-from blueprints.main.routes import main_bp
-from blueprints.economy.routes import economy_bp
-from blueprints.news.routes import news_bp
-from blueprints.sport.routes import sport_bp
-from blueprints.weather.routes import weather_bp
+from .blueprints.main.routes import main_bp
+from .blueprints.economy.routes import economy_bp
+from .blueprints.news.routes import news_bp
+from .blueprints.sport.routes import sport_bp
+from .blueprints.weather.routes import weather_bp
 
 db = SQLAlchemy()
 
-def create_app():
+def create_app(config):
     # Initialize the app
     app = Flask(__name__)
     Bootstrap(app)
     
-    app.config.from_object(Config)
+    app.config.from_object(config)
 
     app.register_blueprint(main_bp, url_prefix='/') 
     app.register_blueprint(economy_bp, url_prefix='/economy')
@@ -29,6 +28,7 @@ def create_app():
     return app
 
 if __name__ == '__main__':
-    app = create_app()
+    from config import Config
+    app = create_app(Config)
     app.run(debug=True)
 
