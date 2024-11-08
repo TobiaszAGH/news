@@ -1,11 +1,11 @@
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from flask_bootstrap import Bootstrap
-from .blueprints.main.routes import main_bp
-from .blueprints.economy.routes import economy_bp
-from .blueprints.news.routes import news_bp
-from .blueprints.sport.routes import sport_bp
-from .blueprints.weather.routes import weather_bp
+from blueprints.main.routes import main_bp
+from blueprints.economy.routes import economy_bp
+from blueprints.news.routes import news_bp
+from blueprints.sport.routes import sport_bp
+from blueprints.weather.routes import weather_bp
 
 db = SQLAlchemy()
 
