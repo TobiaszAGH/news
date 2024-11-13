@@ -1,9 +1,25 @@
-{% extends "bootstrap/base.html" %} {% import "bootstrap/fixes.html" as fixes %}
-{% block head %} {{ super() }} {% endblock %} {% block content %} {% block main
-%}{% endblock %} {% block footer %}
-<div class="container">
-  <div id="footer" style="display: flex; justify-content: center">
-    <p>&copy 2024 NTWK gr.1</p>
-  </div>
-</div>
-{% endblock %} {% endblock %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{% block title %}{% endblock %}</title>
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/main.css') }}"
+    />
+    {% block header %}{% endblock %}
+  </head>
+  <body>
+    <div class="container-fluid d-flex flex-column min-vh-100">
+      {% block main %}{% endblock %}
+      <div id="footer" style="display: flex; justify-content: center">
+        <p>&copy 2024 NTWK gr.1</p>
+      </div>
+    </div>
+  </body>
+</html>

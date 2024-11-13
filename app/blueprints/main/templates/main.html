@@ -1,6 +1,28 @@
 {% extends "base.html" %} {% block title %}Home{% endblock %} {% import
-"bootstrap/utils.html" as utils %} {% block main%}
-<div class="container">
-  <h1>Hello</h1>
+"bootstrap/utils.html" as utils %} {% block main %}
+<div
+  class="flex-1 d-flex flex-column justify-content-start align-items-center p-4"
+  style="flex: 1"
+>
+  <div class="row text-center w-100">
+    <div class="col-auto mx-auto">
+      <a href="/weather" class="btn btn-primary mb-2"> weather </a>
+    </div>
+  </div>
+  <div class="row text-center w-100">
+    <div class="col-auto mx-auto">
+      <a href="/economy" class="btn btn-primary mb-2"> economy </a>
+    </div>
+  </div>
+  <div class="row text-center w-100">
+    <div class="col-auto mx-auto">
+      <a href="/news" class="btn btn-primary mb-2"> news </a>
+    </div>
+  </div>
+  <div class="row text-center w-100">
+    <div class="col-auto mx-auto">
+      <a href="/sport" class="btn btn-primary mb-2"> sport </a>
+    </div>
+  </div>
 </div>
 {% endblock %}
