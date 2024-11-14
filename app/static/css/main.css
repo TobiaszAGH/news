@@ -48,9 +48,6 @@ body {
 .main-header {
   flex: 1;
 }
-.main-header p {
-  margin: 0;
-}
 
 .row-main {
   flex: 9;
