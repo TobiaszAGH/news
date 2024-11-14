@@ -1,0 +1,12 @@
+{% extends "base.html" %} {% block title %}Economy{% endblock %} {% import
+    "bootstrap/utils.html" as utils %} {% block main%}
+    <div class="container">
+      <h1>Economy</h1>
+      <form method="POST" action="/economy">
+        {{ form.currency(size=32) }}
+        {{ form.startdate }}
+        {{ form.todate }}
+        {{ form.submit() }}
+    </form>
+    </div>
+    {% endblock %}

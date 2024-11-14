@@ -1,3 +1,6 @@
 FLASK==3.0.3
 FLASK-SQLALCHEMY==3.1.1
 FLASK-BOOTSTRAP==3.3.7.1
+flask_wtf
+wtforms
+requests
