@@ -1,29 +1,51 @@
 {% extends "base.html" %} {% block title %}Home{% endblock %} {% import
 "bootstrap/utils.html" as utils %} {% block main %}
 <div
-  class="flex-1 d-flex flex-column justify-content-start align-items-center p-4"
+  class="d-flex flex-column justify-content-start align-items-center p-4"
   style="flex: 1"
 >
-  <div
-    class="row row-cols-2 text-center w-100 flex-1"
-    style="background-color: green"
-  >
-    <div class="col mx-auto">
-      <a href="/news" class="btn btn-primary mb-2"> news </a>
+  <div class="container main-header d-flex flex-column">
+    <h1>Welcome to the Home Page</h1>
+    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
+  </div>
+  <div class="row row-main row-cols-1 row-cols-md-2 g-4 text-center w-100">
+    <div class="col">
+      <div class="card h-100">
+        <div class="card-body">
+          <h5 class="card-title">News</h5>
+          <p class="card-text">Stay updated with the latest news.</p>
+          <a href="/news" class="btn btn-primary">Go to News</a>
+        </div>
+      </div>
     </div>
-    <div class="col mx-auto">
-      <a href="/weather" class="btn btn-primary mb-2"> weather </a>
+    <div class="col">
+      <div class="card h-100">
+        <div class="card-body">
+          <h5 class="card-title">Weather</h5>
+          <p class="card-text">Check the latest weather updates.</p>
+          <a href="/weather" class="btn btn-primary">Go to Weather</a>
+        </div>
+      </div>
     </div>
   </div>
-  <div
-    class="row row-cols-2 text-center w-100 flex-1"
-    style="background-color: purple"
-  >
-    <div class="col mx-auto">
-      <a href="/economy" class="btn btn-primary mb-2"> economy </a>
+  <div class="row row-main row-cols-1 row-cols-md-2 g-4 text-center w-100 mt-4">
+    <div class="col">
+      <div class="card h-100">
+        <div class="card-body">
+          <h5 class="card-title">Economy</h5>
+          <p class="card-text">Get the latest economic news and updates.</p>
+          <a href="/economy" class="btn btn-primary">Go to Economy</a>
+        </div>
+      </div>
     </div>
-    <div class="col mx-auto">
-      <a href="/sport" class="btn btn-primary mb-2"> sport </a>
+    <div class="col">
+      <div class="card h-100">
+        <div class="card-body">
+          <h5 class="card-title">Sport</h5>
+          <p class="card-text">Catch up on the latest sports news.</p>
+          <a href="/sport" class="btn btn-primary">Go to Sport</a>
+        </div>
+      </div>
     </div>
   </div>
 </div>
