@@ -1,0 +1,93 @@
+:root {
+  --light-gray: #e3e2df;
+  --dark-burgundy: #5d001e;
+  --dark-pink: #9a1750;
+  --medium-pink: #e2afbc;
+  --bright-pink: #ee4c7c;
+
+  --background-color: var(--light-gray);
+  --text-color: var(--dark-burgundy);
+  --navbar-background-color: var(--dark-pink);
+  --navbar-link-color: var(--light-gray);
+  --navbar-link-hover-color: var(--medium-pink);
+  --card-background-color: var(--light-gray);
+  --card-border-color: var(--dark-burgundy);
+  --footer-background-color: var(--dark-pink);
+  --footer-text-color: var(--light-gray);
+  --btn-primary-background-color: var(--bright-pink);
+  --btn-primary-hover-background-color: var(--dark-pink);
+
+  font-family: "Roboto", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+body {
+  background-color: var(--background-color);
+  color: var(--text-color);
+
+  padding: 0;
+  margin: 0;
+}
+
+.navbar {
+  background-color: var(--navbar-background-color);
+  /* width: 100vw; */
+  /* border-radius: 0 0 10px 10px; */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Dodanie cienia */
+}
+
+.navbar a {
+  color: var(--navbar-link-color);
+}
+
+.navbar a:hover {
+  color: var(--navbar-link-hover-color);
+}
+
+.main-header {
+  flex: 1;
+}
+
+.row-main {
+  flex: 9;
+}
+
+.card {
+  background-color: var(--card-background-color);
+  border: 2px solid var(--card-border-color);
+}
+
+#footer {
+  background-color: var(--footer-background-color);
+  color: var(--footer-text-color);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* border-radius: 10px 10px 0 0; */
+  box-sizing: border-box;
+  padding: 0.75rem 0;
+  box-shadow: 0 -4px 8px rgba(0, 0, 0, 0.1); /* Dodanie cienia */
+}
+
+#footer p {
+  margin: 0;
+}
+
+a {
+  color: var(--dark-pink);
+}
+
+a:hover {
+  color: var(--bright-pink);
+}
+
+.btn-primary {
+  background-color: var(--btn-primary-background-color);
+  border-color: var(--btn-primary-background-color);
+}
+
+.btn-primary:hover {
+  background-color: var(--btn-primary-hover-background-color);
+  border-color: var (--btn-primary-hover-background-color);
+}

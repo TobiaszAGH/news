@@ -6,3 +6,7 @@ news_bp = Blueprint(
     static_folder='static',
     template_folder='templates'
 )
+
+@news_bp.route('/')
+def hello():
+    return 'news'
