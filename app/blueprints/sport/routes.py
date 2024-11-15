@@ -1,4 +1,4 @@
-from flask import Blueprint
+from flask import Blueprint, render_template
 
 sport_bp = Blueprint(
     'sport_bp',
@@ -9,4 +9,4 @@ sport_bp = Blueprint(
 
 @sport_bp.route('/')
 def hello():
-    return 'sport'
+    return render_template('sport.html')

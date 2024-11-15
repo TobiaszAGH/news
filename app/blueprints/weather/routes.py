@@ -1,4 +1,4 @@
-from flask import Blueprint
+from flask import Blueprint, render_template
 
 weather_bp = Blueprint(
     'weather_bp',
@@ -9,4 +9,4 @@ weather_bp = Blueprint(
 
 @weather_bp.route('/')
 def hello():
-    return 'weather'
+    return render_template('weather.html')
