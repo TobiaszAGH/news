@@ -1,0 +1,83 @@
+{% extends "base.html" %} {% block title %}Artykuły Sportowe{% endblock %} {%
+block header %}
+<link
+  rel="stylesheet"
+  href="{{ url_for('static', filename='css/sport.css') }}"
+/>
+<script>
+  function openModal(imageSrc) {
+    const modal = document.getElementById("image-modal");
+    const modalImage = document.getElementById("modal-image");
+    modalImage.src = imageSrc;
+    modal.style.display = "flex";
+  }
+
+  function closeModal() {
+    const modal = document.getElementById("image-modal");
+    modal.style.display = "none";
+  }
+</script>
+
+{% endblock %} {%block main %}
+<div class="container mt-4">
+  <h2 class="mb-4">{{ sport_name }} - Najnowsze wiadomości!</h2>
+  {% if error %}
+  <div class="alert alert-danger">{{ error }}</div>
+  {% else %}
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Zdjęcie</th>
+        <th>Tytuł</th>
+        <th>Opis</th>
+        <th>Data dodania</th>
+        <th>Link</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for article in articles %}
+      <tr>
+        <td>
+          {% if article.image %}
+          <img
+            src="{{ article.image }}"
+            alt="Zdjęcie artykułu"
+            class="article-image"
+            onclick="openModal('{{ article.image }}')"
+          />
+          {% else %} Brak zdjęcia {% endif %}
+        </td>
+        <td><strong>{{ article.title }}</strong></td>
+        <td>
+          {% if article.description %} {{ article.description }} {% else %} Opis
+          niedostępny - przejdź do całego artykułu -> {% endif %}
+        </td>
+        <td style="width: 150px">
+          {% if article.pubDate %} {{ article.pubDate }} {% else %} Brak daty {%
+          endif %}
+        </td>
+        <td>
+          <a href="{{ article.link }}" target="_blank" class="btn btn-link"
+            >Czytaj więcej</a
+          >
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  {% endif %}
+  <a
+    href="{{ url_for('sport.sport_home') }}"
+    class="btn btn-primary sticky-back-button"
+    >Powrót</a
+  >
+</div>
+<div
+  id="image-modal"
+  class="modal-overlay"
+  style="display: none"
+  onclick="closeModal()"
+>
+  <img id="modal-image" class="modal-image" alt="Powiększone zdjęcie" />
+</div>
+{% endblock %}
