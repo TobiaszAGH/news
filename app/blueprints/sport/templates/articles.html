@@ -1,4 +1,4 @@
-{% extends "base.html" %} {% block title %}Artykuły Sportowe{% endblock %} {%
+{% extends "base.html" %} {% block title %}Sports Articles{% endblock %} {%
 block header %}
 <link
   rel="stylesheet"
@@ -20,17 +20,17 @@ block header %}
 
 {% endblock %} {%block main %}
 <div class="container mt-4">
-  <h2 class="mb-4">{{ sport_name }} - Najnowsze wiadomości!</h2>
+  <h2 class="mb-4">{{ sport_name }} - Breaking news!</h2>
   {% if error %}
   <div class="alert alert-danger">{{ error }}</div>
   {% else %}
   <table class="table table-striped">
     <thead>
       <tr>
-        <th>Zdjęcie</th>
-        <th>Tytuł</th>
-        <th>Opis</th>
-        <th>Data dodania</th>
+        <th>Photo</th>
+        <th>Title</th>
+        <th>Description</th>
+        <th>Date</th>
         <th>Link</th>
       </tr>
     </thead>
@@ -41,24 +41,23 @@ block header %}
           {% if article.image %}
           <img
             src="{{ article.image }}"
-            alt="Zdjęcie artykułu"
+            alt="Article photo"
             class="article-image"
             onclick="openModal('{{ article.image }}')"
           />
-          {% else %} Brak zdjęcia {% endif %}
+          {% else %} No photo {% endif %}
         </td>
         <td><strong>{{ article.title }}</strong></td>
         <td>
-          {% if article.description %} {{ article.description }} {% else %} Opis
-          niedostępny - przejdź do całego artykułu -> {% endif %}
+          {% if article.description %} {{ article.description }} {% else %} Description unavailable - go to full article -> {% endif %}
         </td>
         <td style="width: 150px">
-          {% if article.pubDate %} {{ article.pubDate }} {% else %} Brak daty {%
+          {% if article.pubDate %} {{ article.pubDate }} {% else %} No date {%
           endif %}
         </td>
         <td>
           <a href="{{ article.link }}" target="_blank" class="btn btn-link"
-            >Czytaj więcej</a
+            >Read more</a
           >
         </td>
       </tr>
@@ -69,7 +68,7 @@ block header %}
   <a
     href="{{ url_for('sport.sport_home') }}"
     class="btn btn-primary sticky-back-button"
-    >Powrót</a
+    >Back</a
   >
 </div>
 <div
@@ -78,6 +77,6 @@ block header %}
   style="display: none"
   onclick="closeModal()"
 >
-  <img id="modal-image" class="modal-image" alt="Powiększone zdjęcie" />
+  <img id="modal-image" class="modal-image" alt="Enlarged photo" />
 </div>
 {% endblock %}

@@ -18,15 +18,15 @@ def sport_home():
 def sport_articles(sport_type):
     api_url = SPORT_API.get(sport_type)
     sport_names = {
-        "football": "Piłka Nożna",
-        "tennis": "Tenis",
-        "ski_jumping": "Skoki Narciarskie",
-        "volleyball": "Siatkówka"
+        "football": "Football",
+        "tennis": "Tennis",
+        "ski_jumping": "Ski jumping",
+        "volleyball": "Volleyball"
     }
-    sport_name = sport_names.get(sport_type, "Nieznany Sport")
+    sport_name = sport_names.get(sport_type, "Unknown")
     
     if not api_url:
-        return render_template('articles.html', articles=[], sport_name=sport_name, error="Nieznany sport!")
+        return render_template('articles.html', articles=[], sport_name=sport_name, error="Unknown!")
 
     try:
         response = requests.get(api_url)
@@ -44,4 +44,4 @@ def sport_articles(sport_type):
         ]
         return render_template('articles.html', articles=articles, sport_name=sport_name)
     except Exception as e:
-        return render_template('articles.html', articles=[], sport_name=sport_name, error="Nie udało się pobrać artykułów!")
+        return render_template('articles.html', articles=[], sport_name=sport_name, error="Failed to load articles!")

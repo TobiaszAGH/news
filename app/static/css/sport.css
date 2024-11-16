@@ -1,15 +1,15 @@
 .button {
   font-size: 18px;
 }
-.sticky-back-button {
-  position: fixed;
-  bottom: 20px;
-  left: 20px;
-  font-size: 18px;
-}
 .back-button {
   position: fixed;
   bottom: 60px;
+  left: 20px;
+  font-size: 18px;
+}
+.sticky-back-button {
+  position: fixed;
+  bottom: 20px;
   left: 20px;
   font-size: 18px;
 }

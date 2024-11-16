@@ -7,30 +7,30 @@ block header %}
 {% endblock %}
 {% block main %}
 <div class="text-center mt-4">
-  <h1>Wybierz swoją dyscyplinę sportową</h1>
+  <h1>Choose your sport</h1>
   <hr><br>
   <div class="d-flex justify-content-center mt-3">
     <a
       href="{{ url_for('sport.sport_articles', sport_type='football') }}"
       class="btn btn-primary mx-2 button"
-      >Piłka Nożna</a
+      >Football</a
     >
     <a
       href="{{ url_for('sport.sport_articles', sport_type='tennis') }}"
       class="btn btn-primary mx-2 button"
-      >Tenis</a
+      >Tennis</a
     >
     <a
       href="{{ url_for('sport.sport_articles', sport_type='ski_jumping') }}"
       class="btn btn-primary mx-2 button"
-      >Skoki Narciarskie</a
+      >Ski jumping</a
     >
     <a
       href="{{ url_for('sport.sport_articles', sport_type='volleyball') }}"
       class="btn btn-primary mx-2 button"
-      >Siatkówka</a
+      >Volleyball</a
     >
   </div>
 </div>
-<a href="{{ url_for('main_bp.main') }}" class="btn btn-primary back-button">Powrót</a>
+<a href="{{ url_for('main_bp.main') }}" class="btn btn-primary back-button">Back</a>
 {% endblock %}
