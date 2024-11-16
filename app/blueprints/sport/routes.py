@@ -1,7 +1,12 @@
 from flask import Blueprint, render_template, request
 import requests
 
-sport_bp = Blueprint('sport', __name__, template_folder='templates')
+sport_bp = Blueprint(
+    'sport',
+    __name__,
+    static_folder='static',
+    template_folder='templates'
+)
 
 SPORT_API = {
     "football": "https://newsdata.io/api/1/news?apikey=pub_593496808acfb9d29e8410845a3b9602f5863&q=piłka%20nożna&country=pl&category=sports",
