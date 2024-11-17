@@ -1,0 +1,70 @@
+{% extends "base.html" %} {% block title %}Sports Articles{% endblock %} {%
+    block header %}
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/news.css') }}"
+    />
+
+    
+    {% endblock %} {%block main %}
+    <div class="container mt-4">
+      <h2 class="mb-4">{{ sport_name }} - Breaking news!</h2>
+      {% if error %}
+      <div class="alert alert-danger">{{ error }}</div>
+      {% else %}
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>Photo</th>
+            <th>Title</th>
+            <th>Description</th>
+            <th>Date</th>
+            <th>Link</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for article in articles %}
+          <tr>
+            <td>
+              {% if article.image %}
+              <img
+                src="{{ article.image }}"
+                alt="Article photo"
+                class="article-image"
+                onclick="openModal('{{ article.image }}')"
+              />
+              {% else %} No photo {% endif %}
+            </td>
+            <td><strong>{{ article.title }}</strong></td>
+            <td>
+              {% if article.description %} {{ article.description }} {% else %} Description unavailable - go to full article -> {% endif %}
+            </td>
+            <td style="width: 150px">
+              {% if article.pubDate %} {{ article.pubDate }} {% else %} No date {%
+              endif %}
+            </td>
+            <td>
+              <a href="{{ article.link }}" target="_blank" class="btn btn-link"
+                >Read more</a
+              >
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+      {% endif %}
+      <a
+        href="{{ url_for('sport.sport_home') }}"
+        class="btn btn-primary sticky-back-button"
+        >Back</a
+      >
+    </div>
+    <div
+      id="image-modal"
+      class="modal-overlay"
+      style="display: none"
+      onclick="closeModal()"
+    >
+      <img id="modal-image" class="modal-image" alt="Enlarged photo" />
+    </div>
+    {% endblock %}

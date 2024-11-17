@@ -11,7 +11,7 @@ class CrimeNews(db.Model):
     article_link = db.Column(db.String(255), nullable=False)
     timestamp = db.Column(db.DateTime, nullable=False)
     
-    images = db.relationship('CrimeImages', back_populates='crime_news')
+    images = db.relationship('CrimeImages', back_populates='news')
 
 
 class CrimeImages(db.Model):
@@ -21,5 +21,5 @@ class CrimeImages(db.Model):
     image_url = db.Column(db.String(255), nullable=True)
     news_id = db.Column(db.Integer, db.ForeignKey('crime_news.id'), nullable=False)
     
-    news = db.relationship('CrimeNews', back_populates='crime_images')
+    news = db.relationship('CrimeNews', back_populates='images')
     
