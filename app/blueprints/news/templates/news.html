@@ -1,50 +1,49 @@
-{% extends "base.html" %} {% block title %}Sports Articles{% endblock %} {%
+{% extends "base.html" %} {% block title %}Crime News{% endblock %} {%
     block header %}
     <link
       rel="stylesheet"
       href="{{ url_for('static', filename='css/news.css') }}"
     />
 
+    <script>
+      function openModal(imageSrc) {
+        const modal = document.getElementById("image-modal");
+        const modalImage = document.getElementById("modal-image");
+        modalImage.src = imageSrc;
+        modal.style.display = "flex";
+      }
+    
+      function closeModal() {
+        const modal = document.getElementById("image-modal");
+        modal.style.display = "none";
+      }
+    </script>
+
     
     {% endblock %} {%block main %}
     <div class="container mt-4">
-      <h2 class="mb-4">{{ sport_name }} - Breaking news!</h2>
+      <h2 class="mb-4">Crime News for Krakow</h2>
       {% if error %}
       <div class="alert alert-danger">{{ error }}</div>
       {% else %}
       <table class="table table-striped">
-        <thead>
-          <tr>
-            <th>Photo</th>
-            <th>Title</th>
-            <th>Description</th>
-            <th>Date</th>
-            <th>Link</th>
-          </tr>
-        </thead>
         <tbody>
           {% for article in articles %}
           <tr>
             <td>
-              {% if article.image %}
               <img
-                src="{{ article.image }}"
-                alt="Article photo"
+                src="{{article.image_url}}" referrerpolicy="no-referrer"
+                alt="{{article.image_url}}"
                 class="article-image"
-                onclick="openModal('{{ article.image }}')"
+                onclick="openModal('{{ article.image_url }}')"
               />
-              {% else %} No photo {% endif %}
             </td>
             <td><strong>{{ article.title }}</strong></td>
             <td>
-              {% if article.description %} {{ article.description }} {% else %} Description unavailable - go to full article -> {% endif %}
-            </td>
-            <td style="width: 150px">
-              {% if article.pubDate %} {{ article.pubDate }} {% else %} No date {%
-              endif %}
+              {% if article.summary %} {{ article.summary }} {% else %} Description unavailable - go to full article -> {% endif %}
             </td>
             <td>
-              <a href="{{ article.link }}" target="_blank" class="btn btn-link"
+              <a href="{{ article.article_link }}" target="_blank" class="btn btn-link"
                 >Read more</a
               >
             </td>
@@ -53,11 +52,6 @@
         </tbody>
       </table>
       {% endif %}
-      <a
-        href="{{ url_for('sport.sport_home') }}"
-        class="btn btn-primary sticky-back-button"
-        >Back</a
-      >
     </div>
     <div
       id="image-modal"
