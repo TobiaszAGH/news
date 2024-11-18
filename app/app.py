@@ -9,8 +9,6 @@ from blueprints.weather.routes import weather_bp
 
 db = SQLAlchemy()
 
-
-
 # Initialize the app
 app = Flask(__name__)
 Bootstrap(app)
@@ -27,7 +25,8 @@ app.register_blueprint(weather_bp, url_prefix='/weather')
 # Initailize the database
 db.init_app(app)
 
-
+# Add models from news
+from blueprints.news.models import *
 
 if __name__ == '__main__':
     with app.app_context():

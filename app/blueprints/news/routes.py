@@ -10,3 +10,7 @@ news_bp = Blueprint(
 @news_bp.route('/')
 def news_home():
     return render_template('news.html')
+
+@news_bp.route('/scrape')
+def data_scraping():
+    return 'Scraping'
