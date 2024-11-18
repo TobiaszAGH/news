@@ -3,11 +3,14 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_bootstrap import Bootstrap
 from blueprints.main.routes import main_bp
 from blueprints.economy.routes import economy_bp
-from blueprints.news.routes import news_bp
+
 from blueprints.sport.routes import sport_bp
 from blueprints.weather.routes import weather_bp
 
 db = SQLAlchemy()
+
+# routes wykorzystuje models.py, które pobiera db z app, więc przeniosłam to tu na razie tak prowizorycznie żeby uniknąć błędów importu
+from blueprints.news.routes import news_bp
 
 # Initialize the app
 app = Flask(__name__)
@@ -25,8 +28,6 @@ app.register_blueprint(weather_bp, url_prefix='/weather')
 # Initailize the database
 db.init_app(app)
 
-""" # Add models from news
-from blueprints.news.models import * """
 
 if __name__ == '__main__':
     with app.app_context():
