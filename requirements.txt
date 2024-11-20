@@ -5,3 +5,4 @@ flask_wtf
 wtforms
 requests
 bs4
+flask_apscheduler
