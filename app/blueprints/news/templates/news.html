@@ -1,9 +1,8 @@
-{% extends "base.html" %} 
-
-{% block title %}Crime News{% endblock %}
-
-{% block header %}
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/news.css') }}"
+{% extends "base.html" %} {% block title %}Crime News{% endblock %}{% import
+  "bootstrap/utils.html" as utils %}{% block header %}
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/news.css') }}"
     />
 
     <script>
@@ -32,7 +31,7 @@
           <tbody>
             {% for article in articles %}
             <tr>
-              <td class="image-cell">
+              <td>
                 <img
                   src="{{article.image_url}}" 
                   referrerpolicy="no-referrer"
@@ -40,46 +39,31 @@
                   class="article-image"
                   onclick="openModal('{{ article.image_url }}')"
                 />
+                <br>
+                <span class="data">Publication date: {{article.publication_date.strftime('%d.%m.%Y')}}</span>
+                <br>
+                <span class="source">Source: policja.pl</span>
               </td>
-              <td class="summary">
+              <td>
                 <strong>
-                  <a href="{{ url_for('news_bp.single_news', news_id=article.id) }}">
+                  <a href={{article.article_link}}>
                   {{ article.title }}
                   </a>
                 </strong>
                 <br>
                 {{ article.summary }}
-                <br>
-                <br>
-                <span class="data">Publication date: {{article.publication_date.strftime('%d.%m.%Y')}}</span>
-                <span class="source">Source: policja.pl</span>
               </td>
             </tr>
             {% endfor %}
           </tbody>
         </table>
-
-        <nav aria-label="Page navigation" class='pagination-container'>
-          <ul class="pagination">
-              <li class="page-item {% if articles.page == 1 %}disabled{% endif %}">
-                  <a class="page-link" href="{{ url_for('news_bp.news_home') }}?page=1">First</a>
-              </li>
-              <li class="page-item {% if articles.page == 1 %}disabled{% endif %}">
-                  <a class="page-link" href="{{ url_for('news_bp.news_home') }}?page={{ articles.page - 1 }}">Previous</a>
-              </li>
-              <li class="page-item {% if articles.page == articles.pages %}disabled{% endif %}">
-                  <a class="page-link" href="{{ url_for('news_bp.news_home') }}?page={{ articles.page + 1 }}">Next</a>
-              </li>
-              <li class="page-item {% if articles.page == articles.pages %}disabled{% endif %}">
-                  <a class="page-link" href="{{ url_for('news_bp.news_home') }}?page={{ articles.pages }}">Last</a>
-              </li>
-          </ul>
-      </nav>
-
+      
       {% endif %}
     </div>
 
-    <a href="{{ url_for('main_bp.main') }}" class="btn btn-primary sticky-back-button">Back</a>
+    <a href="{{ url_for('main_bp.main') }}" class="btn btn-primary back-button">Back</a>
+
+
     <div
       id="image-modal"
       class="modal-overlay"

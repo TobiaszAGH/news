@@ -8,7 +8,7 @@ class CrimeNews(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(255), nullable=False)
     summary = db.Column(db.Text, nullable=False)
-    description = db.Column(db.Text, nullable=True)
+    full_text = db.Column(db.Text, nullable=True)
     image_url = db.Column(db.String(255), nullable=True)
     article_link = db.Column(db.String(255), nullable=False)
     publication_date = db.Column(db.Date, nullable=False)
