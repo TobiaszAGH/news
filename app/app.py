@@ -36,7 +36,7 @@ scheduler.add_job(
     func=scrape_and_save,
     trigger='cron',
     hour=0,
-    minute=00
+    minute=0
 )
 
 
