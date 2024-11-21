@@ -1,4 +1,4 @@
-from flask import Blueprint
+from flask import Blueprint, render_template
 
 news_bp = Blueprint(
     'news_bp',
@@ -9,4 +9,4 @@ news_bp = Blueprint(
 
 @news_bp.route('/')
 def hello():
-    return 'news'
+    return render_template('news.html')

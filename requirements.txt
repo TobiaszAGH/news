@@ -5,3 +5,5 @@ flask_wtf
 wtforms
 requests
 plotly==5.24.1
+geocoder
+
