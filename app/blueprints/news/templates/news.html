@@ -1,5 +1,5 @@
-{% extends "base.html" %} {% block title %}Crime News{% endblock %} {%
-    block header %}
+{% extends "base.html" %} {% block title %}Crime News{% endblock %}{% import
+  "bootstrap/utils.html" as utils %}{% block header %}
     <link
       rel="stylesheet"
       href="{{ url_for('static', filename='css/news.css') }}"
@@ -26,33 +26,44 @@
       {% if error %}
       <div class="alert alert-danger">{{ error }}</div>
       {% else %}
-      <table class="table table-striped">
-        <tbody>
-          {% for article in articles %}
-          <tr>
-            <td>
-              <img
-                src="{{article.image_url}}" referrerpolicy="no-referrer"
-                alt="{{article.image_url}}"
-                class="article-image"
-                onclick="openModal('{{ article.image_url }}')"
-              />
-            </td>
-            <td><strong>{{ article.title }}</strong></td>
-            <td>
-              {% if article.summary %} {{ article.summary }} {% else %} Description unavailable - go to full article -> {% endif %}
-            </td>
-            <td>
-              <a href="{{ article.article_link }}" target="_blank" class="btn btn-link"
-                >Read more</a
-              >
-            </td>
-          </tr>
-          {% endfor %}
-        </tbody>
-      </table>
+      
+        <table class="table table-striped">
+          <tbody>
+            {% for article in articles %}
+            <tr>
+              <td>
+                <img
+                  src="{{article.image_url}}" 
+                  referrerpolicy="no-referrer"
+                  alt="Image"
+                  class="article-image"
+                  onclick="openModal('{{ article.image_url }}')"
+                />
+                <br>
+                <span class="data">Publication date: {{article.publication_date.strftime('%d.%m.%Y')}}</span>
+                <br>
+                <span class="source">Source: policja.pl</span>
+              </td>
+              <td>
+                <strong>
+                  <a href={{article.article_link}}>
+                  {{ article.title }}
+                  </a>
+                </strong>
+                <br>
+                {{ article.summary }}
+              </td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      
       {% endif %}
     </div>
+
+    <a href="{{ url_for('main_bp.main') }}" class="btn btn-primary back-button">Back</a>
+
+
     <div
       id="image-modal"
       class="modal-overlay"

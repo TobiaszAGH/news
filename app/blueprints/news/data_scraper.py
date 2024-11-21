@@ -1,5 +1,5 @@
 import requests
-from .models import CrimeNews, CrimeImages
+from .models import CrimeNews, CrimeImage
 from datetime import datetime
 from bs4 import BeautifulSoup
 import time
@@ -13,9 +13,8 @@ response = requests.get(url)
 def scrape_and_save():
     with app.app_context(): 
         if response.status_code == 200:
-            
+
             soup = BeautifulSoup(response.text, 'html.parser')
-            
             articles = soup.find_all('li', class_='news')
 
             for article in articles:
@@ -26,10 +25,12 @@ def scrape_and_save():
                     
                     title = article.find('strong').get_text(strip=True)
                     
+                    # zakładam, że tytuł artykułu nie będzie zmieniany, inaczej artykuł zostanie zduplikowany w bazie
                     existing_news = CrimeNews.query.filter_by(title=title).first()
                     if existing_news:
                         print(f"Article '{title}' had been already saved.")
-                        continue
+                        print("No new articles to process.")
+                        return
                     
                     summary = article.find('p').get_text(strip=True)
                     
@@ -40,7 +41,7 @@ def scrape_and_save():
                     
                     full_link = base_url + link
                     
-                    timestamp = datetime.strptime(date, "%d.%m.%Y")
+                    publication_date = datetime.strptime(date, "%d.%m.%Y").date()
                     
                     
                     response2 = requests.get(full_link)
@@ -56,10 +57,16 @@ def scrape_and_save():
                         full_text=full_text,
                         image_url=image_src,
                         article_link=full_link,
-                        timestamp=timestamp
+                        publication_date=publication_date
                     )
                     db.session.add(news_obj)
-                    db.session.commit()
+                    try:
+                        db.session.commit()
+                        print(f"Article: '{title}' saved to database.")
+                    except Exception as e:
+                        db.session.rollback()
+                        print(f"Error during saving article: '{title}' to database: {e}")
+
                     
                     
                     images = soup2.find_all('img')
@@ -67,7 +74,7 @@ def scrape_and_save():
                         img_url = img.get('src')
                         img_url = base_url + img_url
                         
-                        img_obj= CrimeImages(
+                        img_obj= CrimeImage(
                             image_url=img_url,
                             news_id=news_obj.id
                         )
@@ -81,7 +88,7 @@ def scrape_and_save():
                         db.session.rollback()
                         print(f"Error during saving images for news: '{title}' to database: {e}")
 
-                    time.sleep(2)
+                    time.sleep(2) 
                     
         else:
             print("Connection failed.", response.status_code)

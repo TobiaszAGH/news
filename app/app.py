@@ -14,8 +14,7 @@ scheduler=APScheduler()
 app = Flask(__name__)
 Bootstrap(app)
 
-# routes wykorzystuje models.py, które pobiera db z app, więc przeniosłam to tu na razie tak prowizorycznie żeby uniknąć błędów importu
-# rozwiązaniem mogłoby też chyba być przeniesienie deklaracji bazy danych do odzielnego pliku
+# routes wykorzystuje models.py, które pobiera db, app z app.py, więc przeniosłam to tu na razie tak prowizorycznie żeby uniknąć błędów importu
 from blueprints.news.routes import news_bp
 
 from config import Config
@@ -37,7 +36,7 @@ scheduler.add_job(
     func=scrape_and_save,
     trigger='cron',
     hour=0,
-    minute=0
+    minute=00
 )
 
 
