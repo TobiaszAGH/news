@@ -6,3 +6,5 @@ wtforms
 requests
 bs4
 flask_apscheduler
+plotly==5.24.1
+geocoder
