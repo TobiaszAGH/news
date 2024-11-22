@@ -36,3 +36,4 @@ def hello():
     forecast = getForecast(city, country_code)
       
     return render_template('weather2.html', data = data, forecast = forecast)
+
