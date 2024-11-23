@@ -14,7 +14,7 @@
             .weather-card {
                 border-radius: 15px;
                 padding: 20px;
-                background-color: #099ef5;
+                background-color: #1aea28;
                 box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
             }
             .icon {
@@ -23,32 +23,14 @@
             .temperature {
                 font-size: 2.5rem;
             }
+
+            .opis{
+                font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+            }
         </style>
     </head>
     <body>
     
-        <div class="container mt-5">
-            <div class="row justify-content-center">
-                <div class="col-md-6">
-                    <div class="card">
-                        <div class="card-body">
-                            <h3 class="card-title text-center mb-4">Wybierz miasto</h3>
-                            
-                            <form method="POST" action="/weather">
-                                <div class="mb-3">
-                                    <label for="inputText" class="form-label">Wpisz miasto:</label>
-                                    <input type="text" class="form-control" id="city" name="city" required>
-                                </div>
-        
-                                <div class="d-grid gap-2">
-                                    <button type="submit" class="btn btn-primary">Pokaż pogodę</button>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
     
     <div class="container my-5">
         
@@ -64,7 +46,7 @@
                         </div>
                         <div class="col-8">
                             <h3 id="main-weather" class="mb-3">{{ data.city }}, <h7>{{data.country}}</h7></h3>
-                            <p id="weather-description" class="text-muted">{{ data.description }}</p>
+                            <p id="weather-description" class="text-muted opis">{{ data.description }}</p>
                             <div class="temperature" id="temperature">
                                 {{ data.temp }}°C
                             </div>
