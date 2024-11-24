@@ -35,7 +35,7 @@ def hello():
 
     forecast = getForecast(city, country_code)
       
-    return render_template('weather2.html', data = data, forecast = forecast)
+    return render_template('weather_page.html', data = data, forecast = forecast)
 
 @weather_bp.route('/widget')
 def showWidget():
@@ -43,9 +43,9 @@ def showWidget():
 
     return render_template('weather.html', data = data)
 
+
 @weather_bp.route('/test')
 def showdata():
     data = getCurrentWeather("Kraków", "PL")
     forecast = getForecast("Kraków", "PL")
-    print(forecast)
     return json.dumps({'data': forecast})

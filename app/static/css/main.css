@@ -30,6 +30,24 @@ body {
   margin: 0;
 }
 
+a {
+  color: var(--dark-pink);
+}
+
+a:hover {
+  color: var(--bright-pink);
+}
+
+.btn-primary {
+  background-color: var(--btn-primary-background-color);
+  border-color: var(--btn-primary-background-color);
+}
+
+.btn-primary:hover {
+  background-color: var(--btn-primary-hover-background-color);
+  border-color: var (--btn-primary-hover-background-color);
+}
+
 .navbar {
   background-color: var(--navbar-background-color);
   /* width: 100vw; */
@@ -72,22 +90,4 @@ body {
 
 #footer p {
   margin: 0;
-}
-
-a {
-  color: var(--dark-pink);
-}
-
-a:hover {
-  color: var(--bright-pink);
-}
-
-.btn-primary {
-  background-color: var(--btn-primary-background-color);
-  border-color: var(--btn-primary-background-color);
-}
-
-.btn-primary:hover {
-  background-color: var(--btn-primary-hover-background-color);
-  border-color: var (--btn-primary-hover-background-color);
 }

@@ -1,0 +1,108 @@
+{% extends "base.html" %} {% block title %}Weather{% endblock %} {% import
+    "bootstrap/utils.html" as utils %} {% block main%}
+<head>
+    <title>Pogoda</title>
+    <style>
+        .cooco{
+            background-color: white;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container-md mt-4">
+        <h1 class="text-center mb-4">Prognoza Pogody</h1>
+        <div class="row ">
+            <form method="post" action="/weather">
+                <div class="input-group mb-3">
+                    <input type="text" class="form-control" name="city" placeholder="Wpisz miasto" aria-label="Recipient's username" aria-describedby="button-addon2">
+                    <input type="submit" class="btn btn-outline-secondary" id="button-addon2" value="Szukaj"></input>
+                  </div>
+            </form>
+        </div>
+        <div class="container mt-4 border border-3 border-secondary rounded border-dashed p-3">
+            {% if data %}
+            <div class="row">
+                
+                <div class="col-xl-3 ">
+                    <div class="row-10 d-flex justify-content-center align-items-center flex-column">
+                        <div class="col--2 d-flex justify-content-center align-items-center flex-column">
+                            <h4 class="card-title">{{ data.city }}, {{ data.country }}</h4>
+                            <img src="http://openweathermap.org/img/wn/{{ data.icon }}@2x.png" alt="Weather icon">
+                            <p>{{ data.description }}</p>
+                        </div>
+                        <div class="col-md-10 col--2 d-flex justify-content-center align-items-center flex-column">
+                            <p><strong>Temperatura:</strong> {{ data.temp }}°C </p>
+                            <p><strong>Temp. odczuwalna:</strong> {{ data.feeltemp }}°C </p>
+                            <p><strong>Wilgotność:</strong> {{ data.humidity }}%</p>
+                            <p><strong>Ciśnienie:</strong> {{ data.pressure }} hPa</p>
+                            {% if data.rain %}<p><strong>Deszcz:</strong> {{ data.rain }} mm</p>{% endif %}
+                            {% if data.snow %}<p><strong>Śnieg:</strong> {{ data.snow }} mm</p>{% endif %}
+                        </div>
+                </div>
+                </div>
+                {% if forecast %}
+                <div class="col-9">
+                    {% if forecast[0] %}
+                    <div class="row">
+                        <h2>W ciągu dnia</h2>
+                    {% for hour in forecast[0] %}
+                        <div class="col-12 col-lg-3 mb-4">
+                            <div class="card" data-bs-toggle="collapse" data-bs-target="#day_forecast{{ loop.index }}" aria-expanded="false" aria-controls="forecast{{ loop.index }}">
+                                <div class="card-body text-center">
+                                    <h5 class="card-title">{{ hour.time[11:] }}</h5>
+                                    <img src="http://openweathermap.org/img/wn/{{ hour.icon }}@2x.png" alt="Weather icon">
+                                    <p>{{hour.temp}}&degC</p>
+                                </div>
+                            </div>
+                            <div class="collapse" id="day_forecast{{ loop.index }}">
+                                <div class="card card-body">
+                                    <h5>Szczegóły</h5>
+                                    <p> {{ hour.description }}</p>
+                                    {% if hour.rain %}<p><strong>Deszcz:</strong> {{ hour.rain }} mm</p>{% endif %}
+                                    {% if hour.snow %}<p><strong>Śnieg:</strong> {{ hour.snow }} mm</p>{% endif %}
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                    </div>
+                    {% endif %}
+                    <div class="row">
+                        <h2>Przyszłe dni</h2>
+                    {% for day in forecast[1:] %}
+                        <div class="col-12 col-lg-3 mb-4">
+                            <div class="card" data-bs-toggle="collapse" data-bs-target="#forecast{{ loop.index }}" aria-expanded="false" aria-controls="forecast{{ loop.index }}">
+                                <div class="card-body text-center">
+                                    <h5 class="card-title">{{ day.date[5:10] }}</h5>
+                                    <img src="http://openweathermap.org/img/wn/{{ day.icon }}@2x.png" alt="Weather icon">
+                                    <p>{{day.max_temp}}&degC\{{day.min_temp}}&degC</p>
+                                </div>
+                            </div>
+                            <div class="collapse" id="forecast{{ loop.index }}">
+                                <div class="card card-body">
+                                    <h5>Szczegóły</h5>
+                                    <p> {{ day.description }}</p>
+                                    <p><strong>Wilgotność:</strong> {{ day.humidity }}%</p>
+                                    <p><strong>Ciśnienie:</strong> {{ day.pressure }} hPa</p>
+                                    {% if day.rain %}<p><strong>Deszcz:</strong> {{ day.rain }} mm</p>{% endif %}
+                                    {% if day.snow %}<p><strong>Śnieg:</strong> {{ day.snow }} mm</p>{% endif %}
+                                </div>
+                            </div>
+                        </div>
+
+                    {% endfor %}
+                    </div>
+                </div>
+                {% endif %}
+            </div>
+            {% endif %}
+            
+        </div>
+
+    </div>
+
+</body>
+</html>
+
+{% endblock %}

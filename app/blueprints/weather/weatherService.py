@@ -30,7 +30,10 @@ def getCurrentWeather(city, country_code):
             dataa['rain'] = 0
         else:
             dataa['rain'] = data['rain']['1h']
-            print(dataa.get('icon', 0))
+        if(data.get('snow', 0) == 0):
+            dataa['snow'] = 0
+        else:
+            dataa['snow'] = data['snow']['1h']
     else:
         dataa = None
 
@@ -47,7 +50,7 @@ def getForecast(city, country_code):
         data = data['list']
 
         result = []
-        today = {}
+        today = []
         result.append(today)
 
         daily = {
@@ -69,8 +72,7 @@ def getForecast(city, country_code):
             dt = datetime.fromtimestamp(step['dt'])
 
             if date.today() == dt.date():
-                today.update(
-                    {step['dt_txt'] : {
+                today.append({
                         'time': step['dt_txt'],
                         'temp': step['main']['temp'],
                         'feels_like' : step['main']['feels_like'],
@@ -81,10 +83,11 @@ def getForecast(city, country_code):
                         'wind': step['wind']['speed'],
                         'rain': (step['rain']['3h']) if 'rain' in step else 0,
                         'snow': (step['snow']['3h']) if 'rain' in step else 0
-                    }})
+                    })
             else:
                 if counter == -1:
                     date_check = dt.date()
+                    counter = 0
 
                 if date_check < dt.date():
                     
@@ -94,8 +97,8 @@ def getForecast(city, country_code):
                         'min_temp': round_to_half(daily['min_temp']),
                         'pressure': round(daily['pressure']/counter),
                         'humidity': round(daily['humidity']/counter),
-                        'rain': daily['rain'],
-                        'snow': daily['snow'],
+                        'rain': round(daily['rain'],2),
+                        'snow': round(daily['snow'],2),
                         'icon' : daily['icon'],
                         'description': daily['description']
                     })
