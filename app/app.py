@@ -46,5 +46,5 @@ if __name__ == '__main__':
         hour=0,
         minute=0)
         
-    app.run(debug=True)
+    app.run(debug=True, port=8000)
 
