@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, request
+from flask import Blueprint, render_template, request, flash
 from .forms import EconomyForm
 import requests
 from datetime import timedelta
@@ -31,9 +31,11 @@ def index():
     startdate = form.startdate.data
     todate = form.todate.data
     if startdate > todate:
-        return 'Start musi być wcześniej niż koniec'
+        flash('Start musi być wcześniej niż koniec!')
+        return render_template('economy.html', form=form, page='economy_bp.index')
     if todate - startdate > timedelta(days=93):
-        return 'Zakres nie może przekraczać 93 dni'
+        flash('Zakres nie może przekraczać 93 dni!')
+        return render_template('economy.html', form=form, page='economy_bp.index')
     for curr_code in curr_codes:
         if curr_code != 'Wybierz walutę':
             link = f'https://api.nbp.pl/api/exchangerates/rates/A/{curr_code}/{startdate}/{todate}'

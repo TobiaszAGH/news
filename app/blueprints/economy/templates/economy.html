@@ -5,7 +5,7 @@
     {% endblock %}
      {% block main%}
     <div class="container ">
-      <h1>Economy</h1>
+      <h1>Ekonomia</h1>
       
       <form method="POST" action="/economy">
         <div class="form-row d-flex">
@@ -28,7 +28,18 @@
           <div class="form-group">{{ form.submit(class='form-control btn-dark btn') }}</div>
         </div>
       </form>
+      {% with messages = get_flashed_messages() %}
+        {% if messages %}
 
+          {% for message in messages %}
+            <div class="alert alert-danger" role="alert" onclick="this.remove()">
+            
+              {{ message }}
+            </div>
+          {% endfor %}
+
+        {% endif %}
+      {% endwith %}
       <div id="chart">{{ graph|safe }}</div>
     </div>
     {% endblock %}
