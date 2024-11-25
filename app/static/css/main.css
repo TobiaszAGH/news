@@ -1,21 +1,21 @@
 :root {
-  --light-gray: #e3e2df;
-  --dark-burgundy: #5d001e;
   --dark-pink: #9a1750;
   --medium-pink: #e2afbc;
   --bright-pink: #ee4c7c;
-
-  --background-color: var(--light-gray);
-  --text-color: var(--dark-burgundy);
-  --navbar-background-color: var(--dark-pink);
-  --navbar-link-color: var(--light-gray);
-  --navbar-link-hover-color: var(--medium-pink);
-  --card-background-color: var(--light-gray);
-  --card-border-color: var(--dark-burgundy);
-  --footer-background-color: var(--dark-pink);
-  --footer-text-color: var(--light-gray);
-  --btn-primary-background-color: var(--bright-pink);
-  --btn-primary-hover-background-color: var(--dark-pink);
+  --light-gray: #f8f9fa;
+  --dark-gray: #343a40;
+  --dark-burgundy: #5a1f2d;
+  --background-color-dark: #121212;
+  --text-color-dark: #e0e0e0;
+  --navbar-background-color-dark: #1f1f1f;
+  --navbar-link-color-dark: #e0e0e0;
+  --navbar-link-hover-color-dark: #e2afbc;
+  --card-background-color-dark: #1f1f1f;
+  --card-border-color-dark: #5a1f2d;
+  --footer-background-color-dark: #1f1f1f;
+  --footer-text-color-dark: #e0e0e0;
+  --btn-primary-background-color-dark: #9a1750;
+  --btn-primary-hover-background-color-dark: #e2afbc;
 
   font-family: "Roboto", sans-serif;
   font-weight: 400;
@@ -30,11 +30,42 @@ body {
   margin: 0;
 }
 
+[data-bs-theme="light"] body {
+  --background-color: var(--light-gray);
+  --text-color: var(--dark-burgundy);
+  --navbar-background-color: var(--dark-pink);
+  --navbar-link-color: var(--light-gray);
+  --navbar-link-hover-color: var(--medium-pink);
+  --card-background-color: var(--light-gray);
+  --card-border-color: var(--dark-burgundy);
+  --footer-background-color: var(--dark-pink);
+  --footer-text-color: var(--light-gray);
+  --btn-primary-background-color: var(--bright-pink);
+  --btn-primary-hover-background-color: var(--dark-pink);
+}
+
+[data-bs-theme="dark"] body {
+  --background-color: var(--background-color-dark);
+  --text-color: var(--text-color-dark);
+  --navbar-background-color: var(--navbar-background-color-dark);
+  --navbar-link-color: var(--navbar-link-color-dark);
+  --navbar-link-hover-color: var(--navbar-link-hover-color-dark);
+  --card-background-color: var(--card-background-color-dark);
+  --card-border-color: var(--card-border-color-dark);
+  --footer-background-color: var(--footer-background-color-dark);
+  --footer-text-color: var(--footer-text-color-dark);
+  --btn-primary-background-color: var(--btn-primary-background-color-dark);
+  --btn-primary-hover-background-color: var(
+    --btn-primary-hover-background-color-dark
+  );
+}
+
 .navbar {
   background-color: var(--navbar-background-color);
   /* width: 100vw; */
   /* border-radius: 0 0 10px 10px; */
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Dodanie cienia */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  position: relative;
 }
 
 .navbar a {
@@ -43,6 +74,19 @@ body {
 
 .navbar a:hover {
   color: var(--navbar-link-hover-color);
+}
+
+.navbar button {
+  margin-right: 3rem;
+}
+
+#theme-toggler {
+  position: absolute;
+  right: 1rem;
+  top: 1rem;
+  /* margin-right: 1rem; */
+  user-select: none;
+  cursor: pointer;
 }
 
 .main-header {

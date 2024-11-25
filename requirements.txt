@@ -4,3 +4,7 @@ FLASK-BOOTSTRAP==3.3.7.1
 flask_wtf
 wtforms
 requests
+bs4
+flask_apscheduler
+plotly==5.24.1
+geocoder

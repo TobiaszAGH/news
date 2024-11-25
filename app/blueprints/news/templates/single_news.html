@@ -1,0 +1,65 @@
+{% extends "base.html" %}
+{% block title %}{{ news.title }}{% endblock %}
+
+{% block header %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/single_news.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/news.css') }}"
+/>
+
+<script>
+    function openModal(imageSrc) {
+      const modal = document.getElementById("image-modal");
+      const modalImage = document.getElementById("modal-image");
+      modalImage.src = imageSrc;
+      modal.style.display = "flex";
+    }
+  
+    function closeModal() {
+      const modal = document.getElementById("image-modal");
+      modal.style.display = "none";
+    }
+  </script>
+
+{% endblock %}
+
+{% block main %}
+<div class="container mt-4">
+    <h1 class="news-title">{{ news.title }}</h1>
+    <p class="publication-date">Publication date: {{ news.publication_date.strftime('%d.%m.%Y') }}
+        <br>Source: policja.pl
+    </p>
+
+    <hr class="divider">
+    
+    <div class="news-content">
+        <img src="{{ news.image_url }}" alt="Main image" class="main-news-image" referrerpolicy="no-referrer">
+        <p class="summary-text">{{ news.summary }}</p>
+        <p class="news-text">{{ news.description }}</p>
+    </div>
+
+    {% if images %}
+    <div class="image-gallery">
+        <h3>Gallery</h3>
+        <div class="gallery-grid">
+            {% for image in images %}
+            <div class="gallery-item">
+                <img src="{{ image.image_url }}" alt="Additional image" class="gallery-image" referrerpolicy="no-referrer"  onclick="openModal('{{ image.image_url }}')">
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+    {% endif %}
+</div>
+
+<a href="{{ request.referrer if request.referrer else url_for('news_bp.news_home')}}" class="btn btn-primary sticky-back-button">Back</a>
+<div
+    id="image-modal"
+    class="modal-overlay"
+    style="display: none"
+    onclick="closeModal()"
+>
+    
+    <img id="modal-image" class="modal-image" alt="Enlarged photo" />
+</div>
+
+{% endblock %}

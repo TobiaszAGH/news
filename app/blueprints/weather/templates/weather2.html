@@ -1,0 +1,76 @@
+{% extends "base.html" %} {% block title %}Weather{% endblock %} {% import
+    "bootstrap/utils.html" as utils %} {% block main%}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pogoda</title>
+    <!-- Poprawny link do Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQ7wYRBVvoLbsmF8V8FZxMe6IU9Cqt5j9Oip3mgdTrWRDlpoF3gFtjFvR" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</head>
+<body>
+    <div class="container mt-4">
+        <h1 class="text-center mb-4">Prognoza Pogody</h1>
+
+        <!-- Form do wpisywania miejscowości -->
+        <form method="POST" action="/weather">
+            <div class="row mb-4">
+                <div class="col-12 col-md-8">
+                    <input type="text" class="form-control" name="city" placeholder="Wpisz nazwę miasta" value="{{ request.form.get('city', 'Kraków') }}">
+                </div>
+                <div class="col-12 col-md-4">
+                    <button type="submit" class="btn btn-primary w-100">Sprawdź</button>
+                </div>
+            </div>
+        </form>
+
+        <!-- Bieżąca pogoda -->
+        {% if data %}
+            <div class="card mb-4">
+                <div class="card-body">
+                    <h4 class="card-title">{{ data.city }}, {{ data.country }}</h4>
+                    <p><strong>Opis:</strong> {{ data.description }}</p>
+                    <p><strong>Temperatura:</strong> {{ data.temp }}°C (odczuwalna: {{ data.feeltemp }}°C)</p>
+                    <p><strong>Wilgotność:</strong> {{ data.humidity }}%</p>
+                    <p><strong>Ciśnienie:</strong> {{ data.pressure }} hPa</p>
+                    <p><strong>Opady:</strong> {% if data.rain %}{{ data.rain }} mm{% else %}Brak{% endif %}</p>
+                    <img src="http://openweathermap.org/img/wn/{{ data.icon }}@2x.png" alt="Weather icon">
+                </div>
+            </div>
+        {% endif %}
+
+        <!-- Prognoza na kolejne dni -->
+        {% if forecast %}
+            <h3>Prognoza na kolejne dni</h3>
+            <div class="row">
+                {% for day in forecast['short'] %}
+                    <div class="col-12 col-md-2 mb-4">
+                        <div class="card" data-bs-toggle="collapse" data-bs-target="#forecast{{ loop.index }}" aria-expanded="false" aria-controls="forecast{{ loop.index }}">
+                            <div class="card-body text-center">
+                                <h5 class="card-title">{{ day.time[:10] }}</h5>
+                                <img src="http://openweathermap.org/img/wn/{{ day.icon }}@2x.png" alt="Weather icon">
+                                <p>{{ day.description}}</p>
+                                <p>{{ day.temp }}°C</p>
+                            </div>
+                        </div>
+                        <div class="collapse" id="forecast{{ loop.index }}">
+                            <div class="card card-body">
+                                <h5>Prognoza szczegółowa</h5>
+                                <p><strong>Odczuwalna temperatura:</strong> {{ day.feeltemp }}°C</p>
+                                <p><strong>Wilgotność:</strong> {{ day.humidity }}%</p>
+                                <p><strong>Ciśnienie:</strong> {{ day.pressure }} hPa</p>
+                                <p><strong>Opis:</strong> {{ day.description }}</p>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        {% endif %}
+    </div>
+
+    <!-- Poprawne linki do Bootstrap JS i Popper.js -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-qjstXjQghc4X1Y8vJhB4WwvE/4z2TfI3UvYov77dQK8jB87/Njvw5b6ywLkKNE3r" crossorigin="anonymous"></script>
+</body>
+</html>
+{% endblock %}
