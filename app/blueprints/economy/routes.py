@@ -18,7 +18,7 @@ def index():
     if request.method == 'GET':
         return render_template('economy.html', form=form)
     
-    curr_codes = form.currency.data
+    curr_codes = [form.currency1.data, form.currency2.data, form.currency3.data]
     startdate = form.startdate.data
     todate = form.todate.data
     if startdate > todate:
@@ -27,7 +27,13 @@ def index():
         return 'Zakres nie może przekraczać 93 dni'
     data = json.loads('{"currencies": []}')
     for curr_code in curr_codes:
-        link = f'https://api.nbp.pl/api/exchangerates/rates/A/{curr_code}/{startdate}/{todate}'
-        data["currencies"].append(requests.get(link).json())
+        if curr_code != 'Wybierz walutę':
+            link = f'https://api.nbp.pl/api/exchangerates/rates/A/{curr_code}/{startdate}/{todate}'
+            response = requests.get(link)
+            if response.status_code == 200:
+                data["currencies"].append(response.json())
+            else:
+                print(response.status_code)
+                print(link)
 
     return data

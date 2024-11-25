@@ -1,12 +1,30 @@
 {% extends "base.html" %} {% block title %}Economy{% endblock %} {% import
     "bootstrap/utils.html" as utils %} {% block main%}
-    <div class="container">
+    <div class="container ">
       <h1>Economy</h1>
+      
       <form method="POST" action="/economy">
-        {{ form.currency(size=32) }}
-        {{ form.startdate }}
-        {{ form.todate }}
-        {{ form.submit() }}
-    </form>
+        <div class="form-row d-flex">
+          <div class="form-group col-6">
+            {{ form.startdate.label }}
+            {{ form.startdate(class='form-control') }}
+
+          </div>
+          <div class="form-group col-6">
+            {{ form.todate.label }}
+            {{ form.todate(class='form-control') }}
+          </div>
+        </div>
+        <div class="form-row d-flex">
+          <div class="form-group col-4">{{ form.currency1(class='form-control') }}</div>
+          <div class="form-group col-4">{{ form.currency2(class='form-control') }}</div>
+          <div class="form-group col-4">{{ form.currency3(class='form-control') }}</div>
+        </div>
+        <div class="">
+          <div class="form-group">{{ form.submit(class='form-control btn-dark btn') }}</div>
+        </div>
+      </form>
+
+    
     </div>
     {% endblock %}
