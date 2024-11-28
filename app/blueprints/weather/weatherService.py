@@ -17,13 +17,14 @@ def getCurrentWeather(city, country_code):
                 'icon': data['weather'][0]['icon'],
                 'main' : data['weather'][0]['main'],
                 'description' : data['weather'][0]['description'],
-                'temp' : data['main']['temp'],
-                'feeltemp': data['main']['feels_like'],
+                'temp' :round_to_half(data['main']['temp']),
+                'feeltemp': round_to_half(data['main']['feels_like']),
                 'humidity' : data['main']['humidity'],
                 'pressure' : data['main']['pressure'],
                 'city' : data['name'],
                 'country' : data['sys']['country']  
             }
+        
         
 
         if(data.get('rain', 0) == 0):
@@ -74,15 +75,15 @@ def getForecast(city, country_code):
             if date.today() == dt.date():
                 today.append({
                         'time': step['dt_txt'],
-                        'temp': step['main']['temp'],
-                        'feels_like' : step['main']['feels_like'],
+                        'temp': round_to_half(step['main']['temp']),
+                        'feels_like' : round_to_half(step['main']['feels_like']),
                         'pressure': step['main']['pressure'],
                         'humidity': step['main']['humidity'],
                         'description': step['weather'][0]['description'],
                         'icon': step['weather'][0]['icon'],
                         'wind': step['wind']['speed'],
-                        'rain': (step['rain']['3h']) if 'rain' in step else 0,
-                        'snow': (step['snow']['3h']) if 'rain' in step else 0
+                        'rain': step.get('rain', {}).get('3h', 0),
+                        'snow': step.get('snow', {}).get('3h', 0)
                     })
             else:
                 if counter == -1:
