@@ -9,7 +9,7 @@
     <div class="container mt-4">
         <h1 class="text-center mb-4">Prognoza Pogody</h1>
 
-        <!-- Form do wpisywania miejscowości -->
+
         <form method="POST" action="/weather">
             <div class="row mb-4">
                 <div class="col-12 col-md-8">
@@ -21,7 +21,6 @@
             </div>
         </form>
 
-        <!-- Bieżąca pogoda -->
         {% if data %}
             <div class="card mb-4">
                 <div class="card-body">
@@ -33,11 +32,7 @@
                     <p><strong>Opady:</strong> {% if data.rain %}{{ data.rain }} mm{% else %}Brak{% endif %}</p>
                     <img src="http://openweathermap.org/img/wn/{{ data.icon }}@2x.png" alt="Weather icon">
                 </div>
-            </div>
-        {% endif %}
-
-        <!-- Prognoza na kolejne dni -->
-        {% if forecast %}
+                {% if forecast %}
             <h3>Prognoza na kolejne dni</h3>
             <div class="row">
                 {% for day in forecast['short'] %}
@@ -63,9 +58,14 @@
                 {% endfor %}
             </div>
         {% endif %}
+            </div>
+        {% endif %}
+
+
+        
     </div>
 
-    <!-- Poprawne linki do Bootstrap JS i Popper.js -->
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-qjstXjQghc4X1Y8vJhB4WwvE/4z2TfI3UvYov77dQK8jB87/Njvw5b6ywLkKNE3r" crossorigin="anonymous"></script>
 </body>
 </html>

@@ -5,6 +5,9 @@ import math
 
 key = '57e63f42559d5a1388381afa287e4a1b'
 
+def round_to_half(x):
+    return round(x * 2) / 2
+
 def getCurrentWeather(city, country_code):
     response = requests.get(f'https://api.openweathermap.org/data/2.5/weather?q={city},{country_code}&lang=pl&units=metric&appid={key}')
 
@@ -14,20 +17,24 @@ def getCurrentWeather(city, country_code):
                 'icon': data['weather'][0]['icon'],
                 'main' : data['weather'][0]['main'],
                 'description' : data['weather'][0]['description'],
-                'temp' : data['main']['temp'],
-                'feeltemp': data['main']['feels_like'],
+                'temp' :round_to_half(data['main']['temp']),
+                'feeltemp': round_to_half(data['main']['feels_like']),
                 'humidity' : data['main']['humidity'],
                 'pressure' : data['main']['pressure'],
                 'city' : data['name'],
                 'country' : data['sys']['country']  
             }
         
+        
 
         if(data.get('rain', 0) == 0):
             dataa['rain'] = 0
         else:
             dataa['rain'] = data['rain']['1h']
-            print(dataa.get('icon', 0))
+        if(data.get('snow', 0) == 0):
+            dataa['snow'] = 0
+        else:
+            dataa['snow'] = data['snow']['1h']
     else:
         dataa = None
 
@@ -36,69 +43,93 @@ def getCurrentWeather(city, country_code):
 
 def getForecast(city, country_code):
 
+
     response = requests.get(f'https://api.openweathermap.org/data/2.5/forecast?q={city},{country_code}&lang=pl&units=metric&appid={key}')
 
     if response.status_code == 200:
         data = response.json()
         data = data['list']
-        
-        forecast_data = {
-            'short': [],
-            'dzien1': [],
-            'dzien2': [],
-            'dzien3': [],
-            'dzien4': [],
-            'dzien5': []
+
+        result = []
+        today = []
+        result.append(today)
+
+        daily = {
+            'max_temp': float('-inf'),
+            'min_temp': float('inf'),
+            'pressure': 0,
+            'humidity': 0,
+            'rain': 0,
+            'snow': 0,
+            'icon': '',
+            'description': ''
         }
-        
-        current_day = date.today()
-        day_counter = 0
 
-        # List to store middle forecasts for dzien2, dzien3, dzien4, dzien5
-        middle_forecasts = []
+        date_check = date.today()
+        counter = -1
+        for i in range(len(data)):
 
-        for entry in data:
-            dt = datetime.fromtimestamp(entry['dt'])
-            forecast = {
-                'icon': entry['weather'][0]['icon'],
-                'main': entry['weather'][0]['main'],
-                'description': entry['weather'][0]['description'],
-                'temp': entry['main']['temp'],
-                'feeltemp': entry['main']['feels_like'],
-                'humidity': entry['main']['humidity'],
-                'pressure': entry['main']['pressure'],
-                'time': entry['dt_txt']
-            }
+            step = data[i]
+            dt = datetime.fromtimestamp(step['dt'])
 
-            # Add forecast data to the appropriate day based on the date
-            if dt.date() > current_day:
-                current_day = dt.date()
-                day_counter += 1
+            if date.today() == dt.date():
+                today.append({
+                        'time': step['dt_txt'],
+                        'temp': round_to_half(step['main']['temp']),
+                        'feels_like' : round_to_half(step['main']['feels_like']),
+                        'pressure': step['main']['pressure'],
+                        'humidity': step['main']['humidity'],
+                        'description': step['weather'][0]['description'],
+                        'icon': step['weather'][0]['icon'],
+                        'wind': step['wind']['speed'],
+                        'rain': step.get('rain', {}).get('3h', 0),
+                        'snow': step.get('snow', {}).get('3h', 0)
+                    })
+            else:
+                if counter == -1:
+                    date_check = dt.date()
+                    counter = 0
 
-            if day_counter == 0:
-                forecast_data['dzien1'].append(forecast)
-            elif day_counter == 1:
-                forecast_data['dzien2'].append(forecast)
-            elif day_counter == 2:
-                forecast_data['dzien3'].append(forecast)
-            elif day_counter == 3:
-                forecast_data['dzien4'].append(forecast)
-            elif day_counter == 4:
-                forecast_data['dzien5'].append(forecast)
+                if date_check < dt.date():
+                    
+                    result.append({
+                        'date': data[i-1]['dt_txt'],
+                        'max_temp': round_to_half(daily['max_temp']),
+                        'min_temp': round_to_half(daily['min_temp']),
+                        'pressure': round(daily['pressure']/counter),
+                        'humidity': round(daily['humidity']/counter),
+                        'rain': round(daily['rain'],2),
+                        'snow': round(daily['snow'],2),
+                        'icon' : daily['icon'],
+                        'description': daily['description']
+                    })
+                    counter = 0
+                    daily = {
+                        'max_temp': 0,
+                        'min_temp': 0,
+                        'pressure': 0,
+                        'humidity': 0,
+                        'rain': 0,
+                        'snow': 0
+                    }
+                    date_check = dt.date()
+               
+                counter += 1
+                daily['max_temp'] = step['main']['temp'] if step['main']['temp'] > daily['max_temp'] else daily['max_temp']
+                daily['min_temp'] = step['main']['temp'] if step['main']['temp'] < daily['min_temp'] else daily['min_temp']
+                daily['pressure'] += step['main']['pressure']
+                daily['humidity'] += step['main']['humidity']
+                if 'rain' in step:
+                    daily['rain'] += step['rain']['3h']
+                if 'snow' in step:
+                    daily['snow'] += step['snow']['3h']
 
-        # Now select the middle of each day's forecast starting from dzien2
-        for dzien in ['dzien2', 'dzien3', 'dzien4', 'dzien5']:
-            day_data = forecast_data[dzien]
-            if day_data:  # Ensure there is data for this day
-                middle_index = len(day_data) // 2  # Choose the middle forecast
-                middle_forecasts.append(day_data[middle_index])
-
-        # Add middle forecasts to the 'short' list
-        forecast_data['short'] = middle_forecasts
-
-        # You can remove this print in production
-
-        return forecast_data
+                if dt.time().hour >= 12 and dt.time().hour <= 14:
+                    daily['icon'] = step['weather'][0]['icon']
+                    daily['description'] = step['weather'][0]['description']
+                 
+        return result
+    
     else:
         print(f"Error: {response.status_code}")
         return None
