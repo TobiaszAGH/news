@@ -133,5 +133,5 @@ a:hover {
 
 .btn-primary:hover {
   background-color: var(--btn-primary-hover-background-color);
-  border-color: var (--btn-primary-hover-background-color);
+  border-color: var(--btn-primary-hover-background-color);
 }
