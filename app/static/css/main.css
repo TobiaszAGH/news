@@ -101,6 +101,17 @@ body {
   border: 2px solid var(--card-border-color);
 }
 
+/* .card-body {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  box-sizing: border-box;
+}
+
+.card-body iframe {
+  box-sizing: border-box;
+} */
+
 #footer {
   background-color: var(--footer-background-color);
   color: var(--footer-text-color);
