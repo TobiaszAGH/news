@@ -7,12 +7,12 @@
 }
 
 .sticky-back-button:hover {
-  border-color:  #5d001e;
+  border-color: #5d001e;
 }
 
 .sticky-back-button:focus {
   background-color: #5d001e;
-  border-color:  #5d001e;
+  border-color: #5d001e;
 }
 
 .article-image {
@@ -54,10 +54,10 @@
 
 .data {
   font-size: 0.6rem;
-  color: rgba(0, 0, 0, 0.6); 
+  color: rgba(0, 0, 0, 0.6);
   position: absolute;
   bottom: 10px;
-  left:10px;
+  left: 10px;
 }
 
 .summary {
@@ -66,15 +66,15 @@
 }
 
 .source {
-  font-size: 0.6rem;  
-  color: rgba(0, 0, 0, 0.6);  
-  font-style: italic;  
+  font-size: 0.6rem;
+  color: rgba(0, 0, 0, 0.6);
+  font-style: italic;
   position: absolute;
   bottom: 10px;
-  right:10px;
+  right: 10px;
 }
 
-.pagination-container{
+.pagination-container {
   display: flex;
   justify-content: center;
 }
@@ -88,26 +88,25 @@
 .pagination .page-item.disabled .page-link {
   background-color: #e695ad;
   color: #e3e2df(247, 247, 247);
-  border-color:  #e3e2df;
+  border-color: #e3e2df;
 }
 
 .pagination .page-link:hover {
   background-color: var(--btn-primary-hover-background-color);
   color: #e3e2df(247, 247, 247);
-  border-color:  #e3e2df;
+  border-color: #e3e2df;
 }
 
 .pagination .page-link:focus {
   box-shadow: none;
 }
 
-
 @media (max-width: 768px) {
   table {
     display: flex;
     flex-direction: column;
     border: none;
-  } 
+  }
   table tr {
     display: flex;
     flex-direction: column;
@@ -120,14 +119,11 @@
   }
 
   .article-image {
-    display: block;             
-    margin: 0 auto;                          
+    display: block;
+    margin: 0 auto;
   }
 
   .article-image:hover {
-    transform: none; 
+    transform: none;
   }
-
 }
-  
-  
