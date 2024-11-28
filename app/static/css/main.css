@@ -1,21 +1,20 @@
 :root {
-  --dark-pink: #9a1750;
-  --medium-pink: #e2afbc;
-  --bright-pink: #ee4c7c;
+  --dark-blue: #3d52a0;
+  --medium-blue: #8697c4;
+  --bright-blue: #7091e6;
   --light-gray: #f8f9fa;
   --dark-gray: #343a40;
-  --dark-burgundy: #5a1f2d;
   --background-color-dark: #121212;
   --text-color-dark: #e0e0e0;
   --navbar-background-color-dark: #1f1f1f;
   --navbar-link-color-dark: #e0e0e0;
-  --navbar-link-hover-color-dark: #e2afbc;
+  --navbar-link-hover-color-dark: var(--medium-blue);
   --card-background-color-dark: #1f1f1f;
-  --card-border-color-dark: #5a1f2d;
+  --card-border-color-dark: var(--bright-blue);
   --footer-background-color-dark: #1f1f1f;
   --footer-text-color-dark: #e0e0e0;
-  --btn-primary-background-color-dark: #9a1750;
-  --btn-primary-hover-background-color-dark: #e2afbc;
+  --btn-primary-background-color-dark: #5067a0;
+  --btn-primary-hover-background-color-dark: var(--medium-blue);
 
   font-family: "Roboto", sans-serif;
   font-weight: 400;
@@ -32,16 +31,16 @@ body {
 
 [data-bs-theme="light"] body {
   --background-color: var(--light-gray);
-  --text-color: var(--dark-burgundy);
-  --navbar-background-color: var(--dark-pink);
+  --text-color: var(--bright-blue);
+  --navbar-background-color: var(--dark-blue);
   --navbar-link-color: var(--light-gray);
-  --navbar-link-hover-color: var(--medium-pink);
+  --navbar-link-hover-color: var(--medium-blue);
   --card-background-color: var(--light-gray);
-  --card-border-color: var(--dark-burgundy);
-  --footer-background-color: var(--dark-pink);
+  --card-border-color: var(--bright-blue);
+  --footer-background-color: var(--dark-blue);
   --footer-text-color: var(--light-gray);
-  --btn-primary-background-color: var(--bright-pink);
-  --btn-primary-hover-background-color: var(--dark-pink);
+  --btn-primary-background-color: var(--bright-blue);
+  --btn-primary-hover-background-color: var(--dark-blue);
 }
 
 [data-bs-theme="dark"] body {
@@ -119,11 +118,11 @@ body {
 }
 
 a {
-  color: var(--dark-pink);
+  color: var(--dark-blue);
 }
 
 a:hover {
-  color: var(--bright-pink);
+  color: var(--bright-blue);
 }
 
 .btn-primary {
@@ -133,5 +132,5 @@ a:hover {
 
 .btn-primary:hover {
   background-color: var(--btn-primary-hover-background-color);
-  border-color: var (--btn-primary-hover-background-color);
+  border-color: var(--btn-primary-hover-background-color);
 }

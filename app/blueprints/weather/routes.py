@@ -30,6 +30,9 @@ def hello():
     if request.form.get('city'):
         city = request.form.get('city')
         country_code = get_country_code(city)
+
+        if city.lower() == "dupa":
+            city = "Warszawa"
         
     data = getCurrentWeather(city, country_code)
 
