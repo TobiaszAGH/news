@@ -3,6 +3,13 @@ from app import app, db, scheduler
 # Start the app
 if __name__ == '__main__':
     with app.app_context():
-        scheduler.start()
         db.create_all()
+        scheduler.start()
+    from blueprints.news.data_scraper import scrape_and_save
+    scheduler.add_job(
+        id='1',
+        func=scrape_and_save,
+        trigger='cron',
+        hour=0,
+        minute=0)
     app.run(debug=False)
