@@ -20,17 +20,17 @@ block header %}
 
 {% endblock %} {%block main %}
 <div class="container mt-4">
-  <h2 class="mb-4">{{ sport_name }} - Breaking news!</h2>
+  <h2 class="mb-4">{{ sport_name }} - Najnowsze wiadomości!</h2>
   {% if error %}
   <div class="alert alert-danger">{{ error }}</div>
   {% else %}
   <table class="table table-striped">
     <thead>
       <tr>
-        <th>Photo</th>
-        <th>Title</th>
-        <th>Description</th>
-        <th>Date</th>
+        <th>Zdjęcie</th>
+        <th>Tytuł</th>
+        <th>Opis</th>
+        <th>Data</th>
         <th>Link</th>
       </tr>
     </thead>
@@ -45,20 +45,23 @@ block header %}
             class="article-image"
             onclick="openModal('{{ article.image }}')"
           />
-          {% else %} No photo {% endif %}
+          {% else %} Brak zdjęcia {% endif %}
         </td>
         <td><strong>{{ article.title }}</strong></td>
         <td>
-          {% if article.description %} {{ article.description }} {% else %} Description unavailable - go to full article -> {% endif %}
+          {% if article.description %} {{ article.description }} {% else %} Opis niedostępny - przejdź do pełnego artykułu -> {% endif %}
         </td>
         <td style="width: 150px">
-          {% if article.pubDate %} {{ article.pubDate }} {% else %} No date {%
+          {% if article.pubDate %} {{ article.pubDate }} {% else %} Brak daty {%
           endif %}
         </td>
         <td>
-          <a href="{{ article.link }}" target="_blank" class="btn btn-link"
-            >Read more</a
-          >
+          {% if article.link %}
+          <a 
+            href="{{ article.link }}"
+            target="_blank"
+            class="btn btn-link">Czytaj więcej</a>
+          {% else %} Brak linku {% endif %}
         </td>
       </tr>
       {% endfor %}
@@ -68,7 +71,7 @@ block header %}
   <a
     href="{{ url_for('sport.sport_home') }}"
     class="btn btn-primary sticky-back-button"
-    >Back</a
+    >Powrót</a
   >
 </div>
 <div
