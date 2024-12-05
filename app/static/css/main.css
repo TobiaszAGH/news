@@ -88,26 +88,22 @@ body {
   cursor: pointer;
 }
 
-.main-header {
-  flex: 1;
-}
-
-.row-main {
-  flex: 9;
-}
-
 .card {
   background-color: var(--card-background-color);
   border: 2px solid var(--card-border-color);
 }
 
-/* .card-body {
+.news-card {
+  height: 50vh;
+}
+
+.card-body {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   box-sizing: border-box;
 }
-
+/* 
 .card-body iframe {
   box-sizing: border-box;
 } */
