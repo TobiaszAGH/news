@@ -1,53 +1,45 @@
 {% extends "base.html" %} {% block title %}Strona Główna{% endblock %} {% import
 "bootstrap/utils.html" as utils %} {% block main %}
 <div
-  class="container-fluid d-flex justify-content-center align-items-center"
+  class="container-l d-flex flex-column justify-content-start align-items-center p-4"
   style="flex: 1"
 >
-  <div class="row h-100 row-cols-2" style="flex: 1">
-    <!-- Left Column with 3 Rows -->
-    <div class="col-md-6 d-flex flex-column">
-      <div class="row mb-1 flex-fill">
-        <div class="card w-100 h-100">
-          <div class="card-body">
-            <h5 class="card-title">Pogoda</h5>
-            <iframe src="/weather" frameborder="0" class="w-100 h-100"></iframe>
-            <a href="/weather" class="btn btn-primary mt-2"
-              >Przejdź do pogody</a
-            >
-          </div>
-        </div>
-      </div>
-      <div class="row mb-1 flex-fill">
-        <div class="card w-100 h-100">
-          <div class="card-body">
-            <h5 class="card-title">Ekonomia</h5>
-            <iframe src="/economy" frameborder="0" class="w-100 h-100"></iframe>
-            <a href="/economy" class="btn btn-primary mt-2"
-              >Przejdź do ekonomii</a
-            >
-          </div>
-        </div>
-      </div>
-      <div class="row flex-fill">
-        <div class="card w-100 h-100">
-          <div class="card-body">
-            <h5 class="card-title">Sport</h5>
-            <iframe src="/sport" frameborder="0" class="w-100 h-100"></iframe>
-            <a href="/sport" class="btn btn-primary mt-2">Przejdź do sportu</a>
-          </div>
+  <div class="main-header d-flex flex-column text-center">
+    <h1>AGH News</h1>
+  </div>
+  <div class="row row-main row-cols-1 row-cols-md-2 g-4 text-center w-100">
+    <div class="col">
+      <div class="card h-100">
+        <div class="card-body">
+          <h5 class="card-title">Wiadomości</h5>
+          <a href="/news" class="btn btn-primary">Przejdź do wiadomości</a>
         </div>
       </div>
     </div>
-    <!-- Right Column with 1 Long Row -->
-    <div class="col-md-6 d-flex flex-column">
-      <div class="row flex-fill">
-        <div class="card w-100 h-100">
-          <div class="card-body">
-            <h5 class="card-title">News</h5>
-            <iframe src="/news" frameborder="0" class="w-100 h-100"></iframe>
-            <a href="/news" class="btn btn-primary mt-2">Przejdź do newsów</a>
-          </div>
+    <div class="col">
+      <div class="card h-100">
+        <div class="card-body">
+          <h5 class="card-title">Pogoda</h5>
+          <!-- <iframe src="/weather" frameborder="0"></iframe> -->
+          <a href="/weather" class="btn btn-primary">Przejdź do pogody</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row row-main row-cols-1 row-cols-md-2 g-4 text-center w-100 mt-1">
+    <div class="col">
+      <div class="card h-100">
+        <div class="card-body">
+          <h5 class="card-title">Ekonomia</h5>
+          <a href="/economy" class="btn btn-primary">Przejdź do ekonomii</a>
+        </div>
+      </div>
+    </div>
+    <div class="col">
+      <div class="card h-100">
+        <div class="card-body">
+          <h5 class="card-title">Sport</h5>
+          <a href="/sport" class="btn btn-primary">Przejdź do sportu</a>
         </div>
       </div>
     </div>
