@@ -1,0 +1,7 @@
+<div>
+    <h2>Plot</h2>
+    <div id="chart">{{ graph|safe }}</div>
+    <button><a href="{{ url_for(page, days=3) }}">Ostatnie 3 dni</a></button>
+    <button><a href="{{ url_for(page, days=5) }}">Ostatnie 5 dni</a></button>
+    <button><a href="{{ url_for(page, days=7) }}">Ostatnie 7 dni</a></button>
+</div>

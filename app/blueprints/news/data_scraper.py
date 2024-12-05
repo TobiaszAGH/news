@@ -3,7 +3,8 @@ from .models import CrimeNews, CrimeImage
 from datetime import datetime
 from bs4 import BeautifulSoup
 import time
-from app import db, app
+from config import db
+from app import app
 
 base_url = "https://krakow.policja.gov.pl"
 url = "https://krakow.policja.gov.pl/kr1/aktualnosci"

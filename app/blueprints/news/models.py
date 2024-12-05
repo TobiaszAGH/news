@@ -1,5 +1,5 @@
 from sqlalchemy import ForeignKey
-from app import db
+from config import db
 
 class CrimeNews(db.Model):
     __tablename__ = 'crime_news'
