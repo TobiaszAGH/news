@@ -43,8 +43,9 @@ def hello():
     if len(cities) == 0:
         cities.append('Kraków')
     for city in cities:
-        data.append(getCurrentWeather(city, None))
-        forecast.append(getForecast(city, None))
+        if getCurrentWeather(city, None) is not None:
+            data.append(getCurrentWeather(city, None))
+            forecast.append(getForecast(city, None))
         i += 1
       
     return render_template('weather_page.html', data = data, forecast = forecast)
