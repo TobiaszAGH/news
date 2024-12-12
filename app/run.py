@@ -1,11 +1,11 @@
 from app import app, db, scheduler
+from blueprints.news.data_scraper import scrape_and_save
 
 # Start the app
-if __name__ == '__main__':
+def main():
     with app.app_context():
         db.create_all()
         scheduler.start()
-    from blueprints.news.data_scraper import scrape_and_save
     scheduler.add_job(
         id='1',
         func=scrape_and_save,
@@ -13,3 +13,6 @@ if __name__ == '__main__':
         hour=0,
         minute=0)
     app.run(debug=False)
+
+if __name__ == '__main__':
+    main()
