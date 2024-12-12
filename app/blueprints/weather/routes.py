@@ -48,7 +48,7 @@ def hello():
             forecast.append(getForecast(city, None))
         i += 1
       
-    return render_template('weather_test.html', data = data, forecast = forecast)
+    return render_template('weather_page.html', data = data, forecast = forecast)
 
 @weather_bp.route('/widget')
 def showWidget():
