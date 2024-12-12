@@ -6,15 +6,6 @@
   z-index: 3;
 }
 
-.sticky-back-button:hover {
-  border-color: #5d001e;
-}
-
-.sticky-back-button:focus {
-  background-color: #5d001e;
-  border-color: #5d001e;
-}
-
 .article-image {
   max-width: 200px;
   max-height: 250px;
@@ -54,7 +45,7 @@
 
 .data {
   font-size: 0.6rem;
-  color: rgba(0, 0, 0, 0.6);
+  color: gray;
   position: absolute;
   bottom: 10px;
   left: 10px;
@@ -67,7 +58,7 @@
 
 .source {
   font-size: 0.6rem;
-  color: rgba(0, 0, 0, 0.6);
+  color: gray;
   font-style: italic;
   position: absolute;
   bottom: 10px;
@@ -77,28 +68,6 @@
 .pagination-container {
   display: flex;
   justify-content: center;
-}
-
-.pagination .page-link {
-  background-color: var(--bright-pink);
-  color: whitesmoke;
-  border-color: #e3e2df;
-}
-
-.pagination .page-item.disabled .page-link {
-  background-color: #e695ad;
-  color: #e3e2df(247, 247, 247);
-  border-color: #e3e2df;
-}
-
-.pagination .page-link:hover {
-  background-color: var(--btn-primary-hover-background-color);
-  color: #e3e2df(247, 247, 247);
-  border-color: #e3e2df;
-}
-
-.pagination .page-link:focus {
-  box-shadow: none;
 }
 
 @media (max-width: 768px) {

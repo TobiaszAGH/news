@@ -1,10 +1,9 @@
 {% extends "base.html" %} 
 
-{% block title %}Crime News{% endblock %}
+{% block title %}Wiadomości kryminalne{% endblock %}
 
 {% block header %}
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/news.css') }}"
-    />
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/news.css') }}"/>
 
     <script>
       function openModal(imageSrc) {
@@ -23,7 +22,7 @@
     
     {% endblock %} {%block main %}
     <div class="container mt-4">
-      <h2 class="mb-4">Crime News for Krakow</h2>
+      <h2 class="mb-4">Wiadomości kryminalne dla Krakowa</h2>
       {% if error %}
       <div class="alert alert-danger">{{ error }}</div>
       {% else %}
@@ -36,7 +35,7 @@
                 <img
                   src="{{article.image_url}}" 
                   referrerpolicy="no-referrer"
-                  alt="Image"
+                  alt="Zdjęcie"
                   class="article-image"
                   onclick="openModal('{{ article.image_url }}')"
                 />
@@ -51,8 +50,8 @@
                 {{ article.summary }}
                 <br>
                 <br>
-                <span class="data">Publication date: {{article.publication_date.strftime('%d.%m.%Y')}}</span>
-                <span class="source">Source: policja.pl</span>
+                <span class="data">Data publikacji: {{article.publication_date.strftime('%d.%m.%Y')}}</span>
+                <span class="source">Źródło: policja.pl</span>
               </td>
             </tr>
             {% endfor %}
@@ -62,16 +61,16 @@
         <nav aria-label="Page navigation" class='pagination-container'>
           <ul class="pagination">
               <li class="page-item {% if articles.page == 1 %}disabled{% endif %}">
-                  <a class="page-link" href="{{ url_for('news_bp.news_home') }}?page=1">First</a>
+                  <a class="page-link" href="{{ url_for('news_bp.news_home') }}?page=1">Pierwsza</a>
               </li>
               <li class="page-item {% if articles.page == 1 %}disabled{% endif %}">
-                  <a class="page-link" href="{{ url_for('news_bp.news_home') }}?page={{ articles.page - 1 }}">Previous</a>
+                  <a class="page-link" href="{{ url_for('news_bp.news_home') }}?page={{ articles.page - 1 }}">Poprzednia</a>
               </li>
               <li class="page-item {% if articles.page == articles.pages %}disabled{% endif %}">
-                  <a class="page-link" href="{{ url_for('news_bp.news_home') }}?page={{ articles.page + 1 }}">Next</a>
+                  <a class="page-link" href="{{ url_for('news_bp.news_home') }}?page={{ articles.page + 1 }}">Następna</a>
               </li>
               <li class="page-item {% if articles.page == articles.pages %}disabled{% endif %}">
-                  <a class="page-link" href="{{ url_for('news_bp.news_home') }}?page={{ articles.pages }}">Last</a>
+                  <a class="page-link" href="{{ url_for('news_bp.news_home') }}?page={{ articles.pages }}">Ostatnia</a>
               </li>
           </ul>
       </nav>
@@ -85,6 +84,9 @@
       class="modal-overlay"
       style="display: none"
       onclick="closeModal()"
-      <img id="modal-image" class="modal-image" alt="Enlarged photo" />
+    >
+
+      <img id="modal-image" class="modal-image" alt="Powiększone zdjęcie" />
     </div>
+    
     {% endblock %}

@@ -3,8 +3,7 @@
 
 {% block header %}
 <link rel="stylesheet" href="{{ url_for('static', filename='css/single_news.css') }}">
-<link rel="stylesheet" href="{{ url_for('static', filename='css/news.css') }}"
-/>
+<link rel="stylesheet" href="{{ url_for('static', filename='css/news.css') }}"/>
 
 <script>
     function openModal(imageSrc) {
@@ -25,25 +24,25 @@
 {% block main %}
 <div class="container mt-4">
     <h1 class="news-title">{{ news.title }}</h1>
-    <p class="publication-date">Publication date: {{ news.publication_date.strftime('%d.%m.%Y') }}
-        <br>Source: policja.pl
+    <p class="publication-date">Data publikacji: {{ news.publication_date.strftime('%d.%m.%Y') }}
+        <br>Źródło: policja.pl
     </p>
 
     <hr class="divider">
     
     <div class="news-content">
-        <img src="{{ news.image_url }}" alt="Main image" class="main-news-image" referrerpolicy="no-referrer">
+        <img src="{{ news.image_url }}" alt="Zdjęcie" class="main-news-image" referrerpolicy="no-referrer">
         <p class="summary-text">{{ news.summary }}</p>
         <p class="news-text">{{ news.description }}</p>
     </div>
 
     {% if images %}
     <div class="image-gallery">
-        <h3>Gallery</h3>
+        <h3>Galeria</h3>
         <div class="gallery-grid">
             {% for image in images %}
             <div class="gallery-item">
-                <img src="{{ image.image_url }}" alt="Additional image" class="gallery-image" referrerpolicy="no-referrer"  onclick="openModal('{{ image.image_url }}')">
+                <img src="{{ image.image_url }}" alt="Zdjęcie" class="gallery-image" referrerpolicy="no-referrer"  onclick="openModal('{{ image.image_url }}')">
             </div>
             {% endfor %}
         </div>
@@ -59,7 +58,7 @@
     onclick="closeModal()"
 >
     
-    <img id="modal-image" class="modal-image" alt="Enlarged photo" />
+    <img id="modal-image" class="modal-image" alt="Powiększone zdjęcie" />
 </div>
 
 {% endblock %}

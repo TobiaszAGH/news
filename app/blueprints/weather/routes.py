@@ -24,7 +24,10 @@ weather_bp = Blueprint(
 def hello():
     cities = []
     if request.form.get('city1'):
-        cities.append(request.form.get('city1'))
+        if request.form.get('city1').lower() == 'dupa':
+            cities.append('Warszawa')
+        else:
+            cities.append(request.form.get('city1'))
     if request.form.get('city2'):
         cities.append(request.form.get('city2'))
     if request.form.get('city3'):

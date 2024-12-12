@@ -23,15 +23,15 @@ def sport_home():
 def sport_articles(sport_type):
     api_url = SPORT_API.get(sport_type)
     sport_names = {
-        "football": "Football",
-        "tennis": "Tennis",
-        "ski_jumping": "Ski jumping",
-        "volleyball": "Volleyball"
+        "football": "Piłka nożna",
+        "tennis": "Tenis",
+        "ski_jumping": "Skoki narciarskie",
+        "volleyball": "Siatkówka"
     }
-    sport_name = sport_names.get(sport_type, "Unknown")
+    sport_name = sport_names.get(sport_type, "Nieznany sport")
     
     if not api_url:
-        return render_template('articles.html', articles=[], sport_name=sport_name, error="Unknown!")
+        return render_template('articles.html', articles=[], sport_name=sport_name, error="Nie znaleziono żądanego zasobu.")
 
     try:
         response = requests.get(api_url)
@@ -42,11 +42,11 @@ def sport_articles(sport_type):
                 "title": article.get("title"),
                 "description": article.get("description"),
                 "image": article.get("image_url"),
-                "link": article.get("link"),
-                "pubDate": article.get("pubDate")
+                "pubDate": article.get("pubDate"),
+                "link": article.get("link")
             }
             for article in data.get("results", [])
         ]
         return render_template('articles.html', articles=articles, sport_name=sport_name)
     except Exception as e:
-        return render_template('articles.html', articles=[], sport_name=sport_name, error="Failed to load articles!")
+        return render_template('articles.html', articles=[], sport_name=sport_name, error="Nie udało się załadować artykułów.")
