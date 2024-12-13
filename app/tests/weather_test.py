@@ -2,7 +2,7 @@ import pytest
 from flask import Flask
 from flask.testing import FlaskClient
 from blueprints.weather.weatherService import getCurrentWeather, getForecast
-from blueprints.weather.routes import weather_bp  # Zakładamy, że blueprint znajduje się w `app/blueprints/weather/routes.py`
+  # Zakładamy, że blueprint znajduje się w `app/blueprints/weather/routes.py`
 import requests_mock
 from datetime import datetime, timedelta
 
@@ -91,15 +91,9 @@ def test_getForecast():
     assert len(result) > 0
     assert result[0][0]['temp'] == 1.0
 
-# Konfiguracja klienta Flask dla testów endpointów
 
 
-@pytest.fixture
-def client():
-    app = Flask(__name__, template_folder='../templates')
-    app.register_blueprint(weather_bp, url_prefix = '/weather', template_folder='templates')  # Rejestracja blueprinta z prefixem
-    app.config['TESTING'] = True
-    return app.test_client()
+
 
 
 # Testowanie endpointu '/weather'
