@@ -30,5 +30,5 @@ def single_news(news_id):
 
 @news_bp.route('/news_preview')
 def news_preview():
-    latest_articles = CrimeNews.query.order_by(CrimeNews.timestamp.desc()).limit(5).all()
-    return render_template('news_preview.html', latest_articles=latest_articles)
+    latest_articles = CrimeNews.query.order_by(CrimeNews.publication_date.desc()).limit(5)
+    return render_template('news_preview.html', articles=latest_articles)
