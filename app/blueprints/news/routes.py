@@ -11,7 +11,6 @@ news_bp = Blueprint(
 
 @news_bp.route('/')
 def news_home():
-    
     per_page = 5
     page = request.args.get('page', 1, type=int)
     paginated_articles = CrimeNews.query.order_by(desc(CrimeNews.publication_date)).paginate(page=page, per_page=per_page, error_out=False)

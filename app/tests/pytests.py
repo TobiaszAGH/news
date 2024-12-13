@@ -7,6 +7,7 @@ sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 
 from .graph_test import *
 from .weather_test import *
+from .crime_test import *
 
 
 
