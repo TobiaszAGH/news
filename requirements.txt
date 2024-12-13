@@ -9,3 +9,4 @@ flask_apscheduler
 plotly==5.24.1
 geocoder
 pytest
+requests_mock
