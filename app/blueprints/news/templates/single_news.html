@@ -50,7 +50,7 @@
     {% endif %}
 </div>
 
-<a href="{{ request.referrer if request.referrer else url_for('news_bp.news_home')}}" class="btn btn-primary sticky-back-button">Back</a>
+<a href="{% if not request.referrer %}{{ url_for('news_bp.news_home') }}{% elif 'news_preview' in request.referrer %}{{ url_for('main_bp.main') }}{% else %}{{ request.referrer }}{% endif %}"   class="btn btn-primary sticky-back-button">Powrót</a>
 <div
     id="image-modal"
     class="modal-overlay"

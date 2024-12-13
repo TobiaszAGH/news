@@ -99,9 +99,10 @@ body {
 .card {
   background-color: var(--card-background-color);
   border: 2px solid var(--card-border-color);
+  max-height: 400px;
 }
 
-/* .card-body {
+.card-body {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -109,8 +110,8 @@ body {
 }
 
 .card-body iframe {
-  box-sizing: border-box;
-} */
+  height: 100%;
+}
 
 #footer {
   background-color: var(--footer-background-color);

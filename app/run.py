@@ -10,6 +10,6 @@ if __name__ == '__main__':
         id='1',
         func=scrape_and_save,
         trigger='cron',
-        hour=0,
-        minute=0)
+        hour=00,
+        minute=00)
     app.run(debug=False)
