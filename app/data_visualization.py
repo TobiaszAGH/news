@@ -12,7 +12,7 @@ def generate_graph_html(data_dict, days):
         name = data_dict["name"]
         index_y2 = data_dict["index_y2"]
 
-        if len(x) == 0 or len(y) == 0 or len(label) == 0 or len(name) == 0 or len(index_y2) == 0:
+        if not len(x) or not len(y) or not len(label) or not len(name) or not len(index_y2):
             return "<div><h2>Błąd: Nieprawidłowe dane</h2></div>"
         
         for i in y:
