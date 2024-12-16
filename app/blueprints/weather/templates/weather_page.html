@@ -1,21 +1,63 @@
-{% extends "base.html" %} {% block title %}Weather{% endblock %} {% import
-    "bootstrap/utils.html" as utils %} {% block main%}
+{% extends "base.html" %} {% block title %}Weather{% endblock %} {% block main%}
 <head>
     <title>Pogoda</title>
     <style>
-        .cooco{
+        .cooco {
             background-color: white;
+        }
+        body {
+            font-size: 0.8rem;
+        }
+        h1 {
+            font-size: 1.5rem;
+        }
+        h2 {
+            font-size: 1.2rem;
+        }
+        h4 {
+            font-size: 1rem;
+        }
+        .form-control {
+            font-size: 0.75rem;
+        }
+        .btn {
+            font-size: 0.75rem;
+        }
+        .card {
+            font-size: 0.7rem;
+        }
+        img {
+            width: 50%;
+            height: auto;
+        }
+        .container {
+            padding: 1rem;
+        }
+        .card-body {
+            padding: 0.5rem;
+        }
+        .input-group {
+            gap: 0.5rem;
+        }
+
+        .for:hover {
+            background-color: rgba(128, 128, 128, 0.322);
+            transition: 1s;
+            cursor: pointer;
+        }
+        .for{
+            transition: 1s;
         }
     </style>
 </head>
 
 <body>
 
-    <div class="container-md mt-4">
-        <h1 class="text-center mb-4">Prognoza Pogody</h1>
-        <div class="row ">
+    <div class="container mt-3">
+        <h1 class="text-center mb-3">Prognoza Pogody</h1>
+        <div class="row">
             <form method="post" action="/weather">
-                <div class="input-group mb-3">
+                <div class="input-group mb-2">
                     <input type="text" class="form-control" name="city1" placeholder="Wpisz miasto 1" {% if data[0] is defined %} value="{{data[0].city}}" {% endif %} aria-label="Recipient's username" aria-describedby="button-addon2">
                     <input type="text" class="form-control" name="city2" placeholder="Wpisz miasto 2" {% if data[1] is defined %} value="{{data[1].city}}" {% endif %} aria-label="Recipient's username" aria-describedby="button-addon2">
                     <input type="text" class="form-control" name="city3" placeholder="Wpisz miasto 3" {% if data[2] is defined %} value="{{data[2].city}}" {% endif %} aria-label="Recipient's username" aria-describedby="button-addon2">
@@ -26,18 +68,19 @@
             </form>
         </div>
         {% for i in range(data | length) %}
-        <div class="container mt-4 border border-3 border-secondary rounded border-dashed p-3">
-            {% if data[i] %}
+        {% if data[i] %}
+        <div class="container mt-3 border border-2 border-secondary rounded border-dashed p-2">
+            
             <div class="row">
                 
-                <div class="col-xl-3 ">
+                <div class="col-sm-3">
                     <div class="row-10 d-flex justify-content-center align-items-center flex-column">
                         <div class="col--2 d-flex justify-content-center align-items-center flex-column">
-                            <h4 class="card-title">{{ data[i].city }}, {{ data[i].country }}</h4>
+                            <h2 class="card-title">{{ data[i].city }}, {{ data[i].country }}</h2>
                             <img src="http://openweathermap.org/img/wn/{{ data[i].icon }}@2x.png" alt="Weather icon">
                             <p>{{ data[i].description }}</p>
                         </div>
-                        <div class="col-md-10 col--2 d-flex justify-content-center align-items-center flex-column">
+                        <div class="col-sm-10 col--2 d-flex justify-content-center align-items-center flex-column">
                             <p><strong>Temperatura:</strong> {{ data[i].temp }}°C </p>
                             <p><strong>Temp. odczuwalna:</strong> {{ data[i].feeltemp }}°C </p>
                             <p><strong>Wilgotność:</strong> {{ data[i].humidity }}%</p>
@@ -53,9 +96,9 @@
                     <div class="row">
                         <h2>W ciągu dnia</h2>
                     {% for hour in forecast[i][0] %}
-                        <div class="col-12 col-lg-3 mb-4">
+                        <div class="col-12 col-sm-3 mb-2">
                             <div class="card" data-bs-toggle="collapse" data-bs-target="#daily_forecast{{i}}{{ loop.index }}" aria-expanded="false" aria-controls="forecast{{ loop.index }}">
-                                <div class="card-body text-center">
+                                <div class="card-body text-center for">
                                     <h5 class="card-title">{{ hour.time[11:16] }}</h5>
                                     <img src="http://openweathermap.org/img/wn/{{ hour.icon }}@2x.png" alt="Weather icon">
                                     <p>{{hour.temp}}&degC</p>
@@ -76,9 +119,9 @@
                     <div class="row">
                         <h2>Przyszłe dni</h2>
                     {% for day in forecast[i][1:] %}
-                        <div class="col-12 col-lg-3 mb-4">
+                        <div class="col-12 col-sm-3 mb-2">
                             <div class="card" data-bs-toggle="collapse" data-bs-target="#forecast{{i}}{{ loop.index }}" aria-expanded="false" aria-controls="forecast{{ loop.index }}">
-                                <div class="card-body text-center">
+                                <div class="card-body text-center for">
                                     <h5 class="card-title">{{ day.date[8:10] }}{{ day.date[4:7] }}</h5>
                                     <img src="http://openweathermap.org/img/wn/{{ day.icon }}@2x.png" alt="Weather icon">
                                     <p>{{day.max_temp}}&degC\{{day.min_temp}}&degC</p>
@@ -101,9 +144,10 @@
                 </div>
                 {% endif %}
             </div>
-            {% endif %}
+            
             
         </div>
+        {% endif %}
         {% endfor %}
 
     </div>
