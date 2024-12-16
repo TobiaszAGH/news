@@ -1,5 +1,5 @@
-from flask import Blueprint, render_template, request
-from .models import CrimeNews, CrimeImage
+from flask import Blueprint, render_template
+from .models import CrimeNews
 from sqlalchemy import desc
 
 news_bp = Blueprint(
@@ -11,12 +11,8 @@ news_bp = Blueprint(
 
 @news_bp.route('/')
 def news_home():
-    
-    per_page = 5
-    page = request.args.get('page', 1, type=int)
-    paginated_articles = CrimeNews.query.order_by(desc(CrimeNews.publication_date)).paginate(page=page, per_page=per_page, error_out=False)
-    
-    return render_template('news.html', articles=paginated_articles)
+    articles_data=CrimeNews.query.order_by(desc(CrimeNews.publication_date)).all()
+    return render_template('news.html', articles=articles_data)
 
 
 @news_bp.route('/<int:news_id>')
