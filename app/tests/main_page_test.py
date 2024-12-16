@@ -20,3 +20,8 @@ def test_home_page(client):
     with original_app.test_request_context():
         response = client.get('/')
         assert response.status_code == 200
+
+def test_404_page(client):
+    with original_app.test_request_context():
+        response = client.get('/nonexistent')
+        assert response.status_code == 404
