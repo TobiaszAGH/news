@@ -21,8 +21,7 @@ html, body {
     height: 100%;
     object-fit: cover;
     display: block;
-    /*filter:grayscale(1)*/
-    filter: blur(2px);
+    filter: blur(3px);
     z-index: 1;
 
 }
@@ -52,7 +51,7 @@ html, body {
 }
 
 .carousel-caption h3{
-  font-size: clamp(1.2rem, 5vw, 3rem);
+  font-size: clamp(1.2rem, 4vw, 3rem);
   color:white;
   text-decoration: none;
 }
