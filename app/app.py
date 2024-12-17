@@ -6,6 +6,7 @@ from blueprints.main.routes import main_bp
 from blueprints.economy.routes import economy_bp
 from blueprints.sport.routes import sport_bp
 from blueprints.weather.routes import weather_bp
+from blueprints.calendar.routes import calendar_bp
 
 
 scheduler=APScheduler()
@@ -25,6 +26,7 @@ app.register_blueprint(economy_bp, url_prefix='/economy')
 app.register_blueprint(news_bp, url_prefix='/news')
 app.register_blueprint(sport_bp, url_prefix='/sport')
 app.register_blueprint(weather_bp, url_prefix='/weather') 
+app.register_blueprint(calendar_bp, url_prefix='/calendar')
 
 # Initailize the database
 db.init_app(app)

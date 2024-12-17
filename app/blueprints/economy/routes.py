@@ -3,7 +3,7 @@ from .forms import EconomyForm
 import requests
 from datetime import timedelta
 import json
-from data_visualization import generate_graph_html
+from app.data_visualization import generate_graph_html
 
 economy_bp = Blueprint(
     'economy_bp',

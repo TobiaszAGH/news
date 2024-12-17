@@ -1,5 +1,5 @@
-from flask import Blueprint, render_template, request
-from .models import CrimeNews, CrimeImage
+from flask import Blueprint, render_template
+from .models import CrimeNews
 from sqlalchemy import desc
 from config import db
 

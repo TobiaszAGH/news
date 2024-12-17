@@ -4,7 +4,7 @@ from datetime import datetime
 from bs4 import BeautifulSoup
 import time
 from config import db
-from app import app
+from app.app import app
 
 base_url = "https://krakow.policja.gov.pl"
 url = "https://krakow.policja.gov.pl/kr1/aktualnosci"
@@ -49,12 +49,13 @@ def scrape_and_save():
                     soup2 = BeautifulSoup(response2.text, 'html.parser')
                     paragraphs = soup2.find_all('p')
                     description = paragraphs[3].get_text(strip=True)
+                    full_text = summary + '\n' + description
                     
                         
                     news_obj = CrimeNews(
                         title=title,
                         summary=summary,
-                        description=description,
+                        full_text=full_text,
                         image_url=image_src,
                         article_link=full_link,
                         publication_date=publication_date
