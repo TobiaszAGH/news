@@ -26,7 +26,6 @@ def scrape_and_save():
                     
                     title = article.find('strong').get_text(strip=True)
                     
-                    # zakładam, że tytuł artykułu nie będzie zmieniany, inaczej artykuł zostanie zduplikowany w bazie
                     existing_news = CrimeNews.query.filter_by(title=title).first()
                     if existing_news:
                         print(f"Article '{title}' had been already saved.")
@@ -66,8 +65,7 @@ def scrape_and_save():
                         db.session.rollback()
                         print(f"Error during saving article: '{title}' to database: {e}")
 
-                    
-                    
+                     
                     images = soup2.find_all('img')
                     for img in images:
                         img_url = img.get('src')
