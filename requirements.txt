@@ -9,7 +9,6 @@ flask_apscheduler
 plotly==5.24.1
 geocoder
 pytest
-selenium
 requests_mock
 selenium
 webdriver-manager  

@@ -1,7 +1,7 @@
 
-__all__ = ['blueprints', 'data_visualization', 'app_setup']
+__all__ = ['blueprints', 'data_visualization', 'app']
 from .blueprints import *
-from .app_setup import app
+from .app import app
 from .data_visualization import *
 from .config import *
                        

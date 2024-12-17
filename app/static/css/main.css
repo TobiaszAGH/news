@@ -113,22 +113,6 @@ body {
   height: 100%;
 }
 
-.card-main {
-  position: relative;
-}
-
-.button-link {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  position: absolute;
-  bottom: 0.5rem;
-  right: 0.5rem;
-  width: 125px;
-  height: 35px;
-  font-size: 0.75rem;
-}
-
 #footer {
   background-color: var(--footer-background-color);
   color: var(--footer-text-color);

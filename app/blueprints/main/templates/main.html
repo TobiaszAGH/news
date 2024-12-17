@@ -1,59 +1,41 @@
 {% extends "base.html" %} {% block title %}Strona Główna{% endblock %} {% import
 "bootstrap/utils.html" as utils %} {% block main %}
 <div
-  class="container-l d-flex flex-column justify-content-start align-items-center"
-  style="flex: 1; padding: 1rem 0"
+  class="container-l d-flex flex-column justify-content-start align-items-center p-4"
+  style="flex: 1"
 >
   <div class="row row-main row-cols-1 row-cols-md-2 g-4 text-center w-100">
     <div class="col">
       <div class="card h-100">
-        <div class="card-body card-main">
+        <div class="card-body">
           <iframe src="/calendar/calendar_preview" frameborder="0"></iframe>
-          <a href="/news" class="btn btn-primary button-link"
-            >Zobacz więcej...</a
-          >
+          <a href="/news" class="btn btn-primary">Przejdź do wiadomości</a>
         </div>
       </div>
     </div>
     <div class="col">
       <div class="card h-100">
-        <div class="card-body card-main">
-          <iframe src="/calendar/calendar_preview" frameborder="0"></iframe>
-          <a href="/news" class="btn btn-primary button-link"
-            >Zobacz więcej...</a
-          >
+        <div class="card-body">
+          <iframe src="/weather/widget" frameborder="0"></iframe>
+          <a href="/weather" class="btn btn-primary">Przejdź do pogody</a>
         </div>
       </div>
     </div>
   </div>
-  <div class="row row-main row-cols-1 row-cols-md-3 g-4 text-center w-100 mt-1">
+  <div class="row row-main row-cols-1 row-cols-md-2 g-4 text-center w-100 mt-1">
     <div class="col">
       <div class="card h-100">
-        <div class="card-body card-main">
+        <div class="card-body">
           <iframe src="/economy" frameborder="0"></iframe>
-          <a href="/economy" class="btn btn-primary button-link"
-            >Zobacz więcej...</a
-          >
+          <a href="/economy" class="btn btn-primary">Przejdź do ekonomii</a>
         </div>
       </div>
     </div>
     <div class="col">
       <div class="card h-100">
-        <div class="card-body card-main">
-          <iframe src="/weather/widget" frameborder="0"></iframe>
-          <a href="/weather" class="btn btn-primary button-link"
-            >Zobacz więcej...</a
-          >
-        </div>
-      </div>
-    </div>
-    <div class="col">
-      <div class="card h-100">
-        <div class="card-body card-main">
+        <div class="card-body">
           <iframe src="/sport" frameborder="0"></iframe>
-          <a href="/sport" class="btn btn-primary button-link"
-            >Zobacz więcej...</a
-          >
+          <a href="/sport" class="btn btn-primary">Przejdź do sportu</a>
         </div>
       </div>
     </div>
