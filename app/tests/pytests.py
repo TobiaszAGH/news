@@ -14,7 +14,7 @@ from .sport_tests import *
 
 from app import app as original_app
 
-# Konfiguracja klienta Flask dla testów endpointów
+
 @pytest.fixture
 def client():
     app = original_app
