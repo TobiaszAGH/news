@@ -11,4 +11,5 @@ geocoder
 pytest
 selenium
 requests_mock
+selenium
 webdriver-manager  
