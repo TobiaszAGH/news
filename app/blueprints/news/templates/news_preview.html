@@ -13,9 +13,7 @@
             {% if articles %}
                 {% for article in articles %}
                     <div class="carousel-item {% if loop.first %}active{% endif %}">
-                        
                             <img src="{{ article.image_url }}" class="d-block w-100" alt="{{ article.title }}" referrerpolicy="no-referrer">
-
                         <div class="carousel-caption">
                             <a href="{{ url_for('news_bp.single_news', news_id=article.id) }}" target="_top">
                                 <h3>{{article.title}}</h3>
