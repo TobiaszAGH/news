@@ -108,4 +108,4 @@ def index():
 def preview():
     economy_data = economyData()
     economy_data.default()
-    return economy_data.graph()
+    return'<script src="https://cdn.plot.ly/plotly-latest.min.js"></script>' + economy_data.graph()
