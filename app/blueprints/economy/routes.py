@@ -1,8 +1,7 @@
-from flask import Blueprint, render_template, request, flash
+from flask import Blueprint, render_template, request
 from .forms import EconomyForm
 import requests
 from datetime import timedelta
-import json
 from data_visualization import generate_graph_html
 
 economy_bp = Blueprint(
@@ -12,13 +11,14 @@ economy_bp = Blueprint(
     template_folder='templates'
 )
 
+
 class economyData():
     def __init__(self):
         self.graph_data = {
-            'x' : [],
-            'y' : [],
-            'label': ['Data', 'Kursy waluty w PLN'],
-            'name': [],
+            'x' : [],  
+            'y' : [], 
+            'label' : ['Data', 'Kursy waluty w PLN'], 
+            'name' : [], 
             'index_y2' : []
         }
 
