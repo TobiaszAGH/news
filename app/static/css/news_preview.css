@@ -51,7 +51,7 @@ html, body {
 }
 
 .carousel-caption h3{
-  font-size: clamp(1.2rem, 4vw, 3rem);
+  font-size: clamp(0.95rem, 4vw, 3rem);
   color:white;
   text-decoration: none;
 }
