@@ -4,7 +4,7 @@ from datetime import datetime
 from bs4 import BeautifulSoup
 import time
 from config import db
-from app.app import app
+from app import app
 
 base_url = "https://krakow.policja.gov.pl"
 url = "https://krakow.policja.gov.pl/kr1/aktualnosci"
