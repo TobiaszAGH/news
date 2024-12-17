@@ -8,6 +8,7 @@
       <h1>Ekonomia</h1>
       
       <form method="POST" action="/economy">
+        {{ form.csrf_token }}
         <div class="form-row d-flex">
           <div class="form-group col-6">
             {{ form.startdate.label }}
