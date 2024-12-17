@@ -11,9 +11,5 @@ geocoder
 pytest
 selenium
 requests_mock
-<<<<<<< HEAD
 selenium
 webdriver-manager  
-=======
-webdriver-manager  
->>>>>>> parent of 0a47ede (fix)
