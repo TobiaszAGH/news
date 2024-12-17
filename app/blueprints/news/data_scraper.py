@@ -48,14 +48,12 @@ def scrape_and_save():
                     response2 = requests.get(full_link)
                     soup2 = BeautifulSoup(response2.text, 'html.parser')
                     paragraphs = soup2.find_all('p')
-                    description = paragraphs[3].get_text(strip=True)
-                    full_text = summary + '\n' + description
-                    
+                    description = paragraphs[3].get_text(strip=True)          
                         
                     news_obj = CrimeNews(
                         title=title,
                         summary=summary,
-                        full_text=full_text,
+                        description=description,
                         image_url=image_src,
                         article_link=full_link,
                         publication_date=publication_date
