@@ -10,5 +10,5 @@ plotly==5.24.1
 geocoder
 pytest
 requests_mock
-selemium plotly
+selenium
 webdriver-manager  
