@@ -1,6 +1,7 @@
 from flask import Blueprint, render_template, request
 from .models import CrimeNews, CrimeImage
 from sqlalchemy import desc
+from config import db
 
 news_bp = Blueprint(
     'news_bp',
@@ -21,7 +22,7 @@ def news_home():
 @news_bp.route('/<int:news_id>')
 def single_news(news_id):
     
-    news = CrimeNews.query.get(news_id)
+    news = db.session.get(CrimeNews, news_id)
     
     images = CrimeImage.query.filter_by(news_id=news_id).all()
 
