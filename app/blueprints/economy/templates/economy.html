@@ -2,10 +2,19 @@
     "bootstrap/utils.html" as utils %}
     {% block header %}
     <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <style>
+      .sticky-back-button {
+        position: fixed;
+        bottom: 20px;
+        left: 20px;
+        font-size: 18px;
+        z-index: 3;
+      }
+    </style>
     {% endblock %}
      {% block main%}
     <div class="container ">
-      <h1>Ekonomia</h1>
+      <h1 class="text-center mb-4">Ekonomia</h1>
       
       <form method="POST" action="/economy">
         {{ form.csrf_token }}
@@ -43,4 +52,5 @@
       {% endwith %}
       <div id="chart">{{ graph|safe }}</div>
     </div>
+    <a href="{{ url_for('main_bp.main') }}" class="btn btn-primary sticky-back-button">Powrót</a>
     {% endblock %}
