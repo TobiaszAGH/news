@@ -44,10 +44,10 @@ class economyData():
 
 
     def default(self):
-        codes, topCount = ['EUR','USD',"CHF"], 7
+        codes, topCount = ['EUR','USD','CHF'], 7
         for code in codes:
             X, Y = [], []
-            link =f"https://api.nbp.pl/api/exchangerates/rates/A/{code}/last/{topCount}/"
+            link =f'https://api.nbp.pl/api/exchangerates/rates/A/{code}/last/{topCount}/'
             x, y, name = fetch_link(link)
             X += x
             Y += y
