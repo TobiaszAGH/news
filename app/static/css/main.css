@@ -99,9 +99,10 @@ body {
 .card {
   background-color: var(--card-background-color);
   border: 2px solid var(--card-border-color);
+  max-height: 400px;
 }
 
-/* .card-body {
+.card-body {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -109,8 +110,24 @@ body {
 }
 
 .card-body iframe {
-  box-sizing: border-box;
-} */
+  height: 100%;
+}
+
+.card-main {
+  position: relative;
+}
+
+.button-link {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  bottom: 0.5rem;
+  right: 0.5rem;
+  width: 125px;
+  height: 35px;
+  font-size: 0.75rem;
+}
 
 #footer {
   background-color: var(--footer-background-color);

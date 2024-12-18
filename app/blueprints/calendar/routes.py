@@ -1,6 +1,6 @@
 from flask import Blueprint, render_template, request
 import requests
-from blueprints.calendar.scraping import get_proverb, get_agh_news
+from .scraping import get_proverb, get_agh_news
 from datetime import datetime, timedelta
 
 months=['stycznia', 'lutego', 'marca', 'kwietnia', 'maja', 'czerwca', 'lipca', 'sierpnia', 'wrzesnia', 'pazdziernika', 'listopada', 'grudnia']
