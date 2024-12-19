@@ -11,6 +11,7 @@ from .weather_test import *
 from .economy_tests import *
 from .sport_tests import *
 from .crime_tests import *
+from .calendar_test import *
 
 
 from app import app as original_app
