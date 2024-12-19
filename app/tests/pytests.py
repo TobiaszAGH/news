@@ -10,6 +10,7 @@ from .graph_test import *
 from .weather_test import *
 from .economy_tests import *
 from .sport_tests import *
+from .crime_tests import *
 
 
 from app import app as original_app
