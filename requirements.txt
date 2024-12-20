@@ -12,3 +12,4 @@ pytest
 requests_mock
 selemium plotly
 webdriver-manager  
+scikit-learn
