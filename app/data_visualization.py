@@ -1,6 +1,8 @@
 from flask import Flask
 import plotly.graph_objs as go
 import plotly.io as pio
+import numpy as np
+from sklearn.linear_model import LinearRegression
 
 app = Flask(__name__)
 
@@ -24,34 +26,56 @@ def generate_graph_html(data_dict, days):
                 return "<div><h2>Błąd: Nieprawidłowe dane</h2></div>"
         
         layout = go.Layout(
-        xaxis=dict(title=label[0]),
-        yaxis=dict(title=label[1]), 
-        bargap=0.5,
-        plot_bgcolor="#fcfcfc", 
-        paper_bgcolor="white" 
+            xaxis=dict(title=label[0]),
+            yaxis=dict(title=label[1]), 
+            bargap=0.5,
+            plot_bgcolor="#fcfcfc", 
+            paper_bgcolor="white",
+            legend=dict(
+                orientation="h",
+                x=0.5,            
+                xanchor="center",
+                y=-0.2            
+            )
         )
 
         if len(label) > 2:
             layout['yaxis2'] = dict(
-            title=label[2],  
-            overlaying="y",  
-            side="right", 
-            range=[0, 20])
+                title=label[2],  
+                overlaying="y",  
+                side="right", 
+                range=[0, 20]
+            )
     
         fig = go.Figure(layout=layout)
+
         for i in y:
             if type(i) == list:
                 if index_y2[y.index(i)] == 0:
-                    fig.add_trace(go.Scatter(x=x[:days], y=i[:days], mode='lines+markers', name=name[y.index(i)]))
+                    x_transformed = np.arange(1, days + 1)
+
+                    fig.add_trace(go.Scatter(x=x_transformed, y=i[:days], mode='lines+markers', name=name[y.index(i)]))
+
+                    X = x_transformed.reshape(-1, 1) 
+                    Y = np.array(i[:days])
+
+                    print(X, Y)
+                    model = LinearRegression()
+                    model.fit(X, Y)
+                    x_range = np.linspace(min(x_transformed), max(x_transformed), 100)
+                    y_range = model.predict(x_range.reshape(-1, 1))
+                    
+                    fig.add_trace(go.Scatter(x=x_range, y=y_range, mode='lines', name=f'Regression Line ({name[y.index(i)]})', line=dict(color='red')))
                 else:
-                    fig.update_layout(yaxis2 = dict(
+                    fig.update_layout(yaxis2=dict(
                         title=label[2],  
                         overlaying="y",  
                         side="right", 
-                        range=[min(i)-0.01*min(i), max(i)+0.01*max(i)]))
-                    fig.add_trace(go.Bar(x=x[:days], y=i[:days], yaxis='y2', opacity=0.4, name=name[y.index(i)]))
+                        range=[min(i)-0.01*min(i), max(i)+0.01*max(i)]
+                    ))
+                    fig.add_trace(go.Bar(x=np.arange(1, days + 1), y=i[:days], yaxis='y2', opacity=0.4, name=name[y.index(i)]))
             else:
-                fig.add_trace(go.Scatter(x=x[:days], y=y[:days], mode='lines+markers', name=name[y.index(i)]))
+                fig.add_trace(go.Scatter(x=np.arange(1, days + 1), y=y[:days], mode='lines+markers', name=name[y.index(i)]))
                 break
 
         return pio.to_html(fig, full_html=False, include_plotlyjs=False)
