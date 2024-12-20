@@ -3,6 +3,7 @@ import plotly.graph_objs as go
 import plotly.io as pio
 import numpy as np
 from sklearn.linear_model import LinearRegression
+from datetime import datetime, timedelta
 
 app = Flask(__name__)
 
@@ -26,17 +27,17 @@ def generate_graph_html(data_dict, days):
                 return "<div><h2>Błąd: Nieprawidłowe dane</h2></div>"
         
         layout = go.Layout(
-            xaxis=dict(title=label[0]),
-            yaxis=dict(title=label[1]), 
+            xaxis=dict(title=label[0]),  # Tytuł osi X
+            yaxis=dict(title=label[1]),  # Tytuł osi Y
             bargap=0.5,
             plot_bgcolor="#fcfcfc", 
             paper_bgcolor="white",
             legend=dict(
-                orientation="v",  # Zmiana orientacji na pionową
-                x=1,              # Ustawienie legendy po prawej stronie
-                xanchor="left",   # Kotwica legendy na lewo
-                y=1,              # Ustawienie legendy na górze wykresu
-                yanchor="top"     # Kotwica na górze
+                orientation="v", 
+                x=1,              
+                xanchor="left",  
+                y=1,              
+                yanchor="top"     
             )
         )
 
@@ -50,23 +51,30 @@ def generate_graph_html(data_dict, days):
     
         fig = go.Figure(layout=layout)
 
+        # Zamiana dat na datetime
+        x_dates = [datetime.strptime(date, "%Y-%m-%d") for date in x[:days]]
+
         for i in y:
             if type(i) == list:
                 if index_y2[y.index(i)] == 0:
-                    x_transformed = np.arange(1, days + 1)
+                    # Zamiana dat na liczby dni od pierwszej daty
+                    x_numeric = np.array([(date - x_dates[0]).days for date in x_dates[:days]])
 
-                    fig.add_trace(go.Scatter(x=x_transformed, y=i[:days], mode='lines+markers', name=name[y.index(i)]))
+                    # Rysowanie wykresu
+                    fig.add_trace(go.Scatter(x=x_dates, y=i[:days], mode='lines+markers', name=name[y.index(i)]))
 
-                    X = x_transformed.reshape(-1, 1) 
+                    # Przygotowanie danych do regresji
                     Y = np.array(i[:days])
 
-                    print(X, Y)
                     model = LinearRegression()
-                    model.fit(X, Y)
-                    x_range = np.linspace(min(x_transformed), max(x_transformed), 100)
-                    y_range = model.predict(x_range.reshape(-1, 1))
+                    model.fit(x_numeric.reshape(-1, 1), Y)
                     
-                    fig.add_trace(go.Scatter(x=x_range, y=y_range, mode='lines', name=f'Regresjia linowa ({name[y.index(i)]})', line=dict()))
+                    # Obliczenie prognozowanych wartości regresji na pełnym zakresie danych
+                    y_range = model.predict(x_numeric.reshape(-1, 1))
+
+                    # Dodanie linii regresji (ciągłej)
+                    fig.add_trace(go.Scatter(x=x_dates, y=y_range, mode='lines', name=f'Regresja linowa ({name[y.index(i)]})', line=dict(simplify=False)))
+
                 else:
                     fig.update_layout(yaxis2=dict(
                         title=label[2],  
