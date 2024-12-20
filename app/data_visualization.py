@@ -32,10 +32,11 @@ def generate_graph_html(data_dict, days):
             plot_bgcolor="#fcfcfc", 
             paper_bgcolor="white",
             legend=dict(
-                orientation="h",
-                x=0.5,            
-                xanchor="center",
-                y=-0.2            
+                orientation="v",  # Zmiana orientacji na pionową
+                x=1,              # Ustawienie legendy po prawej stronie
+                xanchor="left",   # Kotwica legendy na lewo
+                y=1,              # Ustawienie legendy na górze wykresu
+                yanchor="top"     # Kotwica na górze
             )
         )
 
@@ -65,7 +66,7 @@ def generate_graph_html(data_dict, days):
                     x_range = np.linspace(min(x_transformed), max(x_transformed), 100)
                     y_range = model.predict(x_range.reshape(-1, 1))
                     
-                    fig.add_trace(go.Scatter(x=x_range, y=y_range, mode='lines', name=f'Regression Line ({name[y.index(i)]})', line=dict(color='red')))
+                    fig.add_trace(go.Scatter(x=x_range, y=y_range, mode='lines', name=f'Regresjia linowa ({name[y.index(i)]})', line=dict()))
                 else:
                     fig.update_layout(yaxis2=dict(
                         title=label[2],  
