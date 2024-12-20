@@ -28,7 +28,7 @@ class TestWykresRenderowanie(unittest.TestCase):
     @classmethod
     def tearDownClass(cls):
         """Zamykanie przeglądarki po zakończeniu testów."""
-        #cls.driver.quit()
+        cls.driver.quit()
         pass
 
     def render_and_verify_graph(self, data, days):
