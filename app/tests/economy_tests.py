@@ -1,7 +1,8 @@
 from flask import Flask
 from flask.testing import FlaskClient
 import pytest
-from blueprints.economy.routes import economyData, fetch_link
+from blueprints.economy.economyData import economyData, fetch_link
+
 from datetime import datetime, timedelta
 
 # unit tests
