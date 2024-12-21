@@ -4,6 +4,19 @@
   rel="stylesheet"
   href="{{ url_for('static', filename='css/sport.css') }}"
 />
+<script>
+  function openModal(imageSrc) {
+    const modal = document.getElementById("image-modal");
+    const modalImage = document.getElementById("modal-image");
+    modalImage.src = imageSrc;
+    modal.style.display = "flex";
+  }
+
+  function closeModal() {
+    const modal = document.getElementById("image-modal");
+    modal.style.display = "none";
+  }
+</script>
 {% endblock %} {% block main %} {% with messages =
 get_flashed_messages(with_categories=true) %} {% if messages %}
 <div class="flashes">
@@ -79,6 +92,7 @@ get_flashed_messages(with_categories=true) %} {% if messages %}
               src="{{ article.image_url }}"
               alt="Article photo"
               class="article-image"
+              onclick="openModal('{{ article.image_url }}')"
             />
             {% else %} Brak zdjęcia {% endif %}
           </td>
@@ -146,6 +160,14 @@ get_flashed_messages(with_categories=true) %} {% if messages %}
       class="btn btn-primary sticky-back-button"
       >Powrót</a
     >
+  </div>
+  <div
+    id="image-modal"
+    class="modal-overlay"
+    style="display: none"
+    onclick="closeModal()"
+  >
+    <img id="modal-image" class="modal-image" alt="Enlarged photo" />
   </div>
   {% endblock %}
 </div>
