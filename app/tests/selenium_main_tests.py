@@ -1,7 +1,7 @@
 from selenium import webdriver
 from selenium.webdriver.common.by import By
-import pytest
 from app import app
+import pytest
 import threading
 
 @pytest.fixture(scope="module")
@@ -29,3 +29,5 @@ def test_home_page_theme(driver):
         assert 'data-bs-theme="dark"' in driver.page_source    
     elif toggler_value == "dark":
         assert 'data-bs-theme="light"' in driver.page_source    
+
+# dodac do kazdego widgetu
