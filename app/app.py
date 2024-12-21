@@ -46,6 +46,12 @@ if __name__ == '__main__':
         trigger='cron',
         hour=0,
         minute=0)
-        
+    from blueprints.sport.routes import fetch_and_save_articles
+    scheduler.add_job(
+        id='fetch_sport_articles',
+        func=fetch_and_save_articles,
+        trigger='cron',
+        hour=0,
+        minute=0)
     app.run(debug=True, port=8000)
 
