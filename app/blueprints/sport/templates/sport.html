@@ -1,37 +1,151 @@
-{% extends "base.html" %} {% block title %}Sport{% endblock %} 
-{%
-block header %}
+{% extends "base.html" %} {% block title %}Sport{% endblock %} {% block header
+%}
 <link
   rel="stylesheet"
-  href="{{ url_for('static', filename='css/sport.css') }}">
-{% endblock %}
-{% block main %}
-<div class="text-center mt-4">
-  <br>
-  <h1>Wybierz sport:</h1>
-  <hr><br>
-  <div class="d-flex justify-content-center mt-3">
+  href="{{ url_for('static', filename='css/sport.css') }}"
+/>
+{% endblock %} {% block main %} {% with messages =
+get_flashed_messages(with_categories=true) %} {% if messages %}
+<div class="flashes">
+  {% for category, message in messages %}
+  <div class="alert alert-{{ category }}">{{ message }}</div>
+  {% endfor %}
+</div>
+{% endif %} {% endwith %}
+<div class="container mt-4">
+  <h1 class="text-center mb-4">Najnowsze artykuły sportowe!</h1>
+  <div class="filter-buttons">
+    <form action="{{ url_for('sport.sport_home') }}" method="get">
+      <button
+        type="submit"
+        name="discipline"
+        value="football"
+        class="btn btn-primary mx-2"
+      >
+        Piłka nożna
+      </button>
+      <button
+        type="submit"
+        name="discipline"
+        value="tennis"
+        class="btn btn-primary mx-2"
+      >
+        Tenis
+      </button>
+      <button
+        type="submit"
+        name="discipline"
+        value="ski_jumping"
+        class="btn btn-primary mx-2"
+      >
+        Skoki Narciarskie
+      </button>
+      <button
+        type="submit"
+        name="discipline"
+        value="volleyball"
+        class="btn btn-primary mx-2"
+      >
+        Siatkówka
+      </button>
+      <button
+        type="submit"
+        name="discipline"
+        value=""
+        class="btn btn-secondary mx-2"
+      >
+        Usuń
+      </button>
+    </form>
+  </div>
+  <div class="table-responsive">
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>Zdjęcie</th>
+          <th>Tytuł</th>
+          <th>Opis</th>
+          <th>Data</th>
+          <th>Dyscyplina</th>
+          <th>Link</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for article in articles %}
+        <tr>
+          <td>
+            {% if article.image_url %}
+            <img
+              src="{{ article.image_url }}"
+              alt="Article photo"
+              class="article-image"
+            />
+            {% else %} Brak zdjęcia {% endif %}
+          </td>
+          <td><strong>{{ article.title }}</strong></td>
+          <td>
+            {% if article.description %} {{ article.description }} {% else %}
+            Opis niedostępny - przejdź do pełnego artykułu -> {% endif %}
+          </td>
+          <td>
+            {% if article.pubDate %} {{ article.pubDate.strftime('%Y-%m-%d
+            %H:%M:%S') }} {% else %} Brak daty {% endif %}
+          </td>
+
+          <td>{{ sport_names[article.sport_type] }}</td>
+          <td>
+            {% if article.link %}
+            <a href="{{ article.link }}" target="_blank" class="btn btn-link"
+              >Czytaj więcej</a
+            >
+            {% else %} Brak linku {% endif %}
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+
+    <nav aria-label="Page navigation" class="pagination-container">
+      <ul class="pagination">
+        <li class="page-item {% if articles.page == 1 %}disabled{% endif %}">
+          <a class="page-link" href="{{ url_for('sport.sport_home', page=1) }}"
+            >Pierwsza</a
+          >
+        </li>
+        <li class="page-item {% if articles.page == 1 %}disabled{% endif %}">
+          <a
+            class="page-link"
+            href="{{ url_for('sport.sport_home', page=articles.page - 1) }}"
+            >Poprzednia</a
+          >
+        </li>
+        <li
+          class="page-item {% if articles.page == articles.pages %}disabled{% endif %}"
+        >
+          <a
+            class="page-link"
+            href="{{ url_for('sport.sport_home', page=articles.page + 1) }}"
+            >Następna</a
+          >
+        </li>
+        <li
+          class="page-item {% if articles.page == articles.pages %}disabled{% endif %}"
+        >
+          <a
+            class="page-link"
+            href="{{ url_for('sport.sport_home', page=articles.pages) }}"
+            >Ostatnia</a
+          >
+        </li>
+      </ul>
+    </nav>
+  </div>
+  <div>
     <a
-      href="{{ url_for('sport.sport_articles', sport_type='football') }}"
-      class="btn btn-primary mx-2 button"
-      >Piłka nożna</a
-    >
-    <a
-      href="{{ url_for('sport.sport_articles', sport_type='tennis') }}"
-      class="btn btn-primary mx-2 button"
-      >Tenis</a
-    >
-    <a
-      href="{{ url_for('sport.sport_articles', sport_type='ski_jumping') }}"
-      class="btn btn-primary mx-2 button"
-      >Skoki narciarskie</a
-    >
-    <a
-      href="{{ url_for('sport.sport_articles', sport_type='volleyball') }}"
-      class="btn btn-primary mx-2 button"
-      >Siatkówka</a
+      href="{{ url_for('main_bp.main') }}"
+      class="btn btn-primary sticky-back-button"
+      >Powrót</a
     >
   </div>
+  {% endblock %}
 </div>
-<a href="{{ url_for('main_bp.main') }}" class="btn btn-primary back-button">Powrót</a>
-{% endblock %}
