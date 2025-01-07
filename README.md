@@ -126,11 +126,17 @@ package "Scheduler" {
    ```
 
 2. Utwórz i aktywuj wirtualne środowisko:
+   Windows
    ```bash
    mkdir venv
    python -m venv venv
    venv\Scripts\activate
-
+   ```
+   Linux:
+   ```bash
+   mkdir venv
+   python -m venv venv
+   . ./venv/bin/activate
    ```
 
 3. Zainstaluj wymagane zależności:
@@ -214,17 +220,16 @@ Przykładowy endpoint:
 ## 🖼️ Zrzuty ekranu
 
 ### Strona główna
-![Strona główna](https://via.placeholder.com/800x400)
+![Strona główna](https://github.com/TobiaszAGH/news/docs/images/main.png)
 
-### Widok panelu administracyjnego
-![Panel administracyjny](https://via.placeholder.com/800x400)
+### Moduł sportowy
+![Panel administracyjny](https://github.com/TobiaszAGH/news/docs/images/sport_football.png)
 
 ---
 
 ## 👥 Autorzy
 
-- **Jan Kowalski** – Frontend i szablony HTML.
-- **Anna Nowak** – Backend i logika aplikacji.
+- **Tobiasz Salik** – Zwierzchnik Młyna, struktura katalogów, moduł ekonomiczny
 
 ---
 
@@ -237,7 +242,6 @@ Projekt jest udostępniony na licencji MIT. Szczegóły znajdziesz w pliku [LICE
 ## ❓ Kontakt
 
 Jeśli masz pytania lub problemy, napisz na:
-- E-mail: jan.kowalski@example.com
-- GitHub: [https://github.com/username](https://github.com/username)
+- E-mail: m.ossysek@agh.edu.pl
 
 
