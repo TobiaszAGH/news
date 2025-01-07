@@ -220,10 +220,10 @@ Przykładowy endpoint:
 ## 🖼️ Zrzuty ekranu
 
 ### Strona główna
-![Strona główna](https://github.com/TobiaszAGH/news/docs/images/main.png)
+![Strona główna](https://github.com/TobiaszAGH/news/blob/main/docs/images/main.png)
 
 ### Moduł sportowy
-![Panel administracyjny](https://github.com/TobiaszAGH/news/docs/images/sport_football.png)
+![Panel administracyjny](https://github.com/TobiaszAGH/news/blob/main/docs/images/sport_football.png)
 
 ---
 
