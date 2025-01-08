@@ -67,9 +67,9 @@ class economyData():
             self.graph_data['name'].append(name)
             self.graph_data['index_y2'].append(0)
 
-    def graph(self):
+    def graph(self, leg=True):
         if self.graph_data['x']:
-            return generate_graph_html(self.graph_data, len(self.graph_data['x']))
+            return generate_graph_html(self.graph_data, len(self.graph_data['x']), leg)
         else:
             return 'Brak danych dotyczących tych walut i przedziału czasowego'
 
