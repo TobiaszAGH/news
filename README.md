@@ -1,24 +1,24 @@
 # Aplikacja webowa `news`
 Projekt na Inżynierię programowania, kierunek Nowoczene Technologie w Kryminalistyce, sem. V, grupa II, piątek 11:30.
 
-## 📋 Opis projektu
-`news` to  aplikacja webowa stworzona w Pythonie z wykorzystaniem frameworka **Flask** oraz kaskadowych arkuszy stylów **Bootstrap**. Projekt pokazuje, jak można stworzyć wielomodułową aplikację webową z obsługą zewnętrznego API oraz integracją z bazą danych.
+## 📋 Opis u
+`news`to  aplikacja webowa stworzow Pythone z wykorzystaiem frameworka **Flask** oraz kaskadowych arkus stylów **Bootstrap**. Projekt pokazuje, jak moża stworzyć wlomodułową aplikację webową z obsługą zewnętznego API oraz ntgracjąz bazą danych.
 
-### Cel projektu
-Aplikacja tworzona w ramach zajęć z Inżynierii Oprogramowania, ma za zadanie dostarczyć informacje pogodowe, kryminalne i sportowe prosty i przejrzysty sposób dla użytkowników. System ma umożliwiać także wizualizację historycznych danych pogodowych i ekonomicznych. 
+### Cel prjektu
+Aplikacja tworzona w ramach zajęć z Inżynierii Oma za zadanie dostarczyć informacje poodowe, kyminalne i sportowe prosty i przejrzysty sposób dla żytkowników. System ma umożliwiać także wizualizację historycznych danych ogodowych i ekonomicznych. 
 
 ### Główne funkcje
-- Aplikacja musi wyświetlać temperature, opady i ciśnienie dla pięciu lokalizacji
-- Użytkownik może przeglądać najnowsze wiadomości kryminalne dla miasta Krakowa
+- Aplikacjmusi wyświetlać temerature, opady  ciśnienie dla pięciu loklizacji
+- Użynik może przeglądać najnowsze wiadomości kryminalne dlmiasta Krakowa
 - Aplikacja powinna wyświetlać aktualne kursy walut
 - Aplikacja umożliwia wizualizację graficzną danych historycznych o pogodzie i danych ekonomicznych
 - Użytkownik może sprawdzić święta, wydarzenia na uczelni oraz imieniny
 
 ### Metodologia prowadzenia projektu
-Projekt prowadzony jest w metodologi SCRUM. Szczegółowa dokumentacja prowadzenia projektu dostepna jest w [Project Plan](docs/SerwisInformacyjny-1130.xlsx).
+Projekt prowadzony jest w metodologi SCRUM. Szczegółowa dokumentacja prowadzenia projektu dostepna jest w [Project Plan](docs/SerwisInformacyjny-30.xlsx).
 
 ## 📐 Architektura Projektu
-Aplikacja składa się z trzech głównych warstw:
+Aplikacja składa się z trzech głównych warstw
 
 1. Frontend:
    **Opis**: Warstwa frontendowa odpowiada za interfejs użytkownika. Szablony HTML są renderowane przez Flask i mogą korzystać z frameworka CSS Bootstrap.
@@ -30,7 +30,7 @@ Aplikacja składa się z trzech głównych warstw:
    **Technologie**: Python, Flask, Flask-APScheduler.
    **Pliki**: Znajdują się w katalogach modułów, w tym routes.py, models.py, config.py.
 
-3. Baza Danych:
+. Baza Danych:
    **Opis**: Warstwa bazy danych przechowuje dane aplikacji, takie jak wiadomości, dane pogodowe, kursy walut itp. SQLAlchemy jest używane jako ORM do zarządzania bazą danych.
    **Technologie**: SQLAlchemy, SQLite (lub inna baza danych).
    **Pliki**: Konfiguracja bazy danych znajduje się w config.py.
@@ -96,7 +96,84 @@ package "Scheduler" {
 ### 📦 Struktura katalogów
 
 ```
-#TODO
+├── app
+│   ├── app.py
+│   ├── blueprints
+│   │   ├── calendar
+│   │   │   ├── functions.py
+│   │   │   ├── __init__.py
+│   │   │   ├── routes.py
+│   │   │   └── templates
+│   │   │       └── calendar.html
+│   │   ├── economy
+│   │   │   ├── economyData.py
+│   │   │   ├── forms.py
+│   │   │   ├── functions.py
+│   │   │   ├── routes.py
+│   │   │   └── templates
+│   │   │       └── economy.html
+│   │   ├── __init__.py
+│   │   ├── main
+│   │   │   ├── routes.py
+│   │   │   └── templates
+│   │   │       └── main.html
+│   │   ├── news
+│   │   │   ├── data_scraper.py
+│   │   │   ├── models.py
+│   │   │   ├── routes.py
+│   │   │   └── templates
+│   │   │       ├── news.html
+│   │   │       ├── news_preview.html
+│   │   │       └── single_news.html
+│   │   ├── sport
+│   │   │   ├── models.py
+│   │   │   ├── routes.py
+│   │   │   └── templates
+│   │   │       ├── articles.html
+│   │   │       ├── sport.html
+│   │   │       └── sport_preview.html
+│   │   └── weather
+│   │       ├── __init__.py
+│   │       ├── routes.py
+│   │       ├── templates
+│   │       │   ├── weather2.html
+│   │       │   ├── weather.html
+│   │       │   └── weather_page.html
+│   │       └── weatherService.py
+│   ├── config.py
+│   ├── data_visualization.py
+│   ├── run.py
+│   ├── static
+│   │   ├── css
+│   │   │   ├── calendar.css
+│   │   │   ├── main.css
+│   │   │   ├── news.css
+│   │   │   ├── news_preview.css
+│   │   │   ├── single_news.css
+│   │   │   └── sport.css
+│   │   └── images
+│   │       └── favicon.ico
+│   ├── templates
+│   │   ├── base.html
+│   │   └── chart_element.html
+│   └── tests
+│       ├── calendar_test.py
+│       ├── crime_tests.py
+│       ├── economy_tests.py
+│       ├── graph_test.py
+│       ├── __init__.py
+│       ├── main_page_test.py
+│       ├── pytests.py
+│       ├── selenium_main_tests.py
+│       ├── selenium_test_graph.py
+│       └── weather_test.py
+├── docs
+│   ├── api.md
+│   └── images
+│       ├── main.png
+│       └── sport_football.png
+├── README.md
+├── requirements.txt
 ```
 
 ---
@@ -150,7 +227,7 @@ package "Scheduler" {
    ```
 2. Otwórz przeglądarkę i przejdź do:
    ```
-   http://127.0.0.1:8000
+   http://127..0.1:8000
    ```
 
 ---
@@ -245,3 +322,5 @@ Jeśli masz pytania lub problemy, napisz na:
 - E-mail: m.ossysek@agh.edu.pl
 
 
+
+projekt na inzynierie oprogramowania, grupa piatkowa 11:30
