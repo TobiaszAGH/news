@@ -11,6 +11,7 @@ from .weather_test import *
 from .economy_tests import *
 from .sport_tests import *
 from .calendar_test import *
+from .selenium_calendar_tests import *
 
 
 from app import app as original_app
