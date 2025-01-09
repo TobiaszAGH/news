@@ -105,7 +105,7 @@ def generate_graph_html(data_dict, days, leg=True):
 
         if leg == False:
             html_content = f"""
-            <div class="chart-container" style="width: 100%; height: 100%; overflow: hidden; position: relative;">
+            <div class="chart-container" style="width: 100%; height: 100%; position: relative;">
             {html_content}
             </div>
             """
