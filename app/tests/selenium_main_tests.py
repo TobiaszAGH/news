@@ -30,4 +30,23 @@ def test_home_page_theme(driver):
     elif toggler_value == "dark":
         assert 'data-bs-theme="light"' in driver.page_source    
 
-# dodac do kazdego widgetu
+def test_calendar_widget(driver):
+    widget = driver.find_element(By.XPATH, "//iframe[@class='iframe-calendar']")
+    driver.switch_to.frame(widget)
+    widget_content = driver.page_source
+    assert "Aktualności" in widget_content
+    driver.switch_to.default_content()
+
+def test_economy_widget(driver):
+    widget = driver.find_element(By.XPATH, "//iframe[@class='iframe-economy']")
+    driver.switch_to.frame(widget)
+    widget_content = driver.page_source
+    assert "Kursy walut" in widget_content
+    driver.switch_to.default_content()
+
+def test_weather_widget(driver):
+    widget = driver.find_element(By.XPATH, "//iframe[@class='iframe-weather']")
+    driver.switch_to.frame(widget)
+    widget_content = driver.page_source
+    assert "Opady" in widget_content
+    driver.switch_to.default_content()
