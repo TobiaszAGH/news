@@ -159,6 +159,16 @@ Dane pogodowe pobierane są z API **OpenWeatherMap**:
   GET https://api.openweathermap.org/data/2.5/weather?q=Krakow&appid=YOUR_API_KEY
   Host: api.openweathermap.org
   ```
+#### Informacje ekonomiczne 💰💸
+
+Dane ekonomiczne pobierane są z API **NBP Web API**:
+
+- **Dokumentacja API**: [https://api.nbp.pl/](https://api.nbp.pl/)
+- **Opis**: Używane do uzyskania aktualnych danych walutowych oraz historycznych kursów walut
+- **Przykładowe żądanie**:
+ 'https://api.nbp.pl/api/exchangerates/tables/{table}/last/{topCount}/'
+
+'https://api.nbp.pl/api/exchangerates/rates/c/usd/today/'
 
 #### Kartka z kalendarza 📖🕊️🎊
 
