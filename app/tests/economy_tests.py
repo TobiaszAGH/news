@@ -6,10 +6,10 @@ from blueprints.economy.economyData import economyData, fetch_link
 from datetime import datetime, timedelta
 
 # unit tests
-@pytest.fixture
-def economy_data():
-    economy_data = economyData()
-    return economy_data
+# @pytest.fixture
+# def economy_data():
+#     economy_data = economyData()
+#     return economy_data
 
 def test_economy_data_load(economy_data):
     curr_codes = ['USD', 'EUR']
@@ -74,23 +74,23 @@ def test_fetch_link():
 
 # integration test
 def test_economy_endpoint(client: FlaskClient):
-    with client:
+    # with client:
         response = client.get('/economy/')
         print(response.data) 
         assert response.status_code == 200
 
 def test_start_after_end(client: FlaskClient):
-    with client:
+    # with client:
         response = client.post('/economy/', data={'startdate': '2024-11-11', 'todate': '2024-10-10', 'currency1': 'USD'})
         assert response.status_code == 200
 
 def test_correct_economy(client: FlaskClient):
-    with client:
+    # with client:
         response = client.post('/economy/', data={'startdate': '2024-11-11', 'todate': '2024-12-12', 'currency1': 'USD'})
         assert response.status_code == 200
 
 def test_over_93_days(client: FlaskClient):
-    with client:
+    # with client:
         response = client.post('/economy/', data={'startdate': '2024-01-11', 'todate': '2024-10-10', 'currency1': 'USD'})
         assert response.status_code == 200
 

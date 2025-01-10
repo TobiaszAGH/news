@@ -26,8 +26,12 @@ def single_news(news_id):
     news = db.session.get(CrimeNews, news_id)
 
     if news is None:
-        print(f"Error during opening article with id: '{news_id}'.")
-        abort(404) # DO ZMIANY!!
+        return render_template(
+            'single_news.html',
+            news=None,
+            images=None,
+            error="Artykuł o podanym ID nie istnieje lub został usunięty."
+            )
 
     images = CrimeImage.query.filter_by(news_id=news_id).all()
 

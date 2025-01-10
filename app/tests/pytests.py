@@ -1,4 +1,4 @@
-import pytest
+# import pytest
 
 import os
 import sys
@@ -13,14 +13,15 @@ from .weather_test import *
 from .economy_tests import *
 from .crime_tests import *
 from .calendar_test import *
+# from .sport_tests import *
 
 
-from app import app as original_app
+# from app import app as original_app
 
 
-@pytest.fixture
-def client():
-    app = original_app
-    app.config['TESTING'] = True
-    return app.test_client()
+# @pytest.fixture
+# def client():
+#     app = original_app
+#     app.config['TESTING'] = True
+#     return app.test_client()
 
