@@ -20,4 +20,3 @@ class CrimeImage(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     image_url = db.Column(db.String(255), nullable=True)
     news_id = db.Column(db.Integer, ForeignKey('crime_news.id'), nullable=False)
-    

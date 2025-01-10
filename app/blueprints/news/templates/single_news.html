@@ -23,6 +23,11 @@
 
 {% block main %}
 <div class="container mt-4">
+    {% if error %}
+    <div class="alert alert-warning">
+        {{ error }}
+    </div>
+    {% else %}
     <h1 class="news-title">{{ news.title }}</h1>
     <p class="publication-date">Data publikacji: {{ news.publication_date.strftime('%d.%m.%Y') }}
         <br>Źródło: policja.pl
@@ -47,6 +52,7 @@
             {% endfor %}
         </div>
     </div>
+    {% endif %}
     {% endif %}
 </div>
 

@@ -1,14 +1,14 @@
 # Aplikacja webowa `news`
-Projekt na Inżynierię programowania, kierunek Nowoczene Technologie w Kryminalistyce, sem. V, grupa II, piątek 11:30.
+Projekt na Inżynierię Oprogramowania, kierunek Nowoczene Technologie w Kryminalistyce, sem. V, grupa II, piątek 11:30.
 
 ## 📋 Opis 
-`news`to  aplikacja webowa stworzow Pythone z wykorzystaiem frameworka **Flask** oraz kaskadowych arkus stylów **Bootstrap**. Projekt pokazuje, jak moża stworzyć wlomodułową aplikację webową z obsługą zewnętznego API oraz ntgracjąz bazą danych.
+`news`to  aplikacja webowa stworzona w Pythonie z wykorzystaniem frameworka **Flask** oraz kaskadowych arkuszy stylów **Bootstrap**. Projekt pokazuje, jak można stworzyć wielomodułową aplikację webową z obsługą zewnętrznego API oraz intgracją z bazą danych.
 
-### Cel prjektu
-Aplikacja tworzona w ramach zajęć z Inżynierii Oprogramowania za zadanie dostarczyć informacje poodowe, kyminalne i sportowe prosty i przejrzysty sposób dla użytkowników. System ma umożliwiać także wizualizację historycznych danych ogodowych i ekonomicznych. 
+### Cel projektu
+Aplikacja tworzona w ramach zajęć z Inżynierii Oprogramowania, ma za zadanie dostarczyć informacje pogodowe, kryminalne i sportowe w prosty i przejrzysty sposób dla użytkowników. System ma umożliwiać także wizualizację historycznych danych pogodowych oraz ekonomicznych. 
 
 ### Główne funkcje
-- Aplikacja musi wyświetlać temerature, opady  ciśnienie dla pięciu loklizacji
+- Aplikacja musi wyświetlać temeraturę, opady i ciśnienie dla pięciu lokalizacji
 - Użytkownik może przeglądać najnowsze wiadomości kryminalne dla miasta Krakowa
 - Aplikacja powinna wyświetlać aktualne kursy walut
 - Aplikacja umożliwia wizualizację graficzną danych historycznych o pogodzie i danych ekonomicznych
@@ -16,8 +16,10 @@ Aplikacja tworzona w ramach zajęć z Inżynierii Oprogramowania za zadanie dost
 
 ### Metodologia prowadzenia projektu
 Projekt prowadzony jest w metodologi SCRUM. Szczegółowa dokumentacja prowadzenia projektu dostepna jest w [Project Plan](docs/SerwisInformacyjny-30.xlsx).
+Projekt prowadzony jest w metodologi SCRUM. Szczegółowa dokumentacja prowadzenia projektu dostepna jest w [Project Plan](docs/SerwisInformacyjny-30.xlsx).
 
 ## 📐 Architektura Projektu
+Aplikacja składa się z trzech głównych warstw
 Aplikacja składa się z trzech głównych warstw
 
 1. Frontend:
@@ -30,6 +32,7 @@ Aplikacja składa się z trzech głównych warstw
    **Technologie**: Python, Flask, Flask-APScheduler.
    **Pliki**: Znajdują się w katalogach modułów, w tym routes.py, models.py, config.py.
 
+. Baza Danych:
 . Baza Danych:
    **Opis**: Warstwa bazy danych przechowuje dane aplikacji, takie jak wiadomości, dane pogodowe, kursy walut itp. SQLAlchemy jest używane jako ORM do zarządzania bazą danych.
    **Technologie**: SQLAlchemy, SQLite (lub inna baza danych).
@@ -174,6 +177,84 @@ package "Scheduler" {
 │       └── sport_football.png
 ├── README.md
 ├── requirements.txt
+├── app
+│   ├── app.py
+│   ├── blueprints
+│   │   ├── calendar
+│   │   │   ├── functions.py
+│   │   │   ├── __init__.py
+│   │   │   ├── routes.py
+│   │   │   └── templates
+│   │   │       └── calendar.html
+│   │   ├── economy
+│   │   │   ├── economyData.py
+│   │   │   ├── forms.py
+│   │   │   ├── functions.py
+│   │   │   ├── routes.py
+│   │   │   └── templates
+│   │   │       └── economy.html
+│   │   ├── __init__.py
+│   │   ├── main
+│   │   │   ├── routes.py
+│   │   │   └── templates
+│   │   │       └── main.html
+│   │   ├── news
+│   │   │   ├── data_scraper.py
+│   │   │   ├── models.py
+│   │   │   ├── routes.py
+│   │   │   └── templates
+│   │   │       ├── news.html
+│   │   │       ├── news_preview.html
+│   │   │       └── single_news.html
+│   │   ├── sport
+│   │   │   ├── models.py
+│   │   │   ├── routes.py
+│   │   │   └── templates
+│   │   │       ├── articles.html
+│   │   │       ├── sport.html
+│   │   │       └── sport_preview.html
+│   │   └── weather
+│   │       ├── __init__.py
+│   │       ├── routes.py
+│   │       ├── templates
+│   │       │   ├── weather2.html
+│   │       │   ├── weather.html
+│   │       │   └── weather_page.html
+│   │       └── weatherService.py
+│   ├── config.py
+│   ├── data_visualization.py
+│   ├── run.py
+│   ├── static
+│   │   ├── css
+│   │   │   ├── calendar.css
+│   │   │   ├── main.css
+│   │   │   ├── news.css
+│   │   │   ├── news_preview.css
+│   │   │   ├── single_news.css
+│   │   │   └── sport.css
+│   │   └── images
+│   │       └── favicon.ico
+│   ├── templates
+│   │   ├── base.html
+│   │   └── chart_element.html
+│   └── tests
+│       ├── calendar_test.py
+│       ├── crime_tests.py
+│       ├── economy_tests.py
+│       ├── graph_test.py
+│       ├── __init__.py
+│       ├── main_page_test.py
+│       ├── pytests.py
+│       ├── selenium_main_tests.py
+│       ├── selenium_test_graph.py
+│       └── weather_test.py
+├── docs
+│   ├── api.md
+│   └── images
+│       ├── main.png
+│       └── sport_football.png
+├── README.md
+├── requirements.txt
 ```
 
 ---
@@ -227,7 +308,7 @@ package "Scheduler" {
    ```
 2. Otwórz przeglądarkę i przejdź do:
    ```
-   http://127..0.1:8000
+   http://127.0.1:8000
    ```
 
 ---
@@ -251,25 +332,33 @@ DATABASE_URL=sqlite:///app.db
 ---
 
 ## 🛠️ Testowanie
-Testy są zorganizowane w katalogu `tests/`. 
+Testy są zorganizowane w katalogu `app/tests/`. 
 Dla Aplikacji opracowano testy jednostkowe, integracyjne i akceptacyjne.
-Dla testów akceptacyjnych reazlizowanych z wykorzystaniem Selenium opracowany został plan testowania [Test Plan](docs/Acceptance_TP.xlsx).
+Dla testów akceptacyjnych realizowanych z wykorzystaniem Selenium opracowany został plan testowania [Test Plan](docs/Acceptance_TP.xlsx).
 Więcej szczegółów znajdziesz w pliku [Testing Documentation](docs/testing.md).
 
 ### Uruchomienie testów:
-1. Aby uruchomić testy jednsotkowe, wykonaj:
+1. Aby uruchomić wszystkie testy wykonaj:
 ```bash
-pytest .\tests\unit
-```
-2. Aby uruchomić testy integracyjne, wykonaj:
-```bash
-pytest .\tests\integration
+pytest app\tests\pytests.py
 ```
 
-3. Aby uruchomić testy akceptacyjne, wykonaj:
+2. Aby uruchomić testy jednostkowe, wykonaj:
 ```bash
-pytest .\tests\acceptance
+pytest app\tests\unit.py
 ```
+
+3. Aby uruchomić testy integracyjne, wykonaj:
+```bash
+pytest app\tests\integration.py
+```
+
+4. Aby uruchomić testy akceptacyjne, wykonaj:
+```bash
+pytest app\tests\acceptance.py
+```
+
+<!-- strategia testowania, raport z ostatniej wersji aplikacji-->
 
 ---
 
@@ -305,6 +394,10 @@ Przykładowy endpoint:
 ![Panel administracyjny](https://github.com/TobiaszAGH/news/blob/main/docs/images/economy.png)
 ### Moduł pogodowy
 ![Panel administracyjny](https://github.com/TobiaszAGH/news/blob/main/docs/images/weather.png)
+### Moduł ekonomiczny
+![Panel administracyjny](https://github.com/TobiaszAGH/news/blob/main/docs/images/economy.png)
+### Moduł pogodowy
+![Panel administracyjny](https://github.com/TobiaszAGH/news/blob/main/docs/images/weather.png)
 ---
 
 ## 👥 Autorzy
@@ -326,4 +419,4 @@ Jeśli masz pytania lub problemy, napisz na:
 
 
 
-projekt na inzynierie oprogramowania, grupa piatkowa 11:30
+Projekt na inżynierię oprogramowania, grupa piątkowa 11:30

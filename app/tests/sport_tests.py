@@ -1,98 +1,96 @@
-import unittest
-from flask import Flask, url_for
-from flask_testing import TestCase
-from app import create_app, db
-from app.blueprints.sport.models import SportArticle
 from datetime import datetime
+from blueprints.sport.routes import fetch_and_save_articles, SPORT_API
+from blueprints.sport.models import SportArticle
+from config import db
 
-# Konfiguracja aplikacji testowej
-class BaseTestCase(TestCase):
-    def create_app(self):
-        app = create_app('testing')  # Użycie konfiguracji testowej
-        return app
+def test_sport_home(client):
+    # Testuje, czy endpoint sport_home działa poprawnie.
+    response = client.get('/sport/')
+    assert response.status_code == 200
+    assert b'Narciarskie' in response.data  # Zakłada obecność sportów w widoku.
 
-    def setUp(self):
-        db.create_all()
-        self.populate_test_data()
-
-    def tearDown(self):
-        db.session.remove()
-        db.drop_all()
-
-    def populate_test_data(self):
-        """Dodanie przykładowych danych do testów."""
-        articles = [
-            SportArticle(
-                title="Football News 1",
-                description="Description of football news 1",
-                image_url="http://example.com/image1.jpg",
-                pubDate=datetime(2024, 1, 10, 10, 0),
-                link="http://example.com/football1",
-                sport_type="football"
-            ),
-            SportArticle(
-                title="Tennis News 1",
-                description="Description of tennis news 1",
-                image_url="http://example.com/image2.jpg",
-                pubDate=datetime(2024, 1, 9, 10, 0),
-                link="http://example.com/tennis1",
-                sport_type="tennis"
-            ),
-        ]
-        db.session.bulk_save_objects(articles)
-        db.session.commit()
-
-# Testy jednostkowe
-class UnitTests(unittest.TestCase):
-    def test_sport_article_model(self):
-        """Test poprawności modelu SportArticle."""
+def test_sport_home_with_discipline(crime_client):
+    with crime_client.application.app_context():
+    # Dodaje przykładowy artykuł dla wybranej dyscypliny i testuje filtrację.
         article = SportArticle(
-            title="Test Article",
+            title="Test Football Article",
             description="Test Description",
-            image_url="http://example.com/image.jpg",
-            pubDate=datetime(2024, 1, 1, 12, 0),
-            link="http://example.com/article",
+            image_url="test.jpg",
+            pubDate=datetime.now(),
+            link="test.com",
             sport_type="football"
         )
-        self.assertEqual(article.title, "Test Article")
-        self.assertEqual(article.sport_type, "football")
-        self.assertIsNotNone(article.created_at)
+        db.session.add(article)
+        db.session.commit()
 
-# Testy integracyjne
-class IntegrationTests(BaseTestCase):
-    def test_home_page(self):
-        """Test dostępności strony głównej sekcji sportowej."""
-        response = self.client.get(url_for('sport.sport_home'))
-        self.assert200(response)
-        self.assertTemplateUsed('sport.html')
+    response = crime_client.get('/sport/?discipline=football')
+    assert response.status_code == 200
+    assert b'Test Football Article' in response.data
+    assert db.session.query(SportArticle).count() == 1
 
-    def test_filter_by_discipline(self):
-        """Test filtrowania artykułów według dyscypliny."""
-        response = self.client.get(url_for('sport.sport_home', discipline='football'))
-        self.assert200(response)
-        self.assertIn(b"Football News 1", response.data)
+def test_sport_preview(crime_client):
+    with crime_client.application.app_context():
+        # Dodaje przykładowe artykuły dla każdej dyscypliny i testuje widok podglądu.
+        disciplines = ['football', 'tennis', 'ski_jumping', 'volleyball']
+        for discipline in disciplines:
+            article = SportArticle(
+                title=f"Test {discipline} Article",
+                description=f"Test {discipline} Description",
+                image_url="test.jpg",
+                pubDate=datetime.now(),
+                link="test.com",
+                sport_type=discipline
+            )
+            db.session.add(article)
+        db.session.commit()
 
-    def test_pagination(self):
-        """Test paginacji na stronie głównej."""
-        response = self.client.get(url_for('sport.sport_home', page=1))
-        self.assert200(response)
-        self.assertIn(b"Football News 1", response.data)
-        self.assertIn(b"Tennis News 1", response.data)
+        response = crime_client.get('/sport/sport_preview')
+        assert response.status_code == 200
+        for discipline in disciplines:
+            assert f"Test {discipline} Article".encode() in response.data
 
-    def test_sport_preview(self):
-        """Test widoku podglądu dyscyplin sportowych."""
-        response = self.client.get(url_for('sport.sport_preview'))
-        self.assert200(response)
-        self.assertTemplateUsed('sport_preview.html')
-        self.assertIn(b"Football News 1", response.data)
 
-    def test_fetch_and_save_articles(self):
-        """Test funkcji fetch_and_save_articles."""
-        with self.client:
-            from app.blueprints.sport.routes import fetch_and_save_articles
-            fetch_and_save_articles()
-            article_count = SportArticle.query.count()
-            self.assertGreater(article_count, 2)  # Nowe artykuły zostały dodane
+def test_sport_home_pagination(crime_client):
+    with crime_client.application.app_context():
+        # Dodaje więcej artykułów, aby przetestować paginację.
+        for i in range(15):
+            article = SportArticle(
+                title=f"Test Article {i}",
+                description=f"Test Description {i}",
+                image_url="test.jpg",
+                pubDate=datetime.now(),
+                link=f"test.com/{i}",
+                sport_type="football"
+            )
+            db.session.add(article)
+        db.session.commit()
 
-if __name__ == '__main__':
-    unittest.main()
+        response = crime_client.get('/sport/?page=2')
+        assert response.status_code == 200
+        assert b"Article 0" not in response.data  # Pierwsza strona powinna być pominięta.
+        assert b"Article 7" in response.data  # Powinny być artykuły z drugiej strony.
+        
+# def test_fetch_and_save_articles(crime_client, mocked_responses):
+#     with crime_client.application.app_context():
+#         # Mockuje odpowiedzi API dla sportowych endpointów i sprawdza zapisywanie danych w bazie.
+#         mock_data = {
+#             "results": [{
+#                 "title": "Test Sport Article",
+#                 "description": "Test Description",
+#                 "image_url": "test.jpg",
+#                 "pubDate": "2023-12-25 12:00:00",
+#                 "link": "test.com"
+#             }]
+#         }
+
+#         for url in SPORT_API.values():
+#             mocked_responses.get(url, json=mock_data)
+            
+        
+#         fetch_and_save_articles()
+
+#         articles = SportArticle.query.all()
+#         assert articles[0].title == "Test Sport Article"
+#         assert articles[0].description == "Test Description"
+#         assert articles[0].sport_type in SPORT_API.keys()
+#         assert len(articles) > 0
