@@ -1,15 +1,15 @@
 # Aplikacja webowa `news`
 Projekt na Inżynierię programowania, kierunek Nowoczene Technologie w Kryminalistyce, sem. V, grupa II, piątek 11:30.
 
-## 📋 Opis u
+## 📋 Opis 
 `news`to  aplikacja webowa stworzow Pythone z wykorzystaiem frameworka **Flask** oraz kaskadowych arkus stylów **Bootstrap**. Projekt pokazuje, jak moża stworzyć wlomodułową aplikację webową z obsługą zewnętznego API oraz ntgracjąz bazą danych.
 
 ### Cel prjektu
-Aplikacja tworzona w ramach zajęć z Inżynierii Oma za zadanie dostarczyć informacje poodowe, kyminalne i sportowe prosty i przejrzysty sposób dla żytkowników. System ma umożliwiać także wizualizację historycznych danych ogodowych i ekonomicznych. 
+Aplikacja tworzona w ramach zajęć z Inżynierii Oprogramowania za zadanie dostarczyć informacje poodowe, kyminalne i sportowe prosty i przejrzysty sposób dla użytkowników. System ma umożliwiać także wizualizację historycznych danych ogodowych i ekonomicznych. 
 
 ### Główne funkcje
-- Aplikacjmusi wyświetlać temerature, opady  ciśnienie dla pięciu loklizacji
-- Użynik może przeglądać najnowsze wiadomości kryminalne dlmiasta Krakowa
+- Aplikacja musi wyświetlać temerature, opady  ciśnienie dla pięciu loklizacji
+- Użytkownik może przeglądać najnowsze wiadomości kryminalne dla miasta Krakowa
 - Aplikacja powinna wyświetlać aktualne kursy walut
 - Aplikacja umożliwia wizualizację graficzną danych historycznych o pogodzie i danych ekonomicznych
 - Użytkownik może sprawdzić święta, wydarzenia na uczelni oraz imieniny
@@ -301,6 +301,8 @@ Przykładowy endpoint:
 
 ### Moduł sportowy
 ![Panel administracyjny](https://github.com/TobiaszAGH/news/blob/main/docs/images/sport_football.png)
+### Moduł ekonomiczny
+![Panel administracyjny](https://github.com/TobiaszAGH/news/blob/main/docs/images/economy.png)
 
 ---
 
