@@ -14,13 +14,6 @@ def client():
     app.config['TESTING'] = True
     return app.test_client()
 
-# @pytest.fixture
-# def client():
-#     app = original_app
-#     app.config['TESTING'] = True
-#     with app.app_context():
-#         with app.test_client() as client:
-#             yield client
 
 @pytest.fixture
 def mocked_responses():
@@ -44,8 +37,10 @@ def crime_app():
 
     from blueprints.main.routes import main_bp
     from blueprints.news.routes import news_bp
+    from blueprints.sport.routes import sport_bp
     app.register_blueprint(main_bp, url_prefix='/')
     app.register_blueprint(news_bp, url_prefix='/news')
+    app.register_blueprint(sport_bp, url_prefix='/sport')
 
     return app
 

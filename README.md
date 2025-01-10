@@ -180,19 +180,27 @@ Dla testów akceptacyjnych realizowanych z wykorzystaniem Selenium opracowany zo
 Więcej szczegółów znajdziesz w pliku [Testing Documentation](docs/testing.md).
 
 ### Uruchomienie testów:
-1. Aby uruchomić testy jednostkowe, wykonaj:
+1. Aby uruchomić wszystkie testy wykonaj:
+```bash
+pytest app\tests\pytests.py
+```
+
+2. Aby uruchomić testy jednostkowe, wykonaj:
 ```bash
 pytest app\tests\unit.py
 ```
-2. Aby uruchomić testy integracyjne, wykonaj:
+
+3. Aby uruchomić testy integracyjne, wykonaj:
 ```bash
 pytest app\tests\integration.py
 ```
 
-3. Aby uruchomić testy akceptacyjne, wykonaj:
+4. Aby uruchomić testy akceptacyjne, wykonaj:
 ```bash
 pytest app\tests\acceptance.py
 ```
+
+<!-- strategia testowania, raport z ostatniej wersji aplikacji-->
 
 ---
 

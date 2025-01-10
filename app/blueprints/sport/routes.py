@@ -39,26 +39,28 @@ def sport_home():
     return render_template('sport.html', articles=articles, sport_names=sport_names)
 
 def fetch_and_save_articles():
-    for sport_type, api_url in SPORT_API.items():
-        response = requests.get(api_url)
-        if response.status_code == 200:
-            data = response.json()
-            for article in data.get("results", []):
-                existing_article = SportArticle.query.filter_by(title=article.get("title")).first()
-                if not existing_article:
-                    pub_date_str = article.get("pubDate")
-                    pub_date = datetime.strptime(pub_date_str, "%Y-%m-%d %H:%M:%S") if pub_date_str else None
-                    
-                    new_article = SportArticle(
-                        title=article.get("title"),
-                        description=article.get("description"),
-                        image_url=article.get("image_url"),
-                        pubDate=pub_date,
-                        link=article.get("link"),
-                        sport_type=sport_type
-                    )
-                    db.session.add(new_article)
-            db.session.commit()
+    from app import app
+    with app.app_context():
+        for sport_type, api_url in SPORT_API.items():
+            response = requests.get(api_url)
+            if response.status_code == 200:
+                data = response.json()
+                for article in data.get("results", []):
+                    existing_article = SportArticle.query.filter_by(title=article.get("title")).first()
+                    if not existing_article:
+                        pub_date_str = article.get("pubDate")
+                        pub_date = datetime.strptime(pub_date_str, "%Y-%m-%d %H:%M:%S") if pub_date_str else None
+                        
+                        new_article = SportArticle(
+                            title=article.get("title"),
+                            description=article.get("description"),
+                            image_url=article.get("image_url"),
+                            pubDate=pub_date,
+                            link=article.get("link"),
+                            sport_type=sport_type
+                        )
+                        db.session.add(new_article)
+                db.session.commit()
             
 
 @sport_bp.route('/sport_preview')

@@ -2,8 +2,8 @@
 
 ## Fixtures
 
-### Fixtures mockujące
-- `mocked_responses` - Dostarcza mocki dla zewnętrznych zapytań HTTP
+### Mock fixture
+- `mocked_responses` 
 
 ### Fixtures bazodanowe
 - `crime_app` - Tworzy testową instancję aplikacji Flask
@@ -45,6 +45,11 @@
 - Weryfikacja interakcji użytkownika
 
 ## Uruchamianie testów
+
+### Wszystkie testy
+```bash
+pytest app/tests/pytests.py
+```
 
 ### Testy jednostkowe
 ```bash
