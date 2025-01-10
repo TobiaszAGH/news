@@ -3,7 +3,7 @@ from plotly.graph_objects import Figure
 
 def test_generate_graph_html_valid_data():
     data_dict = {
-        "x": ["Day 1", "Day 2", "Day 3"],
+        "x": ["2022-09-18", "2022-09-19", "2022-09-20"],
         "y": [[10, 20, 30], [5, 15, 25]],
         "label": ["Days", "Temperature", "Humidity"],
         "name": ["Temperature", "Humidity"],
@@ -31,7 +31,7 @@ def test_generate_graph_html_missing_x_key():
 
 def test_generate_graph_html_missing_y_key():
     data_dict = {
-        "x": ["Day 1", "Day 2", "Day 3"],
+        "x": ["2022-09-18", "2022-09-19", "2022-09-20"],
         "label": ["Days", "Values"],
         "name": ["Data Series"],
         "index_y2": [0],
@@ -69,7 +69,7 @@ def test_generate_graph_html_wrong_y():
 
 def test_generate_graph_html_single_series():
     data_dict = {
-        "x": ["Day 1", "Day 2", "Day 3"],
+        "x": ["2022-09-18", "2022-09-19", "2022-09-20"],
         "y": [[10, 20, 30]],
         "label": ["Days", "Values"],
         "name": ["Temperature"],

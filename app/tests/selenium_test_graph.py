@@ -25,11 +25,11 @@ class TestWykresRenderowanie(unittest.TestCase):
         service = Service(ChromeDriverManager().install())
         cls.driver = webdriver.Chrome(service=service, options=options)
 
-    @classmethod
-    def tearDownClass(cls):
-        """Zamykanie przeglądarki po zakończeniu testów."""
-        cls.driver.quit()
-        #pass
+    # @classmethod
+    # def tearDownClass(cls):
+    #     """Zamykanie przeglądarki po zakończeniu testów."""
+    #     #cls.driver.quit()
+    #     pass
 
     def render_and_verify_graph(self, data, days):
         """Pomocnicza funkcja do renderowania i weryfikacji wykresu."""
@@ -54,7 +54,7 @@ class TestWykresRenderowanie(unittest.TestCase):
     def test_wykres_renderowanie(self):
         """Test sprawdzający, czy wykres renderuje się poprawnie i dane są zgodne."""
         data = {
-            "x": [1, 2, 3, 4, 5],
+            "x": ["2022-09-15", "2022-09-16", "2022-09-17", "2022-09-18", "2022-09-19"],
             "y": [[10, 15, 20, 25, 30], [5, 10, 15, 20, 25]],
             "label": ["X Axis", "Y Axis", "Secondary Y Axis"],
             "name": ["Series 1", "Series 2"],
