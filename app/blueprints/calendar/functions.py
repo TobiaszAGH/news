@@ -15,8 +15,12 @@ def get_agh_news(date):
     response=requests.get(f"https://www.agh.edu.pl/aktualnosci")
     soup=BeautifulSoup(response.content, 'html.parser')
     articles=soup.find_all('article', class_='d-md-flex')
-    if(date.day<10):
+    if(date.day<10 and date.month<10):
+        date2 = f"0{date.day}.0{date.month}.{date.year}"
+    elif(date.day<10 and date.month>10):
         date2 = f"0{date.day}.{date.month}.{date.year}"
+    elif(date.day>10 and date.month<10):
+        date2 = f"{date.day}.0{date.month}.{date.year}"
     else: 
         date2 = f"{date.day}.{date.month}.{date.year}"
     for article in articles:
