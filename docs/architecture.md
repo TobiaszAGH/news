@@ -46,8 +46,18 @@ Python, Flask, Flask-APScheduler.
   - `run.py` – uruchamianie aplikacji.  
   - `config.py` – konfiguracja aplikacji.  
   - `data_visualization.py` – generowanie wizualizacji danych.  
+
 - Moduły:  
-  - Znajdują się w `app/blueprints/`. Każdy moduł posiada pliki, takie jak `routes.py` (obsługa tras), `functions.py` (logika), `models.py` (definicje modeli danych).
+- `weather` (pogodowy)
+- `economy` (walutowy)
+- `calendar` (kartka z kalendarza) 
+- `news` (wiadomości kryminalne) 
+- `sport` (sportowy)
+- `main` (moduł główny aplikacji)
+    - Znajdują się w `app/blueprints/`. Każdy moduł posiada pliki, takie jak:
+    - `routes.py` (obsługa tras)
+    - `functions.py` (logika)
+    - `models.py` (definicje modeli danych).
 
 **Struktura katalogów**:
 ```plaintext
