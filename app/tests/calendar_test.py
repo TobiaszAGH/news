@@ -5,7 +5,6 @@ import requests
 from datetime import datetime, timedelta
 from blueprints.calendar.routes import get_nameday, get_holiday, get_proverb, calendar_bp
 
-
 # @pytest.fixture
 # def client():
 #     app = Flask(__name__, template_folder='../templates')

@@ -1,9 +1,7 @@
-import pytest
 from datetime import date
 from blueprints.news.models import CrimeNews, CrimeImage
 from config import db
 
-""" Tests """
 # Models tests
 def test_database_connection(crime_client):
     with crime_client.application.app_context():

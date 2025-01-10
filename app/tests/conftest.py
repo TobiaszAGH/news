@@ -20,7 +20,7 @@ def mocked_responses():
     with requests_mock.Mocker() as m:
         yield m
 
-""" Economy fixtures """
+""" Economy fixture """
 @pytest.fixture
 def economy_data():
     economy_data = economyData()
