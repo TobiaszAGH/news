@@ -303,7 +303,8 @@ Przykładowy endpoint:
 ![Panel administracyjny](https://github.com/TobiaszAGH/news/blob/main/docs/images/sport_football.png)
 ### Moduł ekonomiczny
 ![Panel administracyjny](https://github.com/TobiaszAGH/news/blob/main/docs/images/economy.png)
-
+### Moduł pogodowy
+![Panel administracyjny](https://github.com/TobiaszAGH/news/blob/main/docs/images/weather.png)
 ---
 
 ## 👥 Autorzy
