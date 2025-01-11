@@ -5,13 +5,12 @@ from unittest.mock import patch
 from datetime import datetime, timedelta
 from blueprints.calendar.routes import get_nameday, get_holiday, get_proverb, get_agh_news, parse_date, calendar_bp
 
-
-@pytest.fixture
-def client():
-    app = Flask(__name__, template_folder='../templates')
-    app.register_blueprint(calendar_bp, url_prefix = '/calendar', template_folder='templates')  
-    app.config['TESTING'] = True
-    return app.test_client()
+# @pytest.fixture
+# def client():
+#     app = Flask(__name__, template_folder='../templates')
+#     app.register_blueprint(calendar_bp, url_prefix = '/calendar', template_folder='templates')  
+#     app.config['TESTING'] = True
+#     return app.test_client()
 
 
 #testy jednostkowe
