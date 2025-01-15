@@ -15,7 +15,7 @@ Aplikacja tworzona w ramach zajęć z Inżynierii Oprogramowania, ma za zadanie 
 - Użytkownik może sprawdzić święta, wydarzenia na uczelni oraz imieniny
 
 ### Metodologia prowadzenia projektu
-Projekt prowadzony jest w metodologi SCRUM. Szczegółowa dokumentacja prowadzenia projektu dostepna jest w [Project Plan](docs/SerwisInformacyjny-30.xlsx).
+Projekt prowadzony jest w metodologi SCRUM. Szczegółowa dokumentacja prowadzenia projektu dostepna jest w [Project Plan](https://aghedupl.sharepoint.com/:x:/r/sites/InynieriaOprogramowaniaGrupaI/Materiay%20z%20zaj/SerwisInformacyjny-1130.xlsx?d=w435e1fcbe69545a09840cb367bf9763f&csf=1&web=1&e=a9bzvh)
 
 ## 📐 Architektura Projektu
 Aplikacja składa się z trzech głównych warstw
