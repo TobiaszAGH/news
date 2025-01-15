@@ -16,10 +16,8 @@ Aplikacja tworzona w ramach zajęć z Inżynierii Oprogramowania, ma za zadanie 
 
 ### Metodologia prowadzenia projektu
 Projekt prowadzony jest w metodologi SCRUM. Szczegółowa dokumentacja prowadzenia projektu dostepna jest w [Project Plan](docs/SerwisInformacyjny-30.xlsx).
-Projekt prowadzony jest w metodologi SCRUM. Szczegółowa dokumentacja prowadzenia projektu dostepna jest w [Project Plan](docs/SerwisInformacyjny-30.xlsx).
 
 ## 📐 Architektura Projektu
-Aplikacja składa się z trzech głównych warstw
 Aplikacja składa się z trzech głównych warstw
 
 1. Frontend:
@@ -32,8 +30,7 @@ Aplikacja składa się z trzech głównych warstw
    **Technologie**: Python, Flask, Flask-APScheduler.
    **Pliki**: Znajdują się w katalogach modułów, w tym routes.py, models.py, config.py.
 
-. Baza Danych:
-. Baza Danych:
+3. Baza Danych:
    **Opis**: Warstwa bazy danych przechowuje dane aplikacji, takie jak wiadomości, dane pogodowe, kursy walut itp. SQLAlchemy jest używane jako ORM do zarządzania bazą danych.
    **Technologie**: SQLAlchemy, SQLite (lub inna baza danych).
    **Pliki**: Konfiguracja bazy danych znajduje się w config.py.
@@ -334,7 +331,7 @@ DATABASE_URL=sqlite:///app.db
 ## 🛠️ Testowanie
 Testy są zorganizowane w katalogu `app/tests/`. 
 Dla Aplikacji opracowano testy jednostkowe, integracyjne i akceptacyjne.
-Dla testów akceptacyjnych realizowanych z wykorzystaniem Selenium opracowany został plan testowania [Test Plan](docs/Acceptance_TP.xlsx).
+<!-- Dla testów akceptacyjnych realizowanych z wykorzystaniem Selenium opracowany został plan testowania [Test Plan](docs/Acceptance_TP.xlsx). -->
 Więcej szczegółów znajdziesz w pliku [Testing Documentation](docs/testing.md).
 
 ### Uruchomienie testów:
