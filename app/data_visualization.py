@@ -4,6 +4,7 @@ import plotly.io as pio
 import numpy as np
 from sklearn.linear_model import LinearRegression
 from datetime import datetime, timedelta
+from datetime import datetime
 
 app = Flask(__name__)
 
@@ -18,6 +19,15 @@ def generate_graph_html(data_dict, days, leg=True):
         if not len(x) or not len(y) or not len(label) or not len(name) or not len(index_y2):
             return "<div><h2>Błąd: Nieprawidłowe dane</h2></div>"
         
+        for i in x:
+            if isinstance(i, str):
+                try:
+                    datetime.strptime(i, "%Y-%m-%d")
+                except ValueError:
+                    return "<div><h2>Błąd: Nieprawidłowe dane</h2></div>"
+            else:
+                return "<div><h2>Błąd: Nieprawidłowe dane</h2></div>"
+            
         for i in y:
             if type(i) == list:
                 if len(y) != len(name) or len(y) != len(index_y2):
@@ -94,9 +104,9 @@ def generate_graph_html(data_dict, days, leg=True):
                         side="right", 
                         range=[min(i)-0.01*min(i), max(i)+0.01*max(i)]
                     ))
-                    fig.add_trace(go.Bar(x=np.arange(1, days + 1), y=i[:days], yaxis='y2', opacity=0.4, name=name[y.index(i)]))
+                    fig.add_trace(go.Bar(x=x_dates, y=i[:days], yaxis='y2', opacity=0.4, name=name[y.index(i)]))
             else:
-                fig.add_trace(go.Scatter(x=np.arange(1, days + 1), y=y[:days], mode='lines+markers', name=name[y.index(i)]))
+                fig.add_trace(go.Scatter(x=x_dates, y=y[:days], mode='lines+markers', name=name[y.index(i)]))
                 break
 
         html_content = pio.to_html(fig, full_html=False, include_plotlyjs=False)
