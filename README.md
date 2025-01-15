@@ -1,14 +1,15 @@
 # Aplikacja webowa `news`
 Projekt na Inżynierię Oprogramowania, kierunek Nowoczene Technologie w Kryminalistyce, sem. V, grupa II, piątek 11:30.
+Projekt na Inżynierię Oprogramowania, kierunek Nowoczene Technologie w Kryminalistyce, sem. V, grupa II, piątek 11:30.
 
-## 📋 Opis 
-`news`to  aplikacja webowa stworzow Pythone z wykorzystaiem frameworka **Flask** oraz kaskadowych arkus stylów **Bootstrap**. Projekt pokazuje, jak moża stworzyć wlomodułową aplikację webową z obsługą zewnętznego API oraz ntgracjąz bazą danych.
+## 📋 Opis projektu
+`news` to aplikacja webowa stworzona w Pythonie z wykorzystaniem frameworka **Flask** oraz kaskadowych arkuszy stylów **Bootstrap**. Projekt pokazuje, jak można stworzyć wielomodułową aplikację webową z obsługą zewnętrznego API oraz integracją z bazą danych.
 
 ### Cel projektu
 Aplikacja tworzona w ramach zajęć z Inżynierii Oprogramowania, ma za zadanie dostarczyć informacje pogodowe, kryminalne i sportowe w prosty i przejrzysty sposób dla użytkowników. System ma umożliwiać także wizualizację historycznych danych pogodowych oraz ekonomicznych. 
 
 ### Główne funkcje
-- Aplikacja musi wyświetlać temerature, opady  ciśnienie dla pięciu loklizacji
+- Aplikacja musi wyświetlać temeraturę, opady i ciśnienie dla pięciu lokalizacji
 - Użytkownik może przeglądać najnowsze wiadomości kryminalne dla miasta Krakowa
 - Aplikacja powinna wyświetlać aktualne kursy walut
 - Aplikacja umożliwia wizualizację graficzną danych historycznych o pogodzie i danych ekonomicznych
@@ -18,7 +19,7 @@ Aplikacja tworzona w ramach zajęć z Inżynierii Oprogramowania, ma za zadanie 
 Projekt prowadzony jest w metodologi SCRUM. Szczegółowa dokumentacja prowadzenia projektu dostepna jest w [Project Plan](docs/SerwisInformacyjny-30.xlsx).
 
 ## 📐 Architektura Projektu
-Aplikacja składa się z trzech głównych warstw
+Aplikacja składa się z trzech głównych warstw:
 
 1. Frontend:
    **Opis**: Warstwa frontendowa odpowiada za interfejs użytkownika. Szablony HTML są renderowane przez Flask i mogą korzystać z frameworka CSS Bootstrap.
@@ -30,7 +31,7 @@ Aplikacja składa się z trzech głównych warstw
    **Technologie**: Python, Flask, Flask-APScheduler.
    **Pliki**: Znajdują się w katalogach modułów, w tym routes.py, models.py, config.py.
 
-. Baza Danych:
+3. Baza Danych:
    **Opis**: Warstwa bazy danych przechowuje dane aplikacji, takie jak wiadomości, dane pogodowe, kursy walut itp. SQLAlchemy jest używane jako ORM do zarządzania bazą danych.
    **Technologie**: SQLAlchemy, SQLite (lub inna baza danych).
    **Pliki**: Konfiguracja bazy danych znajduje się w config.py.
@@ -227,7 +228,7 @@ package "Scheduler" {
    ```
 2. Otwórz przeglądarkę i przejdź do:
    ```
-   http://127..0.1:8000
+   http://127.0.1:8000
    ```
 
 ---
@@ -263,7 +264,14 @@ pytest app\tests\pytests.py
 ```
 
 2. Aby uruchomić testy jednostkowe, wykonaj:
+1. Aby uruchomić wszystkie testy wykonaj:
 ```bash
+pytest app\tests\pytests.py
+```
+
+2. Aby uruchomić testy jednostkowe, wykonaj:
+```bash
+pytest app\tests\unit.py
 pytest app\tests\unit.py
 ```
 
@@ -276,6 +284,8 @@ pytest app\tests\integration.py
 ```bash
 pytest app\tests\acceptance.py
 ```
+
+<!-- strategia testowania, raport z ostatniej wersji aplikacji-->
 
 ---
 
@@ -311,6 +321,10 @@ Przykładowy endpoint:
 ![Panel administracyjny](https://github.com/TobiaszAGH/news/blob/main/docs/images/economy.png)
 ### Moduł pogodowy
 ![Panel administracyjny](https://github.com/TobiaszAGH/news/blob/main/docs/images/weather.png)
+### Moduł ekonomiczny
+![Panel administracyjny](https://github.com/TobiaszAGH/news/blob/main/docs/images/economy.png)
+### Moduł pogodowy
+![Panel administracyjny](https://github.com/TobiaszAGH/news/blob/main/docs/images/weather.png)
 ---
 
 ## 👥 Autorzy
@@ -332,4 +346,4 @@ Jeśli masz pytania lub problemy, napisz na:
 
 
 
-projekt na inzynierie oprogramowania, grupa piatkowa 11:30
+Projekt na inżynierię oprogramowania, grupa piątkowa 11:30

@@ -14,11 +14,11 @@ def client():
     app.config['TESTING'] = True
     return app.test_client()
 
+
 @pytest.fixture
 def mocked_responses():
     with requests_mock.Mocker() as m:
         yield m
-
 
 """ Economy fixture """
 @pytest.fixture

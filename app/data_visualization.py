@@ -101,12 +101,11 @@ def generate_graph_html(data_dict, days, leg=True):
 
         html_content = pio.to_html(fig, full_html=False, include_plotlyjs=False)
 
-        html_content = html_content.replace('<div', '<div style="width: 100%; height: auto;"')
+        html_content = html_content.replace('<div', '<div style="width: 100%; height: 100%;"')
 
         if leg == False:
             html_content = f"""
-                <div class="chart-container" style="width: 95%; box-sizing: border-box; height: 100%; overflow: hidden;">
-                <h3>Ekonomia</h3>
+                <div class="chart-container" style="width: 95%; box-sizing: border-box; height: 100%;">
                 {html_content}
                 </div>
 

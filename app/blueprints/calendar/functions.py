@@ -15,8 +15,12 @@ def get_agh_news(date):
     response=requests.get(f"https://www.agh.edu.pl/aktualnosci")
     soup=BeautifulSoup(response.content, 'html.parser')
     articles=soup.find_all('article', class_='d-md-flex')
-    if(date.day<10):
+    if(date.day<10 and date.month<10):
+        date2 = f"0{date.day}.0{date.month}.{date.year}"
+    elif(date.day<10 and date.month>10):
         date2 = f"0{date.day}.{date.month}.{date.year}"
+    elif(date.day>10 and date.month<10):
+        date2 = f"{date.day}.0{date.month}.{date.year}"
     else: 
         date2 = f"{date.day}.{date.month}.{date.year}"
     for article in articles:
@@ -57,7 +61,7 @@ def get_nameday(date):
         nameday_data = nameday_response.json()
         nameday = nameday_data.get('nameday', {}).get('pl', '')
         return nameday.split(', ') if nameday else ['Brak imienin']
-    return f"Failed to retrieve data with status code {nameday_response.status_code}", 500
+    return ['Brak imienin'], 500
 def get_holiday(date):
     holiday_url=f'https://pniedzwiedzinski.github.io/kalendarz-swiat-nietypowych/{date.month}/{date.day}.json'
     holiday_response = requests.get(holiday_url)
@@ -66,4 +70,4 @@ def get_holiday(date):
         if isinstance(holidays_data, list) and holidays_data:
             return [holiday.get('name', 'Brak nazwy święta') for holiday in holidays_data]
         return ['Brak nazwy święta']
-    return f"Failed to retrieve data with status code {holiday_response.status_code}", 500
+    return ['Brak nazwy święta'], 500
