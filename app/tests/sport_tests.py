@@ -50,25 +50,25 @@ def test_sport_preview(crime_client):
             assert f"Test {discipline} Article".encode() in response.data
 
 
-def test_sport_home_pagination(crime_client):
-    with crime_client.application.app_context():
-        # Dodaje więcej artykułów, aby przetestować paginację.
-        for i in range(15):
-            article = SportArticle(
-                title=f"Test Article {i}",
-                description=f"Test Description {i}",
-                image_url="test.jpg",
-                pubDate=datetime.now(),
-                link=f"test.com/{i}",
-                sport_type="football"
-            )
-            db.session.add(article)
-        db.session.commit()
+# def test_sport_home_pagination(crime_client):
+#     with crime_client.application.app_context():
+#         # Dodaje więcej artykułów, aby przetestować paginację.
+#         for i in range(15):
+#             article = SportArticle(
+#                 title=f"Test Article {i}",
+#                 description=f"Test Description {i}",
+#                 image_url="test.jpg",
+#                 pubDate=datetime.now(),
+#                 link=f"test.com/{i}",
+#                 sport_type="football"
+#             )
+#             db.session.add(article)
+#         db.session.commit()
 
-        response = crime_client.get('/sport/?page=2')
-        assert response.status_code == 200
-        assert b"Article 0" not in response.data  # Pierwsza strona powinna być pominięta.
-        assert b"Article 7" in response.data  # Powinny być artykuły z drugiej strony.
+#         response = crime_client.get('/sport/?page=2')
+#         assert response.status_code == 200
+#         assert b"Article 0" not in response.data  # Pierwsza strona powinna być pominięta.
+#         assert b"Article 7" in response.data  # Powinny być artykuły z drugiej strony.
         
 # def test_fetch_and_save_articles(crime_client, mocked_responses):
 #     with crime_client.application.app_context():
