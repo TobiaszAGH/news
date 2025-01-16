@@ -13,14 +13,13 @@ weather_bp = Blueprint(
 
 # Usunięcie wprowadzonych przez użytkownika znaków specjalnych
 def clean_city_name(city_name):
-
+    if city_name is None:
+        return ''
     # Pozwól na litery alfabetu łacińskiego, spacje i myślniki
     cleaned_name = re.sub(
         r"[^a-zA-ZąćęłńóśźżÄÖÜäöüßÇÉÈÊËéèêëÎÏîïÑñÓÒÔÖÕóòôöõÚÙÛÜúùûüŸÿ \-]", "",
         city_name
     )
-    print(cleaned_name)
-    print(len(cleaned_name.strip()))
     if len(cleaned_name.strip()) == 0:
         return ''
     return cleaned_name.strip()

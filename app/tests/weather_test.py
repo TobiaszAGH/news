@@ -99,8 +99,14 @@ def test_getForecast():
 # Testowanie endpointu '/weather'
 def test_hello_endpoint(client: FlaskClient):
     # with client:
-        response = client.post('/weather/', data={"city1": "Gdynia", "city2": "Warszawa"})
+        response = client.post('/weather/', data={"city1": "Gdynia", "city2": "Warszawa", "city3": "Osl7o", "city4": "57))"})
         print(response.data) 
         assert response.status_code == 200
         assert b"Gdynia" in response.data
         assert b"Warszawa" in response.data
+        assert b"Oslo" in response.data
+        assert b"57))" not in response.data
+
+
+
+  
