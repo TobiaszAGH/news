@@ -13,3 +13,4 @@ requests_mock
 scikit-learn
 selenium
 webdriver-manager 
+flake8

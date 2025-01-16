@@ -14,7 +14,7 @@ def main():
         trigger='cron',
         hour=0,
         minute=0)
-    fetch_and_save_articles
+    fetch_and_save_articles()
     scheduler.add_job(
         id='fetch_sport_articles',
         func=fetch_and_save_articles,
@@ -22,3 +22,7 @@ def main():
         hour=0,
         minute=0)
     return app
+
+if __name__ == '__main__':
+    app = main()
+    app.run()
