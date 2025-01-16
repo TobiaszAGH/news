@@ -320,16 +320,15 @@ Przykładowy endpoint:
 ### Strona główna
 ![Strona główna](https://github.com/TobiaszAGH/news/blob/main/docs/images/main.png)
 ### Moduł sportowy
-![Panel administracyjny](https://github.com/TobiaszAGH/news/blob/main/docs/images/sport_football.png)
+![Moduł sportowy](https://github.com/TobiaszAGH/news/blob/main/docs/images/sport_football.png)
 ### Moduł ekonomiczny
-![Panel administracyjny](https://github.com/TobiaszAGH/news/blob/main/docs/images/economy.png)
+![Moduł ekonomiczny](https://github.com/TobiaszAGH/news/blob/main/docs/images/economy.png)
 ### Moduł pogodowy
-![Panel administracyjny](https://github.com/TobiaszAGH/news/blob/main/docs/images/weather.png)
-### Moduł ekonomiczny
-![Panel administracyjny](https://github.com/TobiaszAGH/news/blob/main/docs/images/economy.png)
-### Moduł z wiadomościami
-![Panel administracyjny](https://github.com/TobiaszAGH/news/blob/main/docs/images/news.png)
-![Panel administracyjny](https://github.com/TobiaszAGH/news/blob/main/docs/images/single_news.png)
+![Moduł pogodowy](https://github.com/TobiaszAGH/news/blob/main/docs/images/weather.png)
+### Moduł z wiadomościami  
+![Moduł z wiadomościami](https://github.com/TobiaszAGH/news/blob/main/docs/images/news.png)
+![Pojedynczy artykuł](https://github.com/TobiaszAGH/news/blob/main/docs/images/single_news.png)
+
 ---
 
 ## 👥 Autorzy
