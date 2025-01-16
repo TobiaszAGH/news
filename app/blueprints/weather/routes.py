@@ -19,6 +19,10 @@ def clean_city_name(city_name):
         r"[^a-zA-ZąćęłńóśźżÄÖÜäöüßÇÉÈÊËéèêëÎÏîïÑñÓÒÔÖÕóòôöõÚÙÛÜúùûüŸÿ \-]", "",
         city_name
     )
+    print(cleaned_name)
+    print(len(cleaned_name.strip()))
+    if len(cleaned_name.strip()) == 0:
+        return ''
     return cleaned_name.strip()
 
 
@@ -27,15 +31,15 @@ def clean_city_name(city_name):
 def hello():
     cities = []
     # Pobieranie danych z formularza i ich walidacja
-    if request.form.get('city1'):
+    if clean_city_name(request.form.get('city1')):
         cities.append(clean_city_name(request.form.get('city1')))
-    if request.form.get('city2'):
+    if clean_city_name(request.form.get('city2')):
         cities.append(clean_city_name(request.form.get('city2')))
-    if request.form.get('city3'):
+    if clean_city_name(request.form.get('city3')):
         cities.append(clean_city_name(request.form.get('city3')))
-    if request.form.get('city4'):
+    if clean_city_name(request.form.get('city4')):
         cities.append(clean_city_name(request.form.get('city4')))
-    if request.form.get('city5'):
+    if clean_city_name(request.form.get('city5')):
         cities.append(clean_city_name(request.form.get('city')))
     data = []
     forecast = []
