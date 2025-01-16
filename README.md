@@ -266,8 +266,8 @@ DATABASE_URL=sqlite:///app.db
 ---
 
 ## 🛠️ Testowanie
-Testy są zorganizowane w katalogu `app\tests\`. 
-Dla Aplikacji opracowano testy jednostkowe, integracyjne i akceptacyjne.
+Testy są zorganizowane w katalogu `app\tests\`.  
+Dla Aplikacji opracowano testy jednostkowe, integracyjne i akceptacyjne.  
 Dla testów akceptacyjnych realizowanych z wykorzystaniem Selenium opracowany został plan testowania [Acceptance Test Plan](https://aghedupl-my.sharepoint.com/:x:/g/personal/zsliwa_student_agh_edu_pl/Eena3cdvy9lDpHRhjVNbgDAB6FDhLVo5YigNuNbHCJCe7Q?e=luumll).
 Więcej szczegółów znajdziesz w pliku [Testing Documentation](docs/testing.md).
 
