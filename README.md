@@ -1,6 +1,5 @@
 # Aplikacja webowa `news`
 Projekt na Inżynierię Oprogramowania, kierunek Nowoczene Technologie w Kryminalistyce, sem. V, grupa II, piątek 11:30.
-Projekt na Inżynierię Oprogramowania, kierunek Nowoczene Technologie w Kryminalistyce, sem. V, grupa II, piątek 11:30.
 
 ## 📋 Opis projektu
 `news` to aplikacja webowa stworzona w Pythonie z wykorzystaniem frameworka **Flask** oraz kaskadowych arkuszy stylów **Bootstrap**. Projekt pokazuje, jak można stworzyć wielomodułową aplikację webową z obsługą zewnętrznego API oraz integracją z bazą danych.
@@ -252,7 +251,7 @@ DATABASE_URL=sqlite:///app.db
 ---
 
 ## 🛠️ Testowanie
-Testy są zorganizowane w katalogu `app/tests/`. 
+Testy są zorganizowane w katalogu `app\tests\`. 
 Dla Aplikacji opracowano testy jednostkowe, integracyjne i akceptacyjne.
 Dla testów akceptacyjnych realizowanych z wykorzystaniem Selenium opracowany został plan testowania [Acceptance Test Plan](https://aghedupl-my.sharepoint.com/:x:/g/personal/zsliwa_student_agh_edu_pl/Eena3cdvy9lDpHRhjVNbgDAB6FDhLVo5YigNuNbHCJCe7Q?e=luumll).
 Więcej szczegółów znajdziesz w pliku [Testing Documentation](docs/testing.md).
@@ -260,22 +259,22 @@ Więcej szczegółów znajdziesz w pliku [Testing Documentation](docs/testing.md
 ### Uruchomienie testów:
 1. Aby uruchomić wszystkie testy wykonaj:
 ```bash
-pytest app\tests\pytests.py
+pytest app/tests/pytests.py
 ```
 
 2. Aby uruchomić testy jednostkowe, wykonaj:
 ```bash
-pytest app\tests\unit.py
+pytest app/tests/unit.py
 ```
 
 3. Aby uruchomić testy integracyjne, wykonaj:
 ```bash
-pytest app\tests\integration.py
+pytest app/tests/integration.py
 ```
 
 4. Aby uruchomić testy akceptacyjne, wykonaj:
 ```bash
-pytest app\tests\acceptance.py
+pytest app/tests/acceptance.py
 ```
 
 ---
@@ -314,8 +313,9 @@ Przykładowy endpoint:
 ![Panel administracyjny](https://github.com/TobiaszAGH/news/blob/main/docs/images/weather.png)
 ### Moduł ekonomiczny
 ![Panel administracyjny](https://github.com/TobiaszAGH/news/blob/main/docs/images/economy.png)
-### Moduł pogodowy
-![Panel administracyjny](https://github.com/TobiaszAGH/news/blob/main/docs/images/weather.png)
+### Moduł z wiadomościami
+![Panel administracyjny](https://github.com/TobiaszAGH/news/blob/main/docs/images/news.png)
+![Panel administracyjny](https://github.com/TobiaszAGH/news/blob/main/docs/images/single_news.png)
 ---
 
 ## 👥 Autorzy
