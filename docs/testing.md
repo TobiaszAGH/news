@@ -1,7 +1,7 @@
 # Testowanie
 
 ## Struktura katalogu testów
-
+```
 tests                                                     
 ├─ __pycache__                                                                        
 ├─ acceptance.py                                          
@@ -22,8 +22,8 @@ tests
 ├─ sport_tests.py                                         
 ├─ unit.py                                                
 ├─ weather_test.py                                        
-└─ __init__.py                                            
-
+└─ __init__.py
+```                                           
 
 ## Strategia testowania
 
