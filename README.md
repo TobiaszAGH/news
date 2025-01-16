@@ -136,7 +136,6 @@ package "Scheduler" {
 │   │       ├── __init__.py
 │   │       ├── routes.py
 │   │       ├── templates
-│   │       │   ├── weather2.html
 │   │       │   ├── weather.html
 │   │       │   └── weather_page.html
 │   │       └── weatherService.py
@@ -150,28 +149,44 @@ package "Scheduler" {
 │   │   │   ├── news.css
 │   │   │   ├── news_preview.css
 │   │   │   ├── single_news.css
-│   │   │   └── sport.css
+│   │   │   ├── sport.css
+│   │   │   └── weather.css
 │   │   └── images
 │   │       └── favicon.ico
 │   ├── templates
 │   │   ├── base.html
 │   │   └── chart_element.html
-│   └── tests
-│       ├── calendar_test.py
-│       ├── crime_tests.py
-│       ├── economy_tests.py
-│       ├── graph_test.py
-│       ├── __init__.py
-│       ├── main_page_test.py
-│       ├── pytests.py
-│       ├── selenium_main_tests.py
-│       ├── selenium_test_graph.py
-│       └── weather_test.py
+│   └── tests
+│       ├── acceptance.py
+│       ├── calendar_test.py
+│       ├── conftest.py
+│       ├── crime_tests.py
+│       ├── economy_tests.py
+│       ├── graph_test.py
+│       ├── integration.py
+│       ├── main_page_test.py
+│       ├── pytests.py
+│       ├── selenium_main_tests.py
+│       ├── selenium_test_calendar.py
+│       ├── selenium_test_graph.py
+│       ├── selenium_test_news.py
+│       ├── selenium_test_sport.py
+│       ├── selenium_weather_test.py
+│       ├── sport_tests.py
+│       ├── unit.py
+│       ├── weather_test.py
+│       └── __init__.py
 ├── docs
 │   ├── api.md
+│   ├── architecture.md
+│   ├── testing.md
 │   └── images
+│       ├── economy.png
 │       ├── main.png
-│       └── sport_football.png
+│       ├── news.png
+│       ├── single_news.png
+│       ├── sport_football.png
+│       └── weather.png
 ├── README.md
 ├── requirements.txt
 ```
@@ -259,22 +274,22 @@ Więcej szczegółów znajdziesz w pliku [Testing Documentation](docs/testing.md
 ### Uruchomienie testów:
 1. Aby uruchomić wszystkie testy wykonaj:
 ```bash
-pytest app/tests/pytests.py
+pytest app/tests/pytests.py -v
 ```
 
 2. Aby uruchomić testy jednostkowe, wykonaj:
 ```bash
-pytest app/tests/unit.py
+pytest app/tests/unit.py -v
 ```
 
 3. Aby uruchomić testy integracyjne, wykonaj:
 ```bash
-pytest app/tests/integration.py
+pytest app/tests/integration.py -v
 ```
 
 4. Aby uruchomić testy akceptacyjne, wykonaj:
 ```bash
-pytest app/tests/acceptance.py
+pytest app/tests/acceptance.py -v
 ```
 
 ---
@@ -304,7 +319,6 @@ Przykładowy endpoint:
 
 ### Strona główna
 ![Strona główna](https://github.com/TobiaszAGH/news/blob/main/docs/images/main.png)
-
 ### Moduł sportowy
 ![Panel administracyjny](https://github.com/TobiaszAGH/news/blob/main/docs/images/sport_football.png)
 ### Moduł ekonomiczny
