@@ -1,8 +1,9 @@
 # Aplikacja webowa `news`
 Projekt na Inżynierię Oprogramowania, kierunek Nowoczene Technologie w Kryminalistyce, sem. V, grupa II, piątek 11:30.
+Projekt na Inżynierię Oprogramowania, kierunek Nowoczene Technologie w Kryminalistyce, sem. V, grupa II, piątek 11:30.
 
-## 📋 Opis 
-`news`to  aplikacja webowa stworzona w Pythonie z wykorzystaniem frameworka **Flask** oraz kaskadowych arkuszy stylów **Bootstrap**. Projekt pokazuje, jak można stworzyć wielomodułową aplikację webową z obsługą zewnętrznego API oraz intgracją z bazą danych.
+## 📋 Opis projektu
+`news` to aplikacja webowa stworzona w Pythonie z wykorzystaniem frameworka **Flask** oraz kaskadowych arkuszy stylów **Bootstrap**. Projekt pokazuje, jak można stworzyć wielomodułową aplikację webową z obsługą zewnętrznego API oraz integracją z bazą danych.
 
 ### Cel projektu
 Aplikacja tworzona w ramach zajęć z Inżynierii Oprogramowania, ma za zadanie dostarczyć informacje pogodowe, kryminalne i sportowe w prosty i przejrzysty sposób dla użytkowników. System ma umożliwiać także wizualizację historycznych danych pogodowych oraz ekonomicznych. 
@@ -174,84 +175,6 @@ package "Scheduler" {
 │       └── sport_football.png
 ├── README.md
 ├── requirements.txt
-├── app
-│   ├── app.py
-│   ├── blueprints
-│   │   ├── calendar
-│   │   │   ├── functions.py
-│   │   │   ├── __init__.py
-│   │   │   ├── routes.py
-│   │   │   └── templates
-│   │   │       └── calendar.html
-│   │   ├── economy
-│   │   │   ├── economyData.py
-│   │   │   ├── forms.py
-│   │   │   ├── functions.py
-│   │   │   ├── routes.py
-│   │   │   └── templates
-│   │   │       └── economy.html
-│   │   ├── __init__.py
-│   │   ├── main
-│   │   │   ├── routes.py
-│   │   │   └── templates
-│   │   │       └── main.html
-│   │   ├── news
-│   │   │   ├── data_scraper.py
-│   │   │   ├── models.py
-│   │   │   ├── routes.py
-│   │   │   └── templates
-│   │   │       ├── news.html
-│   │   │       ├── news_preview.html
-│   │   │       └── single_news.html
-│   │   ├── sport
-│   │   │   ├── models.py
-│   │   │   ├── routes.py
-│   │   │   └── templates
-│   │   │       ├── articles.html
-│   │   │       ├── sport.html
-│   │   │       └── sport_preview.html
-│   │   └── weather
-│   │       ├── __init__.py
-│   │       ├── routes.py
-│   │       ├── templates
-│   │       │   ├── weather2.html
-│   │       │   ├── weather.html
-│   │       │   └── weather_page.html
-│   │       └── weatherService.py
-│   ├── config.py
-│   ├── data_visualization.py
-│   ├── run.py
-│   ├── static
-│   │   ├── css
-│   │   │   ├── calendar.css
-│   │   │   ├── main.css
-│   │   │   ├── news.css
-│   │   │   ├── news_preview.css
-│   │   │   ├── single_news.css
-│   │   │   └── sport.css
-│   │   └── images
-│   │       └── favicon.ico
-│   ├── templates
-│   │   ├── base.html
-│   │   └── chart_element.html
-│   └── tests
-│       ├── calendar_test.py
-│       ├── crime_tests.py
-│       ├── economy_tests.py
-│       ├── graph_test.py
-│       ├── __init__.py
-│       ├── main_page_test.py
-│       ├── pytests.py
-│       ├── selenium_main_tests.py
-│       ├── selenium_test_graph.py
-│       └── weather_test.py
-├── docs
-│   ├── api.md
-│   └── images
-│       ├── main.png
-│       └── sport_football.png
-├── README.md
-├── requirements.txt
 ```
 
 ---
@@ -331,7 +254,7 @@ DATABASE_URL=sqlite:///app.db
 ## 🛠️ Testowanie
 Testy są zorganizowane w katalogu `app/tests/`. 
 Dla Aplikacji opracowano testy jednostkowe, integracyjne i akceptacyjne.
-<!-- Dla testów akceptacyjnych realizowanych z wykorzystaniem Selenium opracowany został plan testowania [Test Plan](docs/Acceptance_TP.xlsx). -->
+Dla testów akceptacyjnych realizowanych z wykorzystaniem Selenium opracowany został plan testowania [Acceptance Test Plan](https://aghedupl-my.sharepoint.com/:x:/g/personal/zsliwa_student_agh_edu_pl/Eena3cdvy9lDpHRhjVNbgDAB6FDhLVo5YigNuNbHCJCe7Q?e=luumll).
 Więcej szczegółów znajdziesz w pliku [Testing Documentation](docs/testing.md).
 
 ### Uruchomienie testów:
@@ -354,8 +277,6 @@ pytest app\tests\integration.py
 ```bash
 pytest app\tests\acceptance.py
 ```
-
-<!-- strategia testowania, raport z ostatniej wersji aplikacji-->
 
 ---
 
