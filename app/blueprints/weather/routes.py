@@ -1,9 +1,8 @@
-from flask import Flask, render_template, request, Blueprint
-import requests
-import geocoder
+from flask import render_template, request, Blueprint
 from .weatherService import getCurrentWeather, getForecast
-import json
+import re
 
+# Utworzenie Blueprint
 weather_bp = Blueprint(
     'weather_bp',
     __name__,
@@ -11,54 +10,59 @@ weather_bp = Blueprint(
     template_folder='templates'
 )
 
-# def get_country_code(city_name):
-#     g = geocoder.osm(city_name)
-#     if g.ok:
-#         return g.country_code
-#     else:
-#         return None
+
+# Usunięcie wprowadzonych przez użytkownika znaków specjalnych
+def clean_city_name(city_name):
+
+    # Pozwól na litery alfabetu łacińskiego, spacje i myślniki
+    cleaned_name = re.sub(
+        r"[^a-zA-ZąćęłńóśźżÄÖÜäöüßÇÉÈÊËéèêëÎÏîïÑñÓÒÔÖÕóòôöõÚÙÛÜúùûüŸÿ \-]", "",
+        city_name
+    )
+    print(cleaned_name)
+    print(len(cleaned_name.strip()))
+    if len(cleaned_name.strip()) == 0:
+        return ''
+    return cleaned_name.strip()
 
 
-
+# Strona pogody
 @weather_bp.route('/', methods=['GET', 'POST'])
 def hello():
     cities = []
-    if request.form.get('city1'):
-        if request.form.get('city1').lower() == 'dupa':
-            cities.append('Warszawa')
-        else:
-            cities.append(request.form.get('city1'))
-    if request.form.get('city2'):
-        cities.append(request.form.get('city2'))
-    if request.form.get('city3'):
-        cities.append(request.form.get('city3'))
-    if request.form.get('city4'):
-        cities.append(request.form.get('city4'))
-    if request.form.get('city5'):
-        cities.append(request.form.get('city5'))
+    # Pobieranie danych z formularza i ich walidacja
+    if clean_city_name(request.form.get('city1')):
+        cities.append(clean_city_name(request.form.get('city1')))
+    if clean_city_name(request.form.get('city2')):
+        cities.append(clean_city_name(request.form.get('city2')))
+    if clean_city_name(request.form.get('city3')):
+        cities.append(clean_city_name(request.form.get('city3')))
+    if clean_city_name(request.form.get('city4')):
+        cities.append(clean_city_name(request.form.get('city4')))
+    if clean_city_name(request.form.get('city5')):
+        cities.append(clean_city_name(request.form.get('city')))
     data = []
     forecast = []
-    i=0
+    i = 0
 
+    # Co jeśli nie ma danych
     if len(cities) == 0:
         cities.append('Kraków')
+
+    # Wywoływanie metod sprawdzających aktualną pogodę i prognoze
     for city in cities:
+        # Sprawdzenie czy API coś zwróciło (czy miasto istnieje)
         if getCurrentWeather(city, None) is not None:
             data.append(getCurrentWeather(city, None))
             forecast.append(getForecast(city, None))
         i += 1
-      
-    return render_template('weather_page.html', data = data, forecast = forecast)
 
+    # Renderowanie html
+    return render_template('weather_page.html', data=data, forecast=forecast)
+
+
+# Wyświetlanie preview na stronie głównej dla Krakowa
 @weather_bp.route('/widget')
 def showWidget():
     data = getCurrentWeather("Kraków", "PL")
-
-    return render_template('weather.html', data = data)
-
-
-@weather_bp.route('/test')
-def showdata():
-    data = getCurrentWeather("Kraków", "PL")
-    forecast = getForecast("Kraków", "PL")
-    return json.dumps({'data': forecast})
+    return render_template('weather.html', data=data)
