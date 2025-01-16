@@ -3,17 +3,16 @@
 ## 🛠️ Testowanie
 
 ### 📦 Struktura katalogu testów
-```
 tests/                                                     
-├─ **acceptance.py **                                         
+├─ acceptance.py                                        
 ├─ calendar_test.py                                       
 ├─ conftest.py                                            
 ├─ crime_tests.py                                         
 ├─ economy_tests.py                                       
 ├─ graph_test.py                                          
-├─ **integration.py **                                        
+├─ integration.py                                       
 ├─ main_page_test.py                                      
-├─ **pytests.py**                                             
+├─ pytests.py                                             
 ├─ selenium_main_tests.py                                 
 ├─ selenium_test_calendar.py                              
 ├─ selenium_test_graph.py                                 
@@ -21,7 +20,7 @@ tests/
 ├─ selenium_test_sport.py                                 
 ├─ selenium_weather_test.py                               
 ├─ sport_tests.py                                         
-├─ **unit.py **                                               
+├─ unit.py                                               
 ├─ weather_test.py                                        
 └─ __init__.py
 ```                                           
