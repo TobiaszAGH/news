@@ -3,6 +3,7 @@
 ## 🛠️ Testowanie
 
 ### 📦 Struktura katalogu testów
+```
 tests/                                                     
 ├─ acceptance.py                                        
 ├─ calendar_test.py                                       
