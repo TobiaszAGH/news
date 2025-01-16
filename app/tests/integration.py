@@ -8,8 +8,6 @@ from .calendar_test import (
     test_get_nameday_no_nameday,
     test_get_nameday_failed_response,
     test_get_holiday_successful_response,
-    # test_get_holiday_no_holiday,
-    # test_get_holiday_failed_response,
     test_get_proverb_successful_response
 )
 

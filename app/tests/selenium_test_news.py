@@ -60,7 +60,6 @@ def test_main_page_news_preview():
     assert len(carousel_items) > 0, "Nie znaleziono elementów karuzeli na stronie głównej!"
     print(f"Znaleziono {len(carousel_items)} elementów karuzeli na stronie głównej")
     
-    driver.switch_to.default_content()
 
 def test_single_news_with_return():
     url = "http://news.tobiasz.xyz/news"
