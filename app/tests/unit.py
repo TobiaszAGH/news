@@ -8,6 +8,12 @@ from .crime_tests import (
     test_fetch_article_description
 )
 
+from .sport_tests import (
+    test_sport_article_model,
+    test_sport_api_fetch,
+    test_sport_api_fetch_error
+)
+
 from .economy_tests import (
     test_economy_data_load,
     test_economy_data_load_swapped_dates,
