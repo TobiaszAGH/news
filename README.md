@@ -129,9 +129,8 @@ package "Scheduler" {
 │   │   │   ├── models.py
 │   │   │   ├── routes.py
 │   │   │   └── templates
-│   │   │       ├── articles.html
 │   │   │       ├── sport.html
-│   │   │       └── sport_preview.html
+│   │   │       └── sport_preview.html 
 │   │   └── weather
 │   │       ├── __init__.py
 │   │       ├── routes.py
