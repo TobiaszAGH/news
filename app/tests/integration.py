@@ -24,6 +24,14 @@ from .crime_tests import (
     test_article_not_found
 )
 
+from .sport_tests import (
+    test_sport_home_with_articles,
+    test_sport_home_article_no_image,
+    test_sport_home_filter_discipline,
+    test_sport_home_filter_no_results,
+    test_sport_preview
+)
+
 from .economy_tests import (
     test_economy_endpoint,
     test_start_after_end,

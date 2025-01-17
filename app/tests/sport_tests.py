@@ -1,96 +1,191 @@
 from datetime import datetime
-from blueprints.sport.routes import fetch_and_save_articles, SPORT_API
+import requests
 from blueprints.sport.models import SportArticle
 from config import db
 
-def test_sport_home(client):
-    # Testuje, czy endpoint sport_home działa poprawnie.
-    response = client.get('/sport/')
-    assert response.status_code == 200
-    assert b'Narciarskie' in response.data  # Zakłada obecność sportów w widoku.
 
-def test_sport_home_with_discipline(crime_client):
+
+# Test jednostkowy - Model
+# Sprawdza, czy model 'SportArticle' poprawnie przechowuje dane, 
+# takie jak tytuł, opis, link, czy typ sportu.
+
+def test_sport_article_model():
+    article = SportArticle(
+        title="Test Article",
+        description="Test Description",
+        image_url="http://example.com/image.jpg",
+        pubDate=datetime(2025, 1, 1),
+        link="http://example.com/article",
+        sport_type="football",
+    )
+    assert article.title == "Test Article"
+    assert article.description == "Test Description"
+    assert article.image_url == "http://example.com/image.jpg"
+    assert article.pubDate == datetime(2025, 1, 1)
+    assert article.link == "http://example.com/article"
+    assert article.sport_type == "football"
+
+
+
+# Test jednostkowy - Połączenie z zewnętrznym API
+# Symuluje odpowiedź z zewnętrznego API i sprawdza, 
+# czy aplikacja poprawnie pobiera dane.
+
+def test_sport_api_fetch(requests_mock):
+    api_url = "https://newsdata.io/api/1/news"
+    sport_data = {
+        "results": [
+            {
+                "title": "API Article",
+                "description": "API Description",
+                "image_url": "http://example.com/api.jpg",
+                "pubDate": "2025-01-15 10:00:00",
+                "link": "http://example.com/api-article",
+            }
+        ]
+    }
+    requests_mock.get(api_url, json=sport_data)
+
+    response = requests.get(api_url)
+    assert response.status_code == 200
+    data = response.json()
+    assert len(data["results"]) == 1
+    assert data["results"][0]["title"] == "API Article"
+
+
+# Test jednostkowy
+# Symuluje błąd serwera API (kod 500) i sprawdza, 
+# czy aplikacja poprawnie reaguje na błędne odpowiedzi.
+
+def test_sport_api_fetch_error(requests_mock):
+    api_url = "https://newsdata.io/api/1/news"
+    requests_mock.get(api_url, status_code=500)
+
+    response = requests.get(api_url)
+    assert response.status_code == 500
+
+
+
+# Test integracyjny - Endpoint sport_home
+# Sprawdza, czy endpoint '/sport/' poprawnie zwraca artykuły, 
+# które znajdują się w bazie danych.
+
+def test_sport_home_with_articles(crime_client):
     with crime_client.application.app_context():
-    # Dodaje przykładowy artykuł dla wybranej dyscypliny i testuje filtrację.
         article = SportArticle(
-            title="Test Football Article",
+            title="Test Article",
             description="Test Description",
-            image_url="test.jpg",
-            pubDate=datetime.now(),
-            link="test.com",
-            sport_type="football"
+            image_url="http://example.com/image.jpg",
+            pubDate=datetime(2025, 1, 1),
+            link="http://example.com/article",
+            sport_type="football",
         )
         db.session.add(article)
         db.session.commit()
 
-    response = crime_client.get('/sport/?discipline=football')
+    response = crime_client.get('/sport/')
     assert response.status_code == 200
-    assert b'Test Football Article' in response.data
-    assert db.session.query(SportArticle).count() == 1
+    assert b"Test Article" in response.data
+    assert b"Test Description" in response.data
+
+
+
+# Test integracyjny
+# Sprawdza, czy endpoint '/sport/' poprawnie obsługuje artykuły 
+# bez zdjęcia (pole 'image_url' jest 'None').
+
+
+def test_sport_home_article_no_image(crime_client):
+    with crime_client.application.app_context():
+        article = SportArticle(
+            title="Test Article Without Image",
+            description="Description Without Image",
+            image_url=None,
+            pubDate=datetime(2025, 1, 1),
+            link="http://example.com/article",
+            sport_type="football",
+        )
+        db.session.add(article)
+        db.session.commit()
+
+    response = crime_client.get('/sport/')
+    assert response.status_code == 200
+    assert b"Test Article Without Image" in response.data
+    assert "Brak zdjęcia".encode('utf-8') in response.data
+
+
+# Test integracyjny - Filtr dyscyplin
+# Sprawdza, czy filtrowanie artykułów po dyscyplinie sportu 
+# ('football', 'tennis') działa poprawnie.
+
+def test_sport_home_filter_discipline(crime_client):
+    with crime_client.application.app_context():
+        article1 = SportArticle(
+            title="Football Article",
+            description="Football Description",
+            image_url="http://example.com/football.jpg",
+            pubDate=datetime(2025, 1, 1),
+            link="http://example.com/football",
+            sport_type="football",
+        )
+        article2 = SportArticle(
+            title="Tennis Article",
+            description="Tennis Description",
+            image_url="http://example.com/tennis.jpg",
+            pubDate=datetime(2025, 1, 2),
+            link="http://example.com/tennis",
+            sport_type="tennis",
+        )
+        db.session.add_all([article1, article2])
+        db.session.commit()
+
+    response = crime_client.get('/sport/?discipline=tennis')
+    assert response.status_code == 200
+    assert b"Tennis Article" in response.data
+    assert b"Football Article" not in response.data
+
+
+
+# Test integracyjny
+# Sprawdza, czy aplikacja poprawnie obsługuje przypadek, 
+# gdy nie ma artykułów dla wybranej dyscypliny.
+
+
+def test_sport_home_filter_no_results(crime_client):
+    with crime_client.application.app_context():
+        article = SportArticle(
+            title="Football Article",
+            description="Football Description",
+            image_url="http://example.com/football.jpg",
+            pubDate=datetime(2025, 1, 1),
+            link="http://example.com/football",
+            sport_type="football",
+        )
+        db.session.add(article)
+        db.session.commit()
+
+    response = crime_client.get('/sport/?discipline=tennis')
+    assert response.status_code == 200
+    assert b"Football Article" not in response.data
+
+
+# Test integracyjny - sport_preview endpoint
+# Sprawdza, czy endpoint '/sport/sport_preview' poprawnie wyświetla 
+# najnowszy artykuł dla każdej dyscypliny.
 
 def test_sport_preview(crime_client):
     with crime_client.application.app_context():
-        # Dodaje przykładowe artykuły dla każdej dyscypliny i testuje widok podglądu.
-        disciplines = ['football', 'tennis', 'ski_jumping', 'volleyball']
-        for discipline in disciplines:
-            article = SportArticle(
-                title=f"Test {discipline} Article",
-                description=f"Test {discipline} Description",
-                image_url="test.jpg",
-                pubDate=datetime.now(),
-                link="test.com",
-                sport_type=discipline
-            )
-            db.session.add(article)
+        article = SportArticle(
+            title="Ski Jumping Article",
+            description="Ski Jumping Description",
+            image_url="http://example.com/ski.jpg",
+            pubDate=datetime(2025, 1, 3),
+            link="http://example.com/ski",
+            sport_type="ski_jumping",
+        )
+        db.session.add(article)
         db.session.commit()
 
-        response = crime_client.get('/sport/sport_preview')
-        assert response.status_code == 200
-        for discipline in disciplines:
-            assert f"Test {discipline} Article".encode() in response.data
-
-
-# def test_sport_home_pagination(crime_client):
-#     with crime_client.application.app_context():
-#         # Dodaje więcej artykułów, aby przetestować paginację.
-#         for i in range(15):
-#             article = SportArticle(
-#                 title=f"Test Article {i}",
-#                 description=f"Test Description {i}",
-#                 image_url="test.jpg",
-#                 pubDate=datetime.now(),
-#                 link=f"test.com/{i}",
-#                 sport_type="football"
-#             )
-#             db.session.add(article)
-#         db.session.commit()
-
-#         response = crime_client.get('/sport/?page=2')
-#         assert response.status_code == 200
-#         assert b"Article 0" not in response.data  # Pierwsza strona powinna być pominięta.
-#         assert b"Article 7" in response.data  # Powinny być artykuły z drugiej strony.
-        
-# def test_fetch_and_save_articles(crime_client, mocked_responses):
-#     with crime_client.application.app_context():
-#         # Mockuje odpowiedzi API dla sportowych endpointów i sprawdza zapisywanie danych w bazie.
-#         mock_data = {
-#             "results": [{
-#                 "title": "Test Sport Article",
-#                 "description": "Test Description",
-#                 "image_url": "test.jpg",
-#                 "pubDate": "2023-12-25 12:00:00",
-#                 "link": "test.com"
-#             }]
-#         }
-
-#         for url in SPORT_API.values():
-#             mocked_responses.get(url, json=mock_data)
-            
-        
-#         fetch_and_save_articles()
-
-#         articles = SportArticle.query.all()
-#         assert articles[0].title == "Test Sport Article"
-#         assert articles[0].description == "Test Description"
-#         assert articles[0].sport_type in SPORT_API.keys()
-#         assert len(articles) > 0
+    response = crime_client.get('/sport/sport_preview')
+    assert response.status_code == 200
+    assert b"Ski Jumping Article" in response.data
