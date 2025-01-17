@@ -171,7 +171,7 @@ def test_sport_home_filter_no_results(crime_client):
 
 # Test integracyjny - sport_preview endpoint
 # Sprawdza, czy endpoint '/sport/sport_preview' poprawnie wyświetla 
-# najnowszy artykuł dla każdej dyscypliny.
+# najnowszy artykuł.
 
 def test_sport_preview(crime_client):
     with crime_client.application.app_context():
