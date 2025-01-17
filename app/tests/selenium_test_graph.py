@@ -15,12 +15,13 @@ app_folder = os.path.join(current_dir, '..')
 sys.path.append(os.path.abspath(app_folder))
 from data_visualization import generate_graph_html
 
+
 class TestWykresRenderowanie(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
         """Konfiguracja Selenium i uruchomienie przeglądarki."""
         options = webdriver.ChromeOptions()
-        # options.add_argument("--headless")
+        # options.add_argument("--headless") 
         options.add_argument("--disable-gpu")
         service = Service(ChromeDriverManager().install())
         cls.driver = webdriver.Chrome(service=service, options=options)
@@ -48,19 +49,20 @@ class TestWykresRenderowanie(unittest.TestCase):
 
         self.driver.get(f"file://{temp_file_path}")
 
-        # Czekaj na załadowanie wykresu
+        # Czekanie na załadowanie wykresu
         WebDriverWait(self.driver, 4).until(
             EC.presence_of_element_located((By.CLASS_NAME, 'plotly'))
         )
 
-
     def test_renderowanie_wykresu(self):
         """Test renderowania wykresu."""
-        data =  {"x": ["2024-09-15", "2024-09-16", "2024-09-17", "2024-09-18", "2024-09-19"],
-                "y": [[10, 15, 17, 26, 30], [15, 8, 6, 16, 32]],
-                "label": ["X Axis", "Y Axis", "Y2 Axis"],
-                "name": ["Series 1", "Series 2"],
-                "index_y2": [0, 1]}
+        data = {
+            "x": ["2024-09-15", "2024-09-16", "2024-09-17", "2024-09-18", "2024-09-19"],
+            "y": [[10, 15, 17, 26, 30], [15, 8, 6, 16, 32]],
+            "label": ["X Axis", "Y Axis", "Y2 Axis"],
+            "name": ["Series 1", "Series 2"],
+            "index_y2": [0, 1]
+        }
         days = 5
         self.render_and_verify_graph(data, days)
 

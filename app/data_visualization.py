@@ -8,6 +8,7 @@ app = Flask(__name__)
 
 
 def generate_graph_html(data_dict, days, leg=True):
+    # ekstrahowanie danych z przekazanego słownika
     if ("x" in data_dict and "y" in data_dict and "label" in data_dict and
             "name" in data_dict and "index_y2" in data_dict):
         x = data_dict["x"]
@@ -16,6 +17,7 @@ def generate_graph_html(data_dict, days, leg=True):
         name = data_dict["name"]
         index_y2 = data_dict["index_y2"]
 
+        # sprawdzenie czy dane są poprawne
         if not len(x) or not len(y) or not len(label) or not len(name) or not len(index_y2):
             return "<div><h2>Błąd: Nieprawidłowe dane</h2></div>"
 
@@ -37,6 +39,7 @@ def generate_graph_html(data_dict, days, leg=True):
             if not isinstance(i, int):
                 return "<div><h2>Błąd: Nieprawidłowe dane</h2></div>"
 
+        # Tworzenie layoutu wykresu
         layout = go.Layout(
             yaxis=dict(title=label[1]),  # Tytuł osi Y
             bargap=0.5,
