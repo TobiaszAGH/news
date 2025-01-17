@@ -1,6 +1,6 @@
 from flask_wtf import FlaskForm
 from wtforms import DateField, SubmitField, SelectField
-from wtforms.validators import DataRequired
+
 
 class EconomyForm(FlaskForm):
     currency1 = SelectField()
