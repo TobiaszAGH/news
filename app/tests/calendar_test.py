@@ -1,4 +1,3 @@
-import pytest
 from unittest.mock import patch
 from datetime import datetime
 from blueprints.calendar.routes import get_nameday, get_holiday, get_proverb, get_agh_news, parse_date
@@ -177,6 +176,6 @@ def test_parse_date_end_of_year():
     assert next_date == "2025-01-01"
 
 
-def test_news_preview(client):
+def test_calendar_preview(client):
     response = client.get('/calendar/calendar_preview')
     assert response.status_code == 200

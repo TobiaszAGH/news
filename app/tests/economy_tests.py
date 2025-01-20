@@ -1,16 +1,9 @@
-from flask import Flask
 from flask.testing import FlaskClient
-import pytest
-from blueprints.economy.economyData import economyData, fetch_link
+from blueprints.economy.economyData import fetch_link
 
 from datetime import datetime, timedelta
 
 # unit tests
-# @pytest.fixture
-# def economy_data():
-#     economy_data = economyData()
-#     return economy_data
-
 def test_economy_data_load(economy_data):
     curr_codes = ['USD', 'EUR']
     startdate = datetime.strptime('2024-11-12', '%Y-%m-%d').date()

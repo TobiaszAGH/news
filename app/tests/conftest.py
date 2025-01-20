@@ -2,7 +2,6 @@ import pytest
 import requests_mock
 from datetime import date
 from flask import Flask
-from flask.testing import FlaskClient
 from app import app as original_app
 from config import db
 from blueprints.news.models import CrimeNews, CrimeImage
@@ -13,7 +12,6 @@ def client():
     app = original_app
     app.config['TESTING'] = True
     return app.test_client()
-
 
 @pytest.fixture
 def mocked_responses():
@@ -26,9 +24,9 @@ def economy_data():
     economy_data = economyData()
     return economy_data
 
-""" News fixtures """
+""" Fixtures app + database """
 @pytest.fixture
-def crime_app():
+def db_app():
     app = Flask(__name__, template_folder='../templates')
     app.config['TESTING'] = True
     app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///:memory:'
@@ -45,21 +43,23 @@ def crime_app():
     return app
 
 @pytest.fixture
-def test_db(crime_app):
-    with crime_app.app_context():
+def test_db(db_app):
+    with db_app.app_context():
         db.create_all()
         yield db
         db.session.remove()
         db.drop_all()
 
 @pytest.fixture
-def crime_client(crime_app, test_db):
-    with crime_app.app_context():
-        return crime_app.test_client()
+def db_client(db_app, test_db):
+    with db_app.app_context():
+        return db_app.test_client()
+    
 
+""" Fixtures for news (sample data)"""
 @pytest.fixture
-def sample_news(crime_client):
-    with crime_client.application.app_context():
+def sample_news(db_client):
+    with db_client.application.app_context():
         news1 = CrimeNews(
             id=1,
             title="News_1",
@@ -81,13 +81,13 @@ def sample_news(crime_client):
         db.session.commit()
     yield
 
-    with crime_client.application.app_context():
+    with db_client.application.app_context():
         db.session.query(CrimeNews).delete()
         db.session.commit()
 
 @pytest.fixture
-def sample_images(crime_client):
-    with crime_client.application.app_context():
+def sample_images(db_client):
+    with db_client.application.app_context():
         image1 = CrimeImage(
             image_url="http://image1.com",
             news_id=1
@@ -105,7 +105,7 @@ def sample_images(crime_client):
         db.session.commit()
     yield
 
-    with crime_client.application.app_context():
+    with db_client.application.app_context():
         db.session.query(CrimeImage).delete()
         db.session.commit()
 

@@ -33,7 +33,7 @@ def driver():
     driver.quit()
 
 
-def test_weather_page(driver):
+def test_weather_page_s(driver):
     """
     Test weryfikujący działanie podstrony /weather
     """

@@ -1,9 +1,19 @@
-import os
-import sys
+from .calendar_test import (
+    test_get_nameday_successful_response,
+    test_get_nameday_no_nameday,
+    test_get_nameday_failed_response,
+    test_get_holiday_successful_response,
+    test_get_holiday_no_response,
+    test_holiday_failed_response,
+    test_get_proverb_successful_response,
+    test_get_proverb_no_response,
+    test_get_agh_news_successful_response,
+    test_get_agh_news_no_response,
+    test_parse_date_standard,
+    test_parse_date_end_of_year
+)
 
-sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
-
-from .crime_tests import (
+from .news_tests import (
     test_fetch_article,
     test_fetch_article_description
 )

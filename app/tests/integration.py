@@ -1,17 +1,8 @@
-import os
-import sys
-
-sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
-
 from .calendar_test import (
-    test_get_nameday_successful_response,
-    test_get_nameday_no_nameday,
-    test_get_nameday_failed_response,
-    test_get_holiday_successful_response,
-    test_get_proverb_successful_response
+    test_calendar_preview
 )
 
-from .crime_tests import (
+from .news_tests import (
     test_database_connection,
     test_sample_news,
     test_sample_images,
@@ -39,10 +30,7 @@ from .economy_tests import (
     test_over_93_days
 )
 
-from .main_page_test import (
-    test_home_page,
-    test_404_page
-)
+from .main_page_test import *
 
 from .weather_test import (
     test_hello_endpoint

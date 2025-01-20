@@ -1,7 +1,7 @@
 from datetime import datetime
 import requests
 from blueprints.sport.models import SportArticle
-from config import db
+from config import db 
 
 
 
@@ -70,8 +70,8 @@ def test_sport_api_fetch_error(requests_mock):
 # Sprawdza, czy endpoint '/sport/' poprawnie zwraca artykuły, 
 # które znajdują się w bazie danych.
 
-def test_sport_home_with_articles(crime_client):
-    with crime_client.application.app_context():
+def test_sport_home_with_articles(db_client):
+    with db_client.application.app_context():
         article = SportArticle(
             title="Test Article",
             description="Test Description",
@@ -83,7 +83,7 @@ def test_sport_home_with_articles(crime_client):
         db.session.add(article)
         db.session.commit()
 
-    response = crime_client.get('/sport/')
+    response = db_client.get('/sport/')
     assert response.status_code == 200
     assert b"Test Article" in response.data
     assert b"Test Description" in response.data
@@ -95,8 +95,8 @@ def test_sport_home_with_articles(crime_client):
 # bez zdjęcia (pole 'image_url' jest 'None').
 
 
-def test_sport_home_article_no_image(crime_client):
-    with crime_client.application.app_context():
+def test_sport_home_article_no_image(db_client):
+    with db_client.application.app_context():
         article = SportArticle(
             title="Test Article Without Image",
             description="Description Without Image",
@@ -108,7 +108,7 @@ def test_sport_home_article_no_image(crime_client):
         db.session.add(article)
         db.session.commit()
 
-    response = crime_client.get('/sport/')
+    response = db_client.get('/sport/')
     assert response.status_code == 200
     assert b"Test Article Without Image" in response.data
     assert "Brak zdjęcia".encode('utf-8') in response.data
@@ -118,8 +118,8 @@ def test_sport_home_article_no_image(crime_client):
 # Sprawdza, czy filtrowanie artykułów po dyscyplinie sportu 
 # ('football', 'tennis') działa poprawnie.
 
-def test_sport_home_filter_discipline(crime_client):
-    with crime_client.application.app_context():
+def test_sport_home_filter_discipline(db_client):
+    with db_client.application.app_context():
         article1 = SportArticle(
             title="Football Article",
             description="Football Description",
@@ -139,7 +139,7 @@ def test_sport_home_filter_discipline(crime_client):
         db.session.add_all([article1, article2])
         db.session.commit()
 
-    response = crime_client.get('/sport/?discipline=tennis')
+    response = db_client.get('/sport/?discipline=tennis')
     assert response.status_code == 200
     assert b"Tennis Article" in response.data
     assert b"Football Article" not in response.data
@@ -151,8 +151,8 @@ def test_sport_home_filter_discipline(crime_client):
 # gdy nie ma artykułów dla wybranej dyscypliny.
 
 
-def test_sport_home_filter_no_results(crime_client):
-    with crime_client.application.app_context():
+def test_sport_home_filter_no_results(db_client):
+    with db_client.application.app_context():
         article = SportArticle(
             title="Football Article",
             description="Football Description",
@@ -164,7 +164,7 @@ def test_sport_home_filter_no_results(crime_client):
         db.session.add(article)
         db.session.commit()
 
-    response = crime_client.get('/sport/?discipline=tennis')
+    response = db_client.get('/sport/?discipline=tennis')
     assert response.status_code == 200
     assert b"Football Article" not in response.data
 
@@ -173,8 +173,8 @@ def test_sport_home_filter_no_results(crime_client):
 # Sprawdza, czy endpoint '/sport/sport_preview' poprawnie wyświetla 
 # najnowszy artykuł.
 
-def test_sport_preview(crime_client):
-    with crime_client.application.app_context():
+def test_sport_preview(db_client):
+    with db_client.application.app_context():
         article = SportArticle(
             title="Ski Jumping Article",
             description="Ski Jumping Description",
@@ -186,6 +186,6 @@ def test_sport_preview(crime_client):
         db.session.add(article)
         db.session.commit()
 
-    response = crime_client.get('/sport/sport_preview')
+    response = db_client.get('/sport/sport_preview')
     assert response.status_code == 200
     assert b"Ski Jumping Article" in response.data

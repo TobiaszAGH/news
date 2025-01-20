@@ -1,5 +1,3 @@
-import pytest
-from flask import Flask
 from flask.testing import FlaskClient
 from blueprints.weather.weatherService import getCurrentWeather, getForecast
   # Zakładamy, że blueprint znajduje się w `app/blueprints/weather/routes.py`

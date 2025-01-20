@@ -12,7 +12,7 @@ driver = webdriver.Chrome(service=service, options=options)
 
 # Test dla strony głównej z podglądem sekcji Sport.
 
-def test_sport_main_page():
+def test_sport_main_page(): 
     url = "http://news.tobiasz.xyz"
     driver.get(url)
     
@@ -56,7 +56,7 @@ def test_sport_home():
 
 # Test dla podstrony Sport Preview.
 
-def test_sport_preview():
+def test_sport_preview_s():
     url = "http://news.tobiasz.xyz/sport/sport_preview"
     driver.get(url)
     
