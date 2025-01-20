@@ -159,11 +159,11 @@ package "Scheduler" {
 │       ├── acceptance.py
 │       ├── calendar_test.py
 │       ├── conftest.py
-│       ├── crime_tests.py
 │       ├── economy_tests.py
 │       ├── graph_test.py
 │       ├── integration.py
 │       ├── main_page_test.py
+│       ├── news_tests.py
 │       ├── pytests.py
 │       ├── selenium_main_tests.py
 │       ├── selenium_test_calendar.py
