@@ -1,31 +1,31 @@
+"""
+Moduł definiuje modele bazy danych dla artykułów kryminalnych oraz powiązanych z nimi obrazów.
+"""
+
 from sqlalchemy import ForeignKey
 from config import db
 
-# Definicja modelu reprezentującego artykuły kryminalne w bazie danych
+
 class CrimeNews(db.Model):
-    # Nazwa tabeli w bazie danych
+    """ Model reprezentujący artykuły kryminalne w bazie danych. """
+
     __tablename__ = 'crime_news'
-    # Umożliwia nadpisanie istniejącej tabeli (jeśli jest już zdefiniowana)
-    __table_args__ = {'extend_existing': True}
 
-    # Główne pola tabeli
-    id = db.Column(db.Integer, primary_key=True)  # Klucz główny, unikalny identyfikator artykułu
+    id = db.Column(db.Integer, primary_key=True)  # Klucz główny, unikalne id artykułu
     title = db.Column(db.String(255), nullable=False)  # Tytuł artykułu, pole wymagane
-    summary = db.Column(db.Text, nullable=False)  # Krótkie streszczenie artykułu, pole wymagane
-    description = db.Column(db.Text, nullable=True)  # Szczegółowy opis artykułu, pole opcjonalne
+    summary = db.Column(db.Text, nullable=False)  # Streszczenie artykułu, pole wymagane
+    description = db.Column(db.Text, nullable=True)  # Opis artykułu, pole opcjonalne
     image_url = db.Column(db.String(255), nullable=True)  # URL do obrazu, pole opcjonalne
-    article_link = db.Column(db.String(255), nullable=False)  # URL do pełnego artykułu, pole wymagane
-    publication_date = db.Column(db.Date, nullable=False)  # Data publikacji artykułu, pole wymagane
+    article_link = db.Column(db.String(255), nullable=False)  # URL do artykułu, wymagany
+    publication_date = db.Column(db.Date, nullable=False)  # Data publikacji, wymagana
 
-# Definicja modelu reprezentującego obrazy związane z artykułami kryminalnymi
+
 class CrimeImage(db.Model):
+    """ Model reprezentujący obrazy związane z artykułami kryminalnymi. """
     # Nazwa tabeli w bazie danych
     __tablename__ = 'crime_images'
-    # Umożliwia nadpisanie istniejącej tabeli (jeśli jest już zdefiniowana)
-    __table_args__ = {'extend_existing': True}
 
-    # Główne pola tabeli
-    id = db.Column(db.Integer, primary_key=True)  # Klucz główny, unikalny identyfikator obrazu
-    image_url = db.Column(db.String(255), nullable=True)  # URL do obrazu, pole opcjonalne
-    news_id = db.Column(db.Integer, ForeignKey('crime_news.id'), nullable=False)  
+    id = db.Column(db.Integer, primary_key=True)  # Klucz główny, unikalne id obrazu
+    image_url = db.Column(db.String(255), nullable=True)  # URL do obrazu, opcjonalny
+    news_id = db.Column(db.Integer, ForeignKey('crime_news.id'), nullable=False)
     # Klucz obcy wskazujący na tabelę 'crime_news', pole wymagane
