@@ -39,7 +39,7 @@ def hello():
     if clean_city_name(request.form.get('city4')):
         cities.append(clean_city_name(request.form.get('city4')))
     if clean_city_name(request.form.get('city5')):
-        cities.append(clean_city_name(request.form.get('city')))
+        cities.append(clean_city_name(request.form.get('city5')))
     data = []
     forecast = []
     i = 0
